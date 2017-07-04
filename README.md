@@ -21,3 +21,19 @@
 In debug mode: 
 
 `DEBUG=front:* npm start`
+
+#### Livereload plugin
+
+Add plugin for LiveReload by browser: 
+
+[Firefox](https://addons.mozilla.org/fr/firefox/addon/livereload/)
+
+[Chrome](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei/related)
+
+#### Gulp
+
+Gulp allow us to make our task automaticly.
+
+|Task                                |Purpose					                                                 |
+|--                   				 |--  						                                                 |   
+|node_modules/gulp/bin/gulp.js serve | Start with live reload, watch etc.( Plugin to add - see below )           |

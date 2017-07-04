@@ -34,6 +34,8 @@ Add plugin for LiveReload by browser:
 
 Gulp allow us to make our task automaticly.
 
-|Task                                |Purpose					                                                 |
-|--                   				 |--  						                                                 |   
-|node_modules/gulp/bin/gulp.js serve | Start with live reload, watch etc.( Plugin to add - see below )           |
+|Task                                 |Purpose					                                            |
+|--                   				  |--  						                                            |   
+|node_modules/gulp/bin/gulp.js serve  | Start with live reload, watch etc.( Plugin to add - see below )     |
+|node_modules/bower/bin/bower install | Install woer dependencies                                           |
+|node_modules/bower/bin/bower install  package_on_bower_io --save| Install a package                         | dependencies                                           |

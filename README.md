@@ -10,10 +10,14 @@
                  |^ ^ ^ ^ |W|   |/^^\ |   /oo |
                   \m___m__|_|    \m_m_|   \mm_|
 
+#### Install
+
 0. `cd project folder`
-1. `git clone WellWheel/front`
+1. `git clone https://github.com/WellWheel/front`
 2. `cd front && npm install`
 
-TO run image in debug mode: 
+#### Run
+
+In debug mode: 
 
 `DEBUG=front:* npm start`

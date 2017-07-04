@@ -1,0 +1,21 @@
+{
+  "name": "WellWheel",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Florian <chadyred@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/WellWheel/front",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "animate.css": "animate-css#^3.5.2"
+  }
+}

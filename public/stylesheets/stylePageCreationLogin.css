@@ -23,9 +23,7 @@
 .connexion-form-signin .connexion-checkbox {
   margin-bottom: 30px;
 }
-.connexion-form-signin .connexion-checkbox {
-  font-weight: normal;
-}
+
 .connexion-form-signin .form-control {
   position: relative;
   font-size: 16px;
@@ -35,9 +33,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.connexion-checkbox{
-  font-size:16px;
-}
+
 .connexion-form-signin .form-control:focus {
   z-index: 2;
 }
@@ -46,12 +42,11 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.connexion-form-signin input[type="password"] {
-  margin-bottom: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.lienCreationCompte{
- margin-left:43%;
+
+#confirmationMdp{
+margin-top: -1%;
 }
 
+#creationCompte{
+  margin-top: 10% !important;
+}

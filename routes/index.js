@@ -7,6 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET dashboard Accueil page. */
+router.get('/CreationCompte', function(req, res, next) {
+  res.render('creationLogin', { title: 'Pimp my road' });
+});
+
+/* GET dashboard Accueil page. */
 router.get('/Accueil', function(req, res, next) {
   res.render('dashboardAccueil', { title: 'Pimp my road' });
 });

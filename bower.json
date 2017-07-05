@@ -1,5 +1,5 @@
 {
-  "name": "WellWheel",
+  "name": "well-wheel",
   "description": "",
   "main": "",
   "authors": [
@@ -16,6 +16,10 @@
   ],
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "animate.css": "animate-css#^3.5.2"
+    "animate.css": "animate-css#^3.5.2",
+    "font-awesome": "^4.7.0",
+    "raphael": "^2.2.7",
+    "morris.js": "morrisjs#^0.5.1",
+    "metisMenu": "^2.7.0"
   }
 }

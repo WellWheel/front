@@ -22,8 +22,8 @@ var sassdocOptions = {
 };
 
 
-gulp.task('styles', function() {  
-  return gulp.src('app/src/sass/*.scss')
+gulp.task('styles:scss', function() {  
+  return gulp.src('app/src/sass/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(sourcemaps.write())
@@ -33,10 +33,16 @@ gulp.task('styles', function() {
     .pipe(livereload());
 });
 
+gulp.task('styles:css', function() {  
+  return gulp.src('app/src/css/**/*.css')
+    .pipe(gulp.dest('public/stylesheets'));
+});
+
 gulp.task('scripts', function() {  
-  return gulp.src('public/javascripts/*.js')
-    .pipe(jshint('.jshintrc'))
+  return gulp.src('app/src/js/**/*.js')
+    .pipe(jshint())
     .pipe(jshint.reporter('default'))
+    .pipe(gulp.dest('public/js'))
     .pipe(livereload());
 });
 
@@ -47,8 +53,9 @@ gulp.task('ejs',function(){
 
 gulp.task('watch', function() {  
     livereload.listen();
-    gulp.watch('app/src/sass/**/*.scss', ['styles']);
-    gulp.watch('public/javascripts/*.js', ['scripts']);
+    gulp.watch('app/src/sass/**/*.scss', ['styles:scss']);
+    gulp.watch('app/src/css/**/*.css', ['styles:css']);
+    gulp.watch('app/src/js/**/*.js', ['scripts']);
     gulp.watch('views/**/*.ejs', ['ejs']);
 });
 

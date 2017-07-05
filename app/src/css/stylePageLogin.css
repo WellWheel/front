@@ -52,7 +52,10 @@
   border-top-right-radius: 0;
 }
 .lienCreationCompte{
- margin-left:47%;
- font-size:50%;
+ margin-top: 20px;
+ font-size:100%;
+ display:block;
+ width: 100%;
+ text-align:center;
 }
 

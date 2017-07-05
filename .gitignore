@@ -23,4 +23,5 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
-public/components
+public/*
+!public/.gitkeep

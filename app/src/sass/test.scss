@@ -1,0 +1,14 @@
+$radius : 5px;
+
+@mixin border-radius($radius) {
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+p {
+	a {
+		span {
+			color: blue;
+		}
+	}	
+}

@@ -22,14 +22,16 @@ var sassdocOptions = {
 };
 
 
+
+
 gulp.task('styles:scss', function() {  
   return gulp.src('app/src/sass/**/*.scss')
+    .pipe(sassdoc(sassdocOptions))
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(sourcemaps.write())
     .pipe(autoprefixer(autoprefixerOptions))
     .pipe(gulp.dest('public/stylesheets'))
-    .pipe(sassdoc(sassdocOptions))
     .pipe(livereload());
 });
 

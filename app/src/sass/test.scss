@@ -1,8 +1,31 @@
+///
+///
+/// Radius effect
+///
+/// @access public
+/// @author Shane
+/// @example
+/// border-radius: $radius;
+/// @since 0.0.0
+///
+///
 $radius : 5px;
 
+///
+/// Here is the description
+///
+/// @content [Border radis rockkss]
+/// @access public
+/// @alias other-item
+/// @author Author's name
+/// @example
+/// .box { @include border-radius(10px); }
+/// @since 0.0.0
+///
+///
 @mixin border-radius($radius) {
-          border-radius: $radius;
-}
+      border-radius: $radius;
+}	
 
 .box { @include border-radius(10px); }
 p {

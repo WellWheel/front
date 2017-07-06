@@ -25,4 +25,3 @@ coverage
 benchmarks/graphs
 public/*
 !public/.gitkeep
-npm-debug.log

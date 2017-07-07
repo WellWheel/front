@@ -68,5 +68,6 @@ gulp.task('server',function(){
     });
 });
 
-gulp.task('serve', ['server','watch']); 
+gulp.task('dist', ['styles:scss','styles:css', 'scripts']); 
+gulp.task('serve', ['dist', 'server','watch']); 
 

@@ -916,21 +916,57 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script type="text/javascript" href='/components/jquery/dist/jquery.min.js'></script>
+    <script type="text/javascript" src='/components/jquery/dist/jquery.min.js'></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" href='/components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script type="text/javascript" src='/components/bootstrap/dist/js/bootstrap.min.js'></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script type="text/javascript" href='/components/metisMenu/dist/metisMenu.min.js'></script>
+    <script type="text/javascript" src='/components/metisMenu/dist/metisMenu.min.js'></script>
 
     <!-- Morris Charts JavaScript -->
-    <script type="text/javascript" href='/components/raphael/raphael.min.js'></script>
-    <script type="text/javascript" href='/components/morrisjs/morris.min.js'></script>
+    <script type="text/javascript" src='/components/raphael/raphael.min.js'></script>
+    <script type="text/javascript" src='/components/morrisjs/morris.min.js'></script>
 
     <!-- Custom Theme JavaScript -->
-    <script type="text/javascript" href='/js/sb-admin-2.js'></script>
+    <script type="text/javascript" src='/js/sb-admin-2.js'></script>
+    <script type="text/javascript" src="/components/socket.io-client/dist/socket.io.js"></script>
+    <script type="text/javascript">  
+        var socket = io.connect('http://localhost:8080/');
+        console.log(socket);
+        socket.on('connect', function(data) {
+            socket.emit('join', 'Hello World from client');
 
+        });
+        socket.on('messages', function(data) {
+                alert(data);
+        });
+
+
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 3000,
+          maximumAge: 0
+        };
+
+        function success(pos) {
+          var crd = pos.coords;
+
+          console.log('Your current position is:');
+          console.log(`Latitude : ${crd.latitude}`);
+          console.log(`Longitude: ${crd.longitude}`);
+          console.log(`More or less ${crd.accuracy} meters.`);
+
+          socket.emit('localization', {lat: crd.latitude, lon: crd.longitude});
+        };
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        };
+
+        window.navigator.geolocation.watchPosition(success, error, options);
+
+    </script>
 </body>
 
 </html>

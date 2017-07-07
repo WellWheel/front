@@ -21,6 +21,8 @@
     "raphael": "^2.2.7",
     "morris.js": "morrisjs#^0.5.1",
     "metisMenu": "^2.7.0",
-    "socket.io-client": "^2.0.3"
+    "socket.io-client": "^2.0.3",
+    "datatables-plugins": "^1.10.15",
+    "datatables-responsive": "^2.1.1"
   }
 }

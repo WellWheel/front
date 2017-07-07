@@ -86,6 +86,7 @@ body.open #menu {
        -moz-transition: all .3s ease-in;
          -o-transition: all .3s ease-in;
             transition: all .3s ease-in;
+    background-color:#ffffff;
 }
 body.open .page-wrap {
     margin-left: 300px;

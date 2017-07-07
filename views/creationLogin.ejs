@@ -14,11 +14,11 @@
 
     <h1 class='titreLogo'> Pimp My road <h1>
         <div class="wrapper">
-          <form class="connexion-form-signin">       
+          <form class="connexion-form-signin" action="/users/create" method="POST">       
             <h2 class="connexion-form-signin-heading">Inscription</h2>
 
               <input type="text" class="form-control" name="username" placeholder="Identifiant" required="" autofocus="" />
-              <input type="text" class="form-control" name="mail" placeholder="Adresse mail" required="" autofocus="" />
+              <input type="text" class="form-control" name="email" placeholder="Adresse mail" required="" autofocus="" />
               <input type="password" class="form-control" name="password" placeholder="Mots de passe" required=""/>      
               <input type="password" id='confirmationMdp' class="form-control" name="confirmationPassword" placeholder="Confirmation du mots de passe" required="" autofocus="" />
               <button id='creationCompte' class="btn btn-lg btn-primary btn-block" type="submit">Envoyer</button>   

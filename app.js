@@ -1,44 +1,32 @@
-var express = require('express'); 
+var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
+var cors = require('cors');
 
+var auth = require('./auth.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var partials = require('express-partials');
 
 var meteo = require('./routes/meteo');
-var request = require('request');	
-
+var request = require('request');
 
 var app = express();
-var server = require('http').createServer(app); 
+
+var server = require('http').createServer(app);
+app.use(cors());
 
 //Socket io
-var io = require('socket.io')(server);
-server.listen(8080, "127.0.0.1");
+var io = require('socket.io')(server, { origins: '*:*'});
+server.listen(8080, "node");
 
-
-
-io.on('connection', function(client) {  
-    console.log('Client connected...');
-
-	client.on('localization', function (data) {
-		console.log('data receive...');
-		console.log(data);
-		request({
-		    url: "http://192.168.33.10/app_dev.php/api/meteo/",
-		    method: "POST",
-		    json: true,   // <--Very important!!!
-		    body: data
-		}, function (error, response, body){
-		    console.log(body);
-		});
-	});
+io.on('connection', function(client) {
+	console.log('client connect');
 });
 
 // view engine setup
@@ -59,10 +47,12 @@ app.use( function(req, res, next) {
   next()
 });
 
+// Get the token
+app.use(auth.init());
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/meteo', meteo);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

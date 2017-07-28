@@ -18,13 +18,13 @@
 
 #### Run
 
-In debug mode: 
+In debug mode:
 
 `DEBUG=front:* npm start`
 
 #### Livereload plugin
 
-Add plugin for LiveReload by browser: 
+Add plugin for LiveReload by browser:
 
 [Firefox](https://addons.mozilla.org/fr/firefox/addon/livereload/)
 
@@ -35,13 +35,26 @@ Add plugin for LiveReload by browser:
 Gulp allow us to make our task automaticly.
 
 |Task                                 |Purpose					                                            |
-|--                   				  |--  						                                            |   
+|--                   				  |--  						                                            |
 |npm install                          | Start with live reload, watch etc.( Plugin to add - see below )     |
 |node_modules/bower/bin/bower install | Install bower dependencies                                          |
-|node_modules/bower/bin/bower install  package_on_bower_io --save | Install a package                       | 
+|node_modules/bower/bin/bower install  package_on_bower_io --save | Install a package                       |
 |node_modules/gulp/bin/gulp.js serve  | Start with live reload, watch etc.( Plugin to add - see below )     |dependencies                                           |
 
 
-#### Socket io
+#### Routes
 
-Socket io is use to dispatch Front <=> Node information.
+Whole express routes unprotected:
+
+|Route           |Purpose|
+|--              |--|
+|/               | login    |
+|/creationCompte | Install bower dependencies|
+
+Whole express routes protected:
+
+|Route           |Purpose|
+|--              |--|
+|/users/deco     |logout|
+|/accueil        | layout |
+|/meteo/         | meteo of the current place |

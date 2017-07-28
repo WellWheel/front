@@ -1,11 +1,12 @@
-var gulp = require('gulp');  
-var nodemon = require('gulp-nodemon');  
+var gulp = require('gulp');
+var nodemon = require('gulp-nodemon');
 var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');  
-var jshint = require('gulp-jshint');  
-var livereload = require('gulp-livereload'); 
-var sourcemaps = require('gulp-sourcemaps'); 
+var autoprefixer = require('gulp-autoprefixer');
+var jshint = require('gulp-jshint');
+var livereload = require('gulp-livereload');
+var sourcemaps = require('gulp-sourcemaps');
 var sassdoc = require('sassdoc');
+var pm2 = require('pm2');
 
 // ... variables
 var autoprefixerOptions = {
@@ -24,7 +25,7 @@ var sassdocOptions = {
 
 
 
-gulp.task('styles:scss', function() {  
+gulp.task('styles:scss', function() {
   return gulp.src('app/src/sass/**/*.scss')
     .pipe(sassdoc(sassdocOptions))
     .pipe(sourcemaps.init())
@@ -35,12 +36,12 @@ gulp.task('styles:scss', function() {
     .pipe(livereload());
 });
 
-gulp.task('styles:css', function() {  
+gulp.task('styles:css', function() {
   return gulp.src('app/src/css/**/*.css')
     .pipe(gulp.dest('public/stylesheets'));
 });
 
-gulp.task('scripts', function() {  
+gulp.task('scripts', function() {
   return gulp.src('app/src/js/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
@@ -48,12 +49,12 @@ gulp.task('scripts', function() {
     .pipe(livereload());
 });
 
-gulp.task('ejs',function(){  
+gulp.task('ejs',function(){
     return gulp.src('views/**/*.ejs')
     .pipe(livereload());
 });
 
-gulp.task('watch', function() {  
+gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('app/src/sass/**/*.scss', ['styles:scss']);
     gulp.watch('app/src/css/**/*.css', ['styles:css']);
@@ -61,13 +62,28 @@ gulp.task('watch', function() {
     gulp.watch('views/**/*.ejs', ['ejs']);
 });
 
-gulp.task('server',function(){  
+gulp.task('server:pm2',function(){
+  pm2.connect(true, function() {
+    pm2.start({
+      name: 'front',
+      script: 'bin/www'
+    }, function() {
+      console.log('pm2 started');
+      pm2.streamLogs('all', 0);
+    });
+  });
+});
+
+gulp.task('server:nodemon',function(){
     nodemon({
         'script': 'bin/www',
-        'ignore': 'public/js/*.js'
+        'ignore': [
+          'public/*'
+        ]
     });
 });
 
-gulp.task('dist', ['styles:scss','styles:css', 'scripts']); 
-gulp.task('serve', ['dist', 'server','watch']); 
+gulp.task('dist', ['styles:scss','styles:css', 'scripts']);
+gulp.task('serve:prod', ['dist', 'server:pm2']);
+gulp.task('serve:dev', ['dist', 'server:nodemon','watch']);
 

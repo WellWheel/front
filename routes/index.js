@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+var auth = require('../auth.js');
+
 /* GET login page. */
-router.get('/', function(req, res, next) {
+router.get('/',  function(req, res, next) {
   res.render('login', { title: 'Pimp my road' });
 });
 
@@ -13,8 +15,10 @@ router.get('/CreationCompte', function(req, res, next) {
 });
 
 /* GET dashboard Accueil page. */
-router.get('/Accueil', function(req, res, next) {
-  res.render('dashboardAccueil', { title: 'Pimp my road' });
+router.get('/Accueil', auth.isAuthenticated, function(req, res, next) {
+    console.log('A token is decoded ?');
+    console.log(req.user);
+    res.render('dashboardAccueil', { title: 'Pimp my road' });
 });
 
 /* GET trajet page. */

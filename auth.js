@@ -1,33 +1,34 @@
-// auth.js
-var passport = require("passport");  
-var passportJWT = require("passport-jwt");  
-var users = require("./users.js");  
-var cfg = require("./config.js");  
-var ExtractJwt = passportJWT.ExtractJwt;  
-var Strategy = passportJWT.Strategy;  
-var params = {  
-    secretOrKey: cfg.jwtSecret,
-    jwtFromRequest: ExtractJwt.fromAuthHeader()
+var jwt = require('express-jwt');
+var fs = require('fs');
+
+
+
+module.exports = {
+      init : function () {
+
+          var publicKey = fs.readFileSync('public.pem');
+          return jwt({
+            secret: publicKey,
+            credentialsRequired: false,
+            requestProperty: 'auth',
+            getToken: function fromCookie (req) {
+              console.log("token is " +  req.cookies.my_token);
+              if (req.cookies.my_token) {
+                  return req.cookies.my_token;
+              }
+              return null;
+            }
+        });
+    },
+    isAuthenticated: function (req, res, next) {
+      console.log("req.auth : " + req.auth)
+      if(req.auth) {
+        return next();
+      }
+
+      res.statusCode = 302;
+      res.setHeader("Location", '/');
+      res.end();
+    }
 };
 
-module.exports = function() {  
-    var strategy = new Strategy(params, function(payload, done) {
-        var user = users[payload.id] || null;
-        if (user) {
-            return done(null, {
-                id: user.id
-            });
-        } else {
-            return done(new Error("User not found"), null);
-        }
-    });
-    passport.use(strategy);
-    return {
-        initialize: function() {
-            return passport.initialize();
-        },
-        authenticate: function() {
-            return passport.authenticate("jwt", cfg.jwtSession);
-        }
-    };
-};

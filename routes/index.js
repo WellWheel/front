@@ -21,10 +21,6 @@ router.get('/Accueil', auth.isAuthenticated, function(req, res, next) {
     res.render('dashboardAccueil', { title: 'Pimp my road' });
 });
 
-/* GET trajet page. */
-router.get('/vos-trajets', function(req, res, next) {
-  res.render('trajets', { title: 'Pimp my road' });
-});
 
 /* GET meteo page. */
 router.get('/votre-meteo', function(req, res, next) {
@@ -40,7 +36,6 @@ router.get('/votre-playlist-Spotify', function(req, res, next) {
 router.get('/vos-articles', function(req, res, next) {
   res.render('articles', { title: 'Pimp my road' });
 });
-module.exports = router;
 
 /* GET visites page. */
 router.get('/vos-visites', function(req, res, next) {

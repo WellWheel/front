@@ -8,7 +8,7 @@ var auth = require('../auth.js');
 /* GET users listing. */
 router.post('/login', function(req, res, next) {
 	request({
-	  url: "http://wellwheel.dev/api/login_check",
+	  url: "http://" + res.conf.parameters().api().ip + "/api/login_check",
       body: qs.stringify(req.body),
       method: "POST",
 	  headers: {
@@ -19,7 +19,9 @@ router.post('/login', function(req, res, next) {
 
 		  	if(response.statusCode === '401')
 		  	{
-		      console.log('401, not accessible for register, show the back.')
+				console.log('401, not accessible for login, show the back.')
+
+				res.redirect("/");
 		  	}
 		  	else
 		  	{
@@ -34,16 +36,19 @@ router.post('/login', function(req, res, next) {
     						res.cookie('my_token', datas.token, { maxAge: 900000, httpOnly: true });
 							res.end();
 					  })
-
+		  		} else {
+					console.log("Bad login");
+					res.redirect("/");
 		  		}
 		  	}
+
 	});
 });
 
 router.post('/create', function (req, res, next) {
 
 	request({
-	  url: "http://wellwheel.dev/api/register",
+	  url: "http://" + res.conf.parameters().api().ip + "/api/register",
       body: qs.stringify(req.body),
       method: "POST",
 	  headers: {
@@ -59,6 +64,9 @@ router.post('/create', function (req, res, next) {
 		  			res.statusCode = 302;
 					res.setHeader("Location", '/');
 					res.end();
+		  		} else {
+		  			console.log("fail");
+		  			res.redirect("/CreationCompte");
 		  		}
 		  	}
 	});

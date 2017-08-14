@@ -36,7 +36,6 @@ router.get('/votre-playlist-Spotify', function(req, res, next) {
 router.get('/vos-articles', function(req, res, next) {
   res.render('articles', { title: 'Pimp my road' });
 });
-module.exports = router;
 
 /* GET visites page. */
 router.get('/vos-visites', function(req, res, next) {

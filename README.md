@@ -66,12 +66,15 @@ Whole express routes unprotected:
 |Route           |Purpose|
 |--              |--|
 |/               | login    |
-|/creationCompte | Install bower dependencies|
+|/creationCompte | create account |
 
 Whole express routes protected:
 
 |Route           |Purpose|
 |--              |--|
-|/users/deco     |logout|
-|/accueil        | layout |
+|/users/deco     |logout GET |
+|/accueil        | layout GET |
 |/meteo/         | meteo of the current place |
+|/trajet/         | list trajet GET |
+|/trajet/creation         | show form trajet via GET |
+|/trajet/creation         | send form trajet via POST |

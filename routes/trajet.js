@@ -4,6 +4,7 @@ var request = require('request');
 
 var auth = require('../auth.js');
 
+var qs = require("querystring");
 
 /* GET trajet page. */
 router.get('/', function(req, res, next) {
@@ -13,12 +14,15 @@ router.get('/', function(req, res, next) {
 
 /* GET meteo page. */
 router.get('/creation', auth.isAuthenticated, function(req, res, next) {
-    console.log("trajets:creation : token is " +  req.cookies.my_token);
-    console.log("trajets:creation : res.conf.parameters().api.ip is " +  res.conf.parameters().api().ip);
-
-
     res.render('creationTrajet', { title: 'Pimp my road' });
 });
 
+/* POST meteo page. */
+router.post('/creation', auth.isAuthenticated, function(req, res, next) {
+
+    console.log("BODY : " + JSON.stringify(req.body) );
+
+    res.render('creationTrajet', { title: 'Pimp my road' });
+});
 
 module.exports = router;

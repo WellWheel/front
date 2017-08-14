@@ -4,41 +4,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">CREATION TRAJET</h1>
-
-
-                    <div id="floating-panel">
-                    <b>Start: </b>
-                    <select id="start">
-                      <option value="chicago, il">Chicago</option>
-                      <option value="st louis, mo">St Louis</option>
-                      <option value="joplin, mo">Joplin, MO</option>
-                      <option value="oklahoma city, ok">Oklahoma City</option>
-                      <option value="amarillo, tx">Amarillo</option>
-                      <option value="gallup, nm">Gallup, NM</option>
-                      <option value="flagstaff, az">Flagstaff, AZ</option>
-                      <option value="winona, az">Winona</option>
-                      <option value="kingman, az">Kingman</option>
-                      <option value="barstow, ca">Barstow</option>
-                      <option value="san bernardino, ca">San Bernardino</option>
-                      <option value="los angeles, ca">Los Angeles</option>
-                    </select>
-                    <b>End: </b>
-                    <select id="end">
-                      <option value="chicago, il">Chicago</option>
-                      <option value="st louis, mo">St Louis</option>
-                      <option value="joplin, mo">Joplin, MO</option>
-                      <option value="oklahoma city, ok">Oklahoma City</option>
-                      <option value="amarillo, tx">Amarillo</option>
-                      <option value="gallup, nm">Gallup, NM</option>
-                      <option value="flagstaff, az">Flagstaff, AZ</option>
-                      <option value="winona, az">Winona</option>
-                      <option value="kingman, az">Kingman</option>
-                      <option value="barstow, ca">Barstow</option>
-                      <option value="san bernardino, ca">San Bernardino</option>
-                      <option value="los angeles, ca">Los Angeles</option>
-                    </select>
-                    </div>
-                    <div id="gmap"></div>
+                    <form action="/trajet/creation/" method="POST">
+                        <div id="gmap"></div>
+                        <input id="pac-input-start" name="start" class="controls" type="text" placeholder="Départ">
+                        <input id="pac-input-end" name="end" class="controls" type="text" placeholder="Destination">
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

@@ -8,8 +8,10 @@ var http = require('http');
 var cors = require('cors');
 
 var auth = require('./auth.js');
+var conf = require('./conf.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var trajet = require('./routes/trajet');
 
 var partials = require('express-partials');
 
@@ -23,7 +25,7 @@ app.use(cors());
 
 //Socket io
 var io = require('socket.io')(server, { origins: '*:*'});
-server.listen(8080, "node");
+server.listen(conf.parameters().serv.port, conf.parameters().serv.ip);
 
 io.on('connection', function(client) {
 	console.log('client connect');
@@ -47,11 +49,17 @@ app.use( function(req, res, next) {
   next()
 });
 
+app.use( function(req, res, next) {
+  res.conf = conf
+  next()
+});
+
 // Get the token
 app.use(auth.init());
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/trajet', trajet);
 app.use('/meteo', meteo);
 
 // catch 404 and forward to error handler

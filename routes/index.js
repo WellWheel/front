@@ -21,10 +21,6 @@ router.get('/Accueil', auth.isAuthenticated, function(req, res, next) {
     res.render('dashboardAccueil', { title: 'Pimp my road' });
 });
 
-/* GET trajet page. */
-router.get('/vos-trajets', function(req, res, next) {
-  res.render('trajets', { title: 'Pimp my road' });
-});
 
 /* GET meteo page. */
 router.get('/votre-meteo', function(req, res, next) {

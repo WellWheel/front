@@ -23,8 +23,6 @@ var sassdocOptions = {
 };
 
 
-
-
 gulp.task('styles:scss', function() {
   return gulp.src('app/src/sass/**/*.scss')
     .pipe(sassdoc(sassdocOptions))

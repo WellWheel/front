@@ -148,4 +148,25 @@ router.get('/playlists', auth.isSpotifyAuthenticated, function (req, res) {
     });
 
 })
+
+router.post('/playlists', auth.isSpotifyAuthenticated, function (req, res) {
+
+    var options = {
+      url: 'https://api.spotify.com/v1/me/playlists',
+      headers: { 'Authorization': 'Bearer ' + req.cookies.spotify_token },
+      data: querystring.stringify(req.body),
+      json: true
+    };
+
+    // use the access token to access the Spotify Web API
+    request.post(options, function(error, response, body) {
+      console.log("options : " + JSON.stringify(options));
+      console.log("Body after add playlist : " + body);
+      console.log("error after add playlist : " + error);
+      console.log("response after add playlist : " + JSON.stringify(response));
+
+      res.redirect('/spotify/playlists');
+    });
+
+})
 module.exports = router;

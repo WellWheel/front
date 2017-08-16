@@ -75,8 +75,10 @@ gulp.task('server:pm2',function(){
 gulp.task('server:nodemon',function(){
     nodemon({
         'script': 'bin/www',
-        'ignore': [
-          'public/*'
+        'watch': [
+          'app/*',
+          'routes/*',
+          'views/*'
         ]
     });
 });

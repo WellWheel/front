@@ -24,6 +24,13 @@ module.exports = {
                     ip : "172.16.33.10",
                     port: 80
                 };
+            },
+            apiSpotify: function () {
+                return {
+                    client_id: '47ba364991014f67ad476aa3c017fad5', // Your client id
+                    client_secret: 'af7832793f384d67b78e13ff1c35c8c7', // Your secret
+                    redirect_uri: 'http://localhost:3000/spotify/callback' // Your redirect uri
+                };
             }
         }
 

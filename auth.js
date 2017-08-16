@@ -29,6 +29,15 @@ module.exports = {
       res.statusCode = 302;
       res.setHeader("Location", '/');
       res.end();
+    },
+    isSpotifyAuthenticated: function (req, res , next) {
+      if (typeof req.cookies.spotify_token !== 'undefined') {
+        if (req.cookies.spotify_token) {
+          return next();
+        }
+      }
+
+      res.redirect('/spotify/');
     }
 };
 

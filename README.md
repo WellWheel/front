@@ -38,6 +38,10 @@ In debug mode:
 
 `DEBUG=front:* npm start` or `node_modules/gulp/bin/gulp.js serve:dev`
 
+#### Show everything at
+
+http://localhost:3000/
+
 #### Livereload plugin
 
 Add plugin for LiveReload by browser:
@@ -78,3 +82,5 @@ Whole express routes protected:
 |/trajet/         | list trajet GET |
 |/trajet/creation         | show form trajet via GET |
 |/trajet/creation         | send form trajet via POST |
+|/spotify/ |  connect to spotify - show profile information GET |
+|/spotify/playlist | show whole play list - GET |

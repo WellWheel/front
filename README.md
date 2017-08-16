@@ -83,4 +83,5 @@ Whole express routes protected:
 |/trajet/creation         | show form trajet via GET |
 |/trajet/creation         | send form trajet via POST |
 |/spotify/ |  connect to spotify - show profile information GET |
-|/spotify/playlist | show whole play list - GET |
+|/spotify/playlists | show whole play list - GET |
+|/spotify/playlists | add a playlist with a name (private by default) - POST |

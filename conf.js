@@ -15,13 +15,13 @@ module.exports = {
             },
             serv : function () {
                 return {
-                    ip : this.nodemonServer.ip,
-                    port: this.nodemonServer.port
+                    ip : this.dockerServer.ip,
+                    port: this.dockerServer.port
                 };
             },
             api: function () {
                 return {
-                    ip : "172.16.33.10",
+                    ip : "wellwheel.dev",
                     port: 80
                 };
             },

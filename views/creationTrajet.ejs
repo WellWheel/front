@@ -8,12 +8,26 @@
                         <div id="gmap"></div>
                         <input id="pac-input-start" name="start" class="controls" type="text" placeholder="Départ">
                         <input id="pac-input-end" name="end" class="controls" type="text" placeholder="Destination">
+
+                        <% if (typeof playlists !== 'undefined') { %>
+                            <select name="playlist" id="inputPlaylist" class="form-control">
+                                <option value="">-- Select One --</option>
+                                <% playlists.forEach( function (p) {  %>
+                                    <option value="<%= p.id %>"><%= p.name %></option>
+                                <% }); %>
+                            </select>
+                        <% } else { %>
+                            <a href="/spotify/">
+                                Connectez vous avec spotify et choisissez vos playlists.
+                            </a>
+                        <% } %>
+
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </form>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <div id="contenufonctionnalitemaps"></div>
+            <bs3
 
 
     </div>

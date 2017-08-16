@@ -1,8 +1,6 @@
 var jwt = require('express-jwt');
 var fs = require('fs');
 
-
-
 module.exports = {
       init : function () {
 

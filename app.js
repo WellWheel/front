@@ -12,6 +12,7 @@ var conf = require('./conf.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var trajet = require('./routes/trajet');
+var spotify = require('./routes/spotify');
 
 var partials = require('express-partials');
 
@@ -61,6 +62,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/trajet', trajet);
 app.use('/meteo', meteo);
+app.use('/spotify', spotify);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

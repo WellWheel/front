@@ -22,7 +22,6 @@ var generateRandomString = function(length) {
 var stateKey = 'spotify_auth_state';
 
 router.get('/', function(req, res) {
-  console.log("trajet");
   res.render('spotify', { title: 'Pimp my road' });
 });
 
@@ -32,7 +31,7 @@ router.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email playlist-read-private playlist-modify-private playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -85,17 +84,18 @@ router.get('/callback', function(req, res) {
           json: true
         };
 
-        // use the access token to access the Spotify Web API
+        // use the access token to access the Spotify Web API to store the user id for calling.
         request.get(options, function(error, response, body) {
-          console.log(body);
+            res.cookie('id_spotify', body.id, { maxAge: 900000, httpOnly: true });
+
+            // we can also pass the token to the browser to make requests from there direcly with javascript
+            res.redirect('/spotify/#' +
+              querystring.stringify({
+                access_token: access_token,
+                refresh_token: refresh_token
+              }));
         });
 
-        // we can also pass the token to the browser to make requests from there
-        res.redirect('/spotify/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
       } else {
         res.redirect('/spotify/#' +
           querystring.stringify({
@@ -121,6 +121,7 @@ router.get('/refresh_token', function(req, res) {
   };
 
   request.post(authOptions, function(error, response, body) {
+
     if (!error && response.statusCode === 200) {
       var access_token = body.access_token;
       res.cookie('spotify_token', access_token, { maxAge: 900000, httpOnly: true });
@@ -142,9 +143,28 @@ router.get('/playlists', auth.isSpotifyAuthenticated, function (req, res) {
 
     // use the access token to access the Spotify Web API
     request.get(options, function(error, response, body) {
-      console.log(body);
 
       res.render('playlistSpotify', { title: 'Pimp my road', playlists: body.items });
+    });
+
+})
+
+router.post('/playlists', auth.isSpotifyAuthenticated, function (req, res) {
+    var data = {
+      name : req.body.name,
+      public : false
+    };
+
+    var options = {
+      url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists',
+      headers: { 'Authorization': 'Bearer ' + req.cookies.spotify_token },
+      body: data,
+      json: true
+    };
+
+    // use the access token to access the Spotify Web API
+    request.post(options, function(error, response, body) {
+      res.redirect('/spotify/playlists');
     });
 
 })

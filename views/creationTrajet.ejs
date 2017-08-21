@@ -27,6 +27,67 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+                 <video width="320" height="240" controls>
+                  <source src="/video.mp4" type="video/mp4">
+                  <source src="/video.ogg" type="video/ogg">
+                Your browser does not support the video tag.
+                </video>
+                <button id="start-button">Start Listening</button>
+                <h1>🎤 Speak in english</h1>
+                <p class="support">See browser support in <a href="http://caniuse.com/#search=speech">
+                    Can I Use</a>
+                </p>
+                <div class="phrases"></div>
+
+
+            </div>
 
     </div>
 </div>
+
+<script type="text/javascript">
+const phrases = document.querySelector('.phrases');
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (window.SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'fr-FR';
+  recognition.interimResults = true;
+
+  recognition.addEventListener('result', e => {
+    const textResult = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('');
+
+    if (e.results[0].isFinal) {
+        const p = document.createElement('p');
+        p.innerHTML = `<span>🗣</span> ${textResult}`;
+        phrases.appendChild(p);
+
+        const ssu = new SpeechSynthesisUtterance();
+        ssu.text = textResult;
+        ssu.rate = 0.8;
+        ssu.pitch = 0;
+        speechSynthesis.speak(ssu);
+    }
+  });
+
+  recognition.addEventListener('end', recognition.start);
+
+  recognition.start();
+} else {
+  document.querySelector('body').textContent = '😩 Your browser doesn\'t support Speech Recognition.';
+}
+
+</script>
+
+
+     <!-- Gmap -->
+    <script type="text/javascript" src="/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrvc135P6W5lV0mNykc7S4-1IOWzCCjac&callback=initMap&libraries=places"
+    async defer></script>

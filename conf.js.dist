@@ -15,13 +15,13 @@ module.exports = {
             },
             serv : function () {
                 return {
-                    ip : this.dockerServer.ip,
-                    port: this.dockerServer.port
+                    ip : this.SOCKET_IP.ip,
+                    port: this.SOCKET_IP.port
                 };
             },
             api: function () {
                 return {
-                    ip : "wellwheel.dev",
+                    ip : "API_HOSTNAME_OR_IP",
                     port: 80
                 };
             },
@@ -29,7 +29,7 @@ module.exports = {
                 return {
                     client_id: '47ba364991014f67ad476aa3c017fad5', // Your client id
                     client_secret: 'af7832793f384d67b78e13ff1c35c8c7', // Your secret
-                    redirect_uri: 'http://localhost:3000/spotify/callback' // Your redirect uri
+                    redirect_uri: 'http://REDIRECT_SPOTIFY_IP_FQDN:REDIRECT_SPOTIFY_PORT/spotify/callback' // Your redirect uri
                 };
             }
         }

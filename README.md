@@ -10,6 +10,13 @@
                  |^ ^ ^ ^ |W|   |/^^\ |   /oo |
                   \m___m__|_|    \m_m_|   \mm_|
 
+
+##### TL;DR
+
+With scotch box:
+
+`make API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
+
 #### Install
 
 0. `cd project folder`
@@ -18,7 +25,18 @@
 
 #### Configure
 
-All parameters for configure the api and the application itself are on `conf.js`:
+All parameters for configure the api and the application itself are on `conf.js`. The `conf.js.dist` is use with 4 variable: 
+
+For information this is it. 
+
+```
+API_HOSTNAME_OR_IP
+SOCKET_IP
+REDIRECT_SPOTIFY_IP_FQDN
+REDIRECT_SPOTIFY_PORT
+```
+
+Whole site: 
 
 1. api
 
@@ -32,11 +50,25 @@ All parameters for configure the api and the application itself are on `conf.js`
 
     Switch to docker and use your host name directly.
 
+4. Spotify
+    
+    Redirect uri MUST be confirgured.
+
 #### Run
 
-In debug mode:
+Use make to start everything:
 
-`DEBUG=front:* npm start` or `node_modules/gulp/bin/gulp.js serve:dev`
+1. Make (best)
+
+    `make API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
+
+2. npm script for start serveur
+
+    `DEBUG=front:* npm start`
+
+3. Gulp
+
+    `node_modules/gulp/bin/gulp.js serve:dev`
 
 #### Show everything at
 

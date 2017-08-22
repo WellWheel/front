@@ -8,13 +8,54 @@ var spotifyService = require('../service/spotifyService.js');
 var qs = require("querystring");
 
 /* GET trajet page. */
-router.get('/', function(req, res, next) {
-  console.log("trajet");
-  res.render('trajets', { title: 'Pimp my road' });
-});
+
+router.get('/', auth.isSpotifyAuthenticated, function (req, res, next) {
+
+    var options = {
+      url: "http://" + res.conf.parameters().api().ip + "/api/list/$iduser", 
+      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+      json: true
+    };
+
+    // use the access token to access Web API
+    request.get(options, function(error, response, body) {
+    	var trajets= [
+    					{nom : 'mylene', parcours : 'trajet 1'}, 
+    					{nom : 'florian', parcours : 'trajet 2'}
+		];
+
+      res.render('trajets', { title: 'Pimp my road', trajets: trajets });
+    });
+
+})
+
+
+/* POST trajet page. */
+
+router.post('/', auth.isSpotifyAuthenticated, function (req, res) {
+    var data = {
+      name : req.body.name,
+      public : false
+    };
+
+    var options = {
+      url: 'http://$ip/app_dev.php/api/' + req.cookies.id_spotify + '/trajet',
+      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+      body: data,
+      json: true
+    };
+
+    // use the access token to access the Spotify Web API
+    request.post(options, function(error, response, body) {
+      res.redirect('/trajets');
+    });
+
+})
+
+
 
 /* GET meteo page. */
-router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, function(req, res, next) {
+router.get('/creation', /*auth.isAuthenticated,*/ spotifyService.getPlaylists, function(req, res, next) {
     var playlists = undefined;
 
     console.log("res.playlists : " + res.playlists);
@@ -22,15 +63,27 @@ router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, funct
     if (typeof res.playlists !== 'undefined')
         playlists = res.playlists;
 
+
+
     res.render('creationTrajet', { title: 'Pimp my road', playlists: playlists });
 });
 
 /* POST meteo page. */
-router.post('/creation', auth.isAuthenticated, function(req, res, next) {
+router.post('/creation', /*auth.isAuthenticated,*/ function(req, res, next) {
 
     console.log("BODY : " + JSON.stringify(req.body) );
 
     res.redirect('/trajet/creation');
 });
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

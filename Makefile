@@ -1,4 +1,4 @@
-install: clean/conf.js conf.js
+install: | conf.js
 	npm install
 	node_modules/bower/bin/bower install
 

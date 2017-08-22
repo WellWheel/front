@@ -9,6 +9,7 @@
 <div id="wrapper">
 
 
+<!--<%= JSON.stringify(playlists) %>-->
         <div id="page-wrapper">
             <!-- /.row -->
             <div class="row">
@@ -28,12 +29,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% playlists.forEach(function(info) { %>
                                     <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
-                                    </tr>
-                                    <tr class="even gradeC">
+                                        <td><%= info.name %></td>
+                                        <td><%= info.href %></td>
+                                        <td class="center">
+                                            <button type="button" class="btn btn-primary">Supprimer</button>
+                                        </td>
+                                    </tr>                                  
+                                    <% }); %>
+                                    <!-- <tr class=" gradeC">
                                         <td>Trident</td>
                                         <td>Internet Explorer 5.0</td>
                                         <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
@@ -42,8 +47,8 @@
                                         <td>Trident</td>
                                         <td>Internet Explorer 5.5</td>
                                         <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
-                                    </tr>
-
+                                    </tr> -->
+                                    
                                 </tbody>
                             </table>
         </div>
@@ -66,12 +71,13 @@
 
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
+    <script type='text/javascript'>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
             responsive: true
         });
     });
+
     </script>
 
 

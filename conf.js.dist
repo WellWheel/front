@@ -15,13 +15,16 @@ module.exports = {
             },
             serv : function () {
                 return {
+
                     ip : this.SOCKET_IP.ip,
                     port: this.SOCKET_IP.port
+
                 };
             },
             api: function () {
                 return {
                     ip : "API_HOSTNAME_OR_IP",
+
                     port: 80
                 };
             },

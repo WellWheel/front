@@ -58,7 +58,7 @@ Whole site:
     
     Redirect uri MUST be confirgured.
 
-#### Run
+#### Install
 
 Use make to start everything:
 
@@ -79,10 +79,20 @@ Use make to start everything:
     `make reinstall API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
     `make full-reinstall API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
 
+
+
+#### Run 
+
+    `make start`
+
 #### Show everything at
 
 
 http://localhost:3000/
+
+or with scotchbox
+
+http://192.168.33.10:3000/
 
 #### Livereload plugin
 

@@ -17,6 +17,10 @@ With scotch box:
 
 `make API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
 
+Go to: 
+
+http://localhost:3000/
+
 #### Install
 
 0. `cd project folder`
@@ -27,13 +31,13 @@ With scotch box:
 
 All parameters for configure the api and the application itself are on `conf.js`. The `conf.js.dist` is use with 4 variable: 
 
-For information this is it. 
+For information this is the variable. 
 
 ```
-API_HOSTNAME_OR_IP
-SOCKET_IP
-REDIRECT_SPOTIFY_IP_FQDN
-REDIRECT_SPOTIFY_PORT
+API_HOSTNAME_OR_IP : our api;
+SOCKET_IP : socket serveur launch on back;
+REDIRECT_SPOTIFY_IP_FQDN : redirirect callback for spotify api (after login);
+REDIRECT_SPOTIFY_PORT : port of our front app.
 ```
 
 Whole site: 
@@ -70,7 +74,13 @@ Use make to start everything:
 
     `node_modules/gulp/bin/gulp.js serve:dev`
 
+#### Reinstall
+
+    `make reinstall API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
+    `make full-reinstall API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
+
 #### Show everything at
+
 
 http://localhost:3000/
 

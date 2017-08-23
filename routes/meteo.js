@@ -19,6 +19,7 @@ router.get('/', auth.isAuthenticated, function(req, res, next) {
 		          "Authorization" : "Bearer " + req.cookies.my_token
 		        }
 			}, function (error, response, body){
+				console.log(body)
 				if(response.statusCode === 200 || response.statusCode === 201)
                   	client.emit('dataMeteo',body.datas);
 

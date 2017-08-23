@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  	<meta charset="UTF-8">
-    	<title><%= title %></title>
-		<title>Connexion</title>
 
-    <link rel='stylesheet' href='/stylesheets/stylePageCreationLogin.css' />
-    <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
-  </head>
-
-
-  <body>
 
     <h1 class='titreLogo'> Pimp My road <h1>
         <div class="wrapper">
-          <form class="connexion-form-signin" action="/users/create" method="POST">
+          <form class="connexion-form-signin" action="/users/create" method="POST" onSubmit="return validPassword(this)">
             <h2 class="connexion-form-signin-heading">Inscription</h2>
 
-              <input type="text" class="form-control" name="username" placeholder="Identifiant" required="" autofocus="" />
-              <input type="text" class="form-control" name="email" placeholder="Adresse mail" required="" autofocus="" />
-              <input type="password" class="form-control" name="password" placeholder="Mots de passe" required=""/>
+              <input  type="text" class="form-control" name="username" placeholder="Identifiant" required="" autofocus="" />
+              <input  type="text" class="form-control" name="email" placeholder="Adresse mail" required="" autofocus="" />
+              <input id ="password" type="password" class="form-control" name="password" placeholder="Mots de passe" required=""/>
               <input type="password" id='confirmationMdp' class="form-control" name="confirmedPassword" placeholder="Confirmation du mots de passe" required="" autofocus="" />
-              <button id='creationCompte' class="btn btn-lg btn-primary btn-block" type="submit">Envoyer</button>
+              <input id='creationCompte' value='envoyer' class="btn btn-lg btn-primary btn-block" type="submit"/>
           </form>
         </div>
-  </body>
-</html>
+  
+
+  <script type="text/javascript">
+
+function validPassword(f) {
+  if (f.password.value == '' || f.confirmedPassword.value == '') {
+    alert('Tous les champs ne sont pas remplis');
+    f.password.focus();
+    return false;
+    }
+  else if (f.password.value != f.confirmedPassword.value) {
+    alert('Ce ne sont pas les mêmes mots de passe!');
+    f.password.focus();
+    return false;
+    }
+  else if (f.password.value == f.confirmedPassword.value) {
+    return true;
+    }
+  else {
+    f.password.focus();
+    return false;
+    }
+  }
+</script>
+
+
+

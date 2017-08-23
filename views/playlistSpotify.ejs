@@ -10,6 +10,7 @@
 
 
 <!--<%= JSON.stringify(playlists) %>-->
+
         <div id="page-wrapper">
             <!-- /.row -->
             <div class="row">
@@ -24,7 +25,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nom de la playlist</th>
-                                        <th>Trajet assigné</th>
+                                        <th>Lien vers la playlist</th>
                                         <th>Paramètres</th>
                                     </tr>
                                 </thead>
@@ -32,7 +33,7 @@
                                     <% playlists.forEach(function(info) { %>
                                     <tr class="odd gradeX">
                                         <td><%= info.name %></td>
-                                        <td><%= info.href %></td>
+                                        <td><%= info.external_urls.spotify %></td>
                                         <td class="center">
                                             <button type="button" class="btn btn-primary">Supprimer</button>
                                         </td>

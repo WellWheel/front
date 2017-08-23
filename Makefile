@@ -8,9 +8,19 @@ reinstall: clean/conf.js start
 
 reinstall-mac: install-mac
 
-install-mac: start
+install-mac: 
+ifneq ("$(wildcard conf.js)","")
+else
+	cp conf.js.dist conf.js
+endif
+	npm install
+	node_modules/bower/bin/bower install
+
 
 start: install 
+	node_modules/gulp/bin/gulp.js serve:dev
+
+start-mac: install-mac 
 	node_modules/gulp/bin/gulp.js serve:dev
 
 start-only: 

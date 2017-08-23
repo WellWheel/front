@@ -7,8 +7,9 @@ var auth = require('../auth.js');
 
 /* GET users listing. */
 router.post('/login', function(req, res, next) {
+	console.log("res.conf.parameters().api().full()" + res.conf.parameters().api().full())
 	request({
-	  url: "http://" + res.conf.parameters().api().ip + "/api/login_check",
+	  url: "http://" + res.conf.parameters().api().full() + "/api/login_check",
       body: qs.stringify(req.body),
       method: "POST",
 	  headers: {
@@ -49,7 +50,7 @@ router.post('/login', function(req, res, next) {
 router.post('/create', function (req, res, next) {
 
 	request({
-	  url: "http://" + res.conf.parameters().api().ip + "/api/register",
+	  url: "http://" + res.conf.parameters().api().full() + "/api/register",
       body: qs.stringify(req.body),
       method: "POST",
 	  headers: {

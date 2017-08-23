@@ -12,7 +12,7 @@ var qs = require("querystring");
 router.get('/', auth.isAuthenticated, function (req, res, next) {
 
     var options = {
-      url: "http://" + res.conf.parameters().api().ip + "/api/journey/1", 
+      url: "http://" + res.conf.parameters().api().full() + "/api/list/$iduser", 
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
       json: true
     };

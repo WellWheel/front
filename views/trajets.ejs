@@ -25,16 +25,16 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Nom du trajet</th>
-                                        <th>Historique des visites</th>
+                                        <th>Point de départ</th>
+                                        <th>Point d'arrivé</th>
                                         <th>Paramètres</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% trajets.forEach(function(info) { %>
                                     <tr class="odd gradeX">
-                                        <td><%= info.nom %></td>
-                                        <td><%= info.parcours %></td>
+                                        <td><%= info.start %></td>
+                                        <td><%= info.end %></td>
                                         <td class="center">
                                             <button type="button" class="btn btn-primary">Supprimer</button>
                                         </td>
@@ -49,55 +49,18 @@
                                         <td>Trident</td>
                                         <td>Internet Explorer 5.5</td>
                                         <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
-                                    </tr> -->
-                                    
+                                   </tr> -->                                    
                                 </tbody>
                             </table>
         </div>
-        <!-- /#page-wrapper -->
-        <form action="/spotify/playlists" method="POST" role="form">
-            <legend>Form title</legend>
-
-            <div class="form-group">
-                <label for="">Nom playlist : </label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Nom playlist">
-            </div>
-
-
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-    <!-- /#wrapper -->
-
-
-
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script type='text/javascript'>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-    });
-
-    </script>
 
             </div>
 
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
 
             <div id="contenufonctionnalitemaps"></div>
 
         </div>
+</div>
 </div>

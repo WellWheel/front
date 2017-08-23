@@ -9,7 +9,7 @@ var qs = require("querystring");
 
 /* GET trajet page. */
 
-router.get('/', auth.isSpotifyAuthenticated, function (req, res, next) {
+router.get('/', auth.isAuthenticated, function (req, res, next) {
 
     var options = {
       url: "http://" + res.conf.parameters().api().full() + "/api/list/$iduser", 
@@ -17,29 +17,39 @@ router.get('/', auth.isSpotifyAuthenticated, function (req, res, next) {
       json: true
     };
 
-    // use the access token to access Web API
-    request.get(options, function(error, response, body) {
-    	var trajets= [
-    					{nom : 'mylene', parcours : 'trajet 1'}, 
-    					{nom : 'florian', parcours : 'trajet 2'}
-		];
 
-      res.render('trajets', { title: 'Pimp my road', trajets: trajets });
+
+    // use the access token to access Web API
+    //request.get(options, function(error, response, body) {
+    //	var trajets= [
+    //					{nom : 'mylene', parcours : 'trajet 1'}, 
+    //					{nom : 'florian', parcours : 'trajet 2'}
+	//	];
+
+    //  res.render('trajets', { title: 'Pimp my road', trajets: trajets });
+    //});
+
+	request.get(options, function(error, response, body) {
+		console.log(body.list_user);
+		// console.log(error);
+		// console.log(response);
+      res.render('trajets', { title: 'Pimp my road', trajets: body.list_user });
     });
+
 
 })
 
 
-/* POST trajet page. */
+/* POST mise a jour voyage trajet page. */
 
-router.post('/', auth.isSpotifyAuthenticated, function (req, res) {
+router.post('/', auth.isAuthenticated, function (req, res) {
     var data = {
       name : req.body.name,
       public : false
     };
 
     var options = {
-      url: 'http://$ip/app_dev.php/api/' + req.cookies.id_spotify + '/trajet',
+      url: 'http://' + res.conf.parameters().api().ip + '/api/journey/update/2',
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
       body: data,
       json: true
@@ -53,9 +63,8 @@ router.post('/', auth.isSpotifyAuthenticated, function (req, res) {
 })
 
 
-
-/* GET meteo page. */
-router.get('/creation', /*auth.isAuthenticated,*/ spotifyService.getPlaylists, function(req, res, next) {
+/* GET creation trajet page. */
+router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, function(req, res, next) {
     var playlists = undefined;
 
     console.log("res.playlists : " + res.playlists);
@@ -68,8 +77,8 @@ router.get('/creation', /*auth.isAuthenticated,*/ spotifyService.getPlaylists, f
     res.render('creationTrajet', { title: 'Pimp my road', playlists: playlists });
 });
 
-/* POST meteo page. */
-router.post('/creation', /*auth.isAuthenticated,*/ function(req, res, next) {
+/* POST creation trajet page. */
+router.post('/creation', auth.isAuthenticated, function(req, res, next) {
 
     console.log("BODY : " + JSON.stringify(req.body) );
 

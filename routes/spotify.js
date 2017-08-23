@@ -21,11 +21,11 @@ var generateRandomString = function(length) {
 
 var stateKey = 'spotify_auth_state';
 
-router.get('/', function(req, res) {
+router.get('/', auth.isAuthenticated, function(req, res) {
   res.render('spotify', { title: 'Pimp my road' });
 });
 
-router.get('/login', function(req, res) {
+router.get('/login', auth.isAuthenticated, function(req, res) {
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -42,7 +42,7 @@ router.get('/login', function(req, res) {
     }));
 });
 
-router.get('/callback', function(req, res) {
+router.get('/callback', auth.isAuthenticated, function(req, res) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter
@@ -106,7 +106,7 @@ router.get('/callback', function(req, res) {
   }
 });
 
-router.get('/refresh_token', function(req, res) {
+router.get('/refresh_token', auth.isAuthenticated, function(req, res) {
 
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
@@ -133,7 +133,7 @@ router.get('/refresh_token', function(req, res) {
   });
 });
 
-router.get('/playlists', auth.isSpotifyAuthenticated, function (req, res) {
+router.get('/playlists', auth.isAuthenticated, auth.isSpotifyAuthenticated, function (req, res) {
 
     var options = {
       url: 'https://api.spotify.com/v1/me/playlists',
@@ -149,7 +149,7 @@ console.log("playlists => " + body.items);
 
 })
 
-router.post('/playlists', auth.isSpotifyAuthenticated, function (req, res) {
+router.post('/playlists', auth.isAuthenticated, auth.isSpotifyAuthenticated, function (req, res) {
     var data = {
       name : req.body.name,
       public : false

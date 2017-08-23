@@ -27,7 +27,7 @@ app.use(cors());
 
 //Socket io
 var io = require('socket.io')(server, { origins: '*:*'});
-server.listen(conf.parameters().serv.port, conf.parameters().serv.ip);
+server.listen(conf.parameters().serv().port, conf.parameters().serv().ip);
 
 io.on('connection', function(client) {
 	console.log('client connect');

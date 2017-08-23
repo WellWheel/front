@@ -6,7 +6,14 @@ full-reinstall: clean/node_modules reinstall
 
 reinstall: clean/conf.js start
 
+reinstall-mac: install-mac
+
+install-mac: start
+
 start: install 
+	node_modules/gulp/bin/gulp.js serve:dev
+
+start-only: 
 	node_modules/gulp/bin/gulp.js serve:dev
 
 conf.js: | conf.js.dist

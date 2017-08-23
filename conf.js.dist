@@ -1,30 +1,23 @@
 module.exports = {
     parameters : function () {
         var params = {
-            nodemonServer: function () {
-                return {
+            nodemonServer: {
                     ip : '127.0.0.1',
                     port: 8080
-                };
             },
-            dockerServer : function () {
-                return {
+            dockerServer : {
                     ip : 'node',
                     port: 8080
-                };
             },
             serv : function () {
                 return {
-
                     ip : this.SOCKET_IP.ip,
                     port: this.SOCKET_IP.port
-
                 };
             },
             api: function () {
                 return {
                     ip : "API_HOSTNAME_OR_IP",
-
                     port: 80
                 };
             },

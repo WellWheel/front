@@ -12,7 +12,7 @@ var qs = require("querystring");
 router.get('/', auth.isSpotifyAuthenticated, function (req, res, next) {
 
     var options = {
-      url: "http://" + res.conf.parameters().api().ip + "/api/list/$iduser", 
+      url: "http://" + res.conf.parameters().api().full() + "/api/list/$iduser", 
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
       json: true
     };

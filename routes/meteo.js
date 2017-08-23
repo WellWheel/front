@@ -11,7 +11,7 @@ router.get('/', auth.isAuthenticated, function(req, res, next) {
 		client.on('localization', function (data) {
 
 			request({
-                url: "http://" + res.conf.parameters().api().ip + "/api/meteo/",
+                url: "http://" + res.conf.parameters().api().full() + "/api/meteo/",
 			    method: "POST",
 			    json: true,   // <--Very important!!!
 			    body: data,

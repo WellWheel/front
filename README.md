@@ -137,3 +137,34 @@ Whole express routes protected:
 |/spotify/ |  connect to spotify - show profile information GET |
 |/spotify/playlists | show whole play list - GET |
 |/spotify/playlists | add a playlist with a name (private by default) - POST |
+
+#### VirtualHost proxy passing
+
+To redirect to port 80, simply redirect the 3000 default port with Apache: 
+
+
+1. `sudo nano /etc/apache2/sites-available/000-default.conf`
+
+```
+<VirtualHost *:80>
+
+        ServerAdmin webmaster@localhost
+        ProxyPreserveHost On
+
+        ProxyPass / http://127.0.0.1:3000/
+        ProxyPassReverse / http://127.0.0.1:3000/
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+```
+
+2. `sudo service apache2 reload && sudo service apache2 restart`
+
+
+3. For spotify redirect just add the 'xip.io' like this :
+
+`redirect_uri: 'http://192.168.33.10.xip.io/spotify/callback' // Your redirect uri for xip.io
+
+4. `make start`

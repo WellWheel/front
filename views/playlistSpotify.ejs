@@ -3,7 +3,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Votre PlayList Spotify</h1>
+                    <h1 class="page-header">Vos PlayList Spotify</h1>
                 </div>
                 <!-- /.col-lg-12 -->
 <div id="wrapper">
@@ -35,9 +35,10 @@
                                         <td><%= info.name %></td>
                                         <td><%= info.external_urls.spotify %></td>
                                         <td class="center">
-                                            <button type="button" class="btn btn-primary">Supprimer</button>
+                                            <a href="/spotify/playlists/show/<%= info.id %>" class="btn btn-primary">Accéder</a>
+                                            <button type="button" class="btn btn-danger">Supprimer</button>
                                         </td>
-                                    </tr>                                  
+                                    </tr>
                                     <% }); %>
                                     <!-- <tr class=" gradeC">
                                         <td>Trident</td>
@@ -49,7 +50,7 @@
                                         <td>Internet Explorer 5.5</td>
                                         <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
                                     </tr> -->
-                                    
+
                                 </tbody>
                             </table>
         </div>
@@ -88,5 +89,3 @@
 
 </div>
 </div>
-
-

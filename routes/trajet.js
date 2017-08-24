@@ -16,10 +16,7 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
       json: true
     };
-
-
-
-    // use the access token to access Web API
+    
     //request.get(options, function(error, response, body) {
     //	var trajets= [
     //					{nom : 'mylene', parcours : 'trajet 1'}, 
@@ -29,6 +26,8 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
     //  res.render('trajets', { title: 'Pimp my road', trajets: trajets });
     //});
 
+
+	// use the access token to access Web API
 	request.get(options, function(error, response, body) {
 		console.log(body.list_user);
 		// console.log(error);
@@ -84,14 +83,6 @@ router.post('/creation', auth.isAuthenticated, function(req, res, next) {
 
     res.redirect('/trajet/creation');
 });
-
-
-
-
-
-
-
-
 
 
 

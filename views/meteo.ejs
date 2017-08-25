@@ -10,7 +10,6 @@
             </div>
 
 
-
         <div id="page-wrapper">
             <!-- /.row -->
             <div class="row">
@@ -19,30 +18,10 @@
                         <div class="panel-heading">
                             Votre météo
                         </div>
+                        <div id='meteo'></div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <thead>
-                                    <tr>
-                                        <th>Nom du trajet</th>
-                                        <th>Historique des visites</th>
-                                        <th>Paramètres</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                 
-                                    <!-- <tr class=" gradeC">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.0</td>
-                                        <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
-                                    </tr>
-                                    <tr class="odd gradeA">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.5</td>
-                                        <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
-                                   </tr> -->                                    
-                                </tbody>
-                            </table>
+                            
         </div>
 
             </div>
@@ -57,7 +36,7 @@
 
 
     <script type="text/javascript">
-        var socket = io.connect('http://localhost:8080/');
+        var socket = io.connect('http://127.0.0.1:8080/');
         socket.on('error', function (error) {
             console.log("Server return error :" + error);
         });
@@ -68,6 +47,18 @@
           maximumAge: 0
         };
 
+        function extractdata(data) {
+
+            console.log(data);
+
+    var maChaine = "<p>" + 'Bienvenue sur votre page météo' + "</p>" 
+                 + "<p>" + 'Aujourd hui le temps est : ' + JSON.stringify(data.list[0].weather[0].description) + '' 
+                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[0].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[0].main.temp_max) + 'degrés' + "</p>" 
+                 + "<p>" + 'Demain le temps est : ' + JSON.stringify(data.list[1].weather[0].description) + "</p>";
+
+    return maChaine ;
+
+}
         function success(pos) {
           var crd = pos.coords;
 
@@ -78,10 +69,14 @@
 
           socket.emit('localization', {lat: crd.latitude, lon: crd.longitude});
           socket.on('dataMeteo', function (data) {
+        	//alert('hello')
             console.log(data);
+
+            $('#meteo').html(extractdata(data));
           })
         };
 
+//+ JSON.stringify(data.message)
         function error(err) {
           socket.emit('localization', {err: `ERROR(${err.code}): ${err.message}` });
           console.warn(`ERROR(${err.code}): ${err.message}`);

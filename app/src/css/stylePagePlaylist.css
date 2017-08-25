@@ -55,7 +55,7 @@ figure.snip1174 p {
   margin-bottom: 20px;
   line-height: 1.4em;
 }
-figure.snip1174 a {
+figure.snip1174 button {
   display: inline-block;
   padding: 10px 20px;
   border: 1px solid #ffffff;
@@ -67,8 +67,9 @@ figure.snip1174 a {
   -webkit-transform: translateY(50%);
   transform: translateY(50%);
   opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
-figure.snip1174 a:hover {
+figure.snip1174 button:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 figure.snip1174.blue {
@@ -92,8 +93,8 @@ figure.snip1174.hover img {
   -webkit-transform: scale(1);
   transform: scale(1);
 }
-figure.snip1174:hover a,
-figure.snip1174.hover a {
+figure.snip1174:hover button,
+figure.snip1174.hover button {
   -webkit-transform: translateY(0);
   transform: translateY(0);
   opacity: 1;

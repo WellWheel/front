@@ -150,96 +150,172 @@ router.get('/refresh_token', auth.isAuthenticated, function(req, res) {
 
 router.get('/playlists', auth.isAuthenticated, auth.isSpotifyAuthenticated, function(req, res) {
 
-  var options = {
-    url: 'https://api.spotify.com/v1/me/playlists',
-    headers: {
-      'Authorization': 'Bearer ' + req.cookies.spotify_token
-    },
-    json: true
-  };
+    var options = {
+        url: 'https://api.spotify.com/v1/me/playlists',
+        headers: {
+            'Authorization': 'Bearer ' + req.cookies.spotify_token
+        },
+        json: true
+    };
 
-  // use the access token to access the Spotify Web API
-  request.get(options, function(error, response, body) {
-    res.render('playlistSpotify', {
-      title: 'Pimp my road',
-      playlists: body.items
+    // use the access token to access the Spotify Web API
+    request.get(options, function(error, response, body) {
+        res.io.on('connection', function(client) {
+            client.on('deletePlaylist', function(data) {
+                var id = data.id;
+                var options2 = {
+                    url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists/' + id + '/followers',
+                    headers: {
+                        'Authorization': 'Bearer ' + req.cookies.spotify_token
+                    },
+                    json: true
+                };
+                request.delete(options2, function(error, response, body) {
+                    if(response.statusCode == 200 || response.statusCode == 201) {
+                        console.log(body);
+                        client.emit('playlistDeleted', id);
+                    }
+                    if(error !== null) {
+                        console.log(error);
+                        client.emit('error', error);
+                    }
+                });
+            });
+        });
+        res.render('playlistSpotify', {
+            title: 'Pimp my road',
+            playlists: body.items
+        });
     });
-  });
-
 })
 
 router.post('/playlists', auth.isAuthenticated, auth.isSpotifyAuthenticated, function(req, res) {
-  var data = {
-    name: req.body.name,
-    public: false
-  };
+    var data = {
+        name: req.body.name,
+        public: false
+    };
 
-  var options = {
-    url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists',
-    headers: {
-      'Authorization': 'Bearer ' + req.cookies.spotify_token
-    },
-    body: data,
-    json: true
-  };
+    var options = {
+        url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists',
+        headers: {
+            'Authorization': 'Bearer ' + req.cookies.spotify_token
+        },
+        body: data,
+        json: true
+    };
 
-  // use the access token to access the Spotify Web API
-  request.post(options, function(error, response, body) {
-    res.redirect('/spotify/playlists');
-  });
 
+    // use the access token to access the Spotify Web API
+    request.post(options, function(error, response, body) {
+        res.redirect('/spotify/playlists');
+    });
 })
 
 router.get('/playlists/show/:id', auth.isAuthenticated, auth.isSpotifyAuthenticated, function(req, res) {
 
-  var id = req.params.id;
+    var id = req.params.id;
 
-  var options1 = {
-    url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists/' + id,
-    headers: {
-      'Authorization': 'Bearer ' + req.cookies.spotify_token
-    },
-    json: true
-  };
-  var options2 = {
-    url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists/' + id + '/tracks',
-    headers: {
-      'Authorization': 'Bearer ' + req.cookies.spotify_token
-    },
-    json: true
-  };
-  var name = "";
-  // use the access token to access the Spotify Web API
-  request.get(options1, function(error, response, body) {
-    name = body.name;
-    request.get(options2, function(error, response, body) {
-      res.io.on('connection', function(client) {
-        client.on('searchtrack', function(data) {
+    var options1 = {
+        url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists/' + id,
+        headers: {
+            'Authorization': 'Bearer ' + req.cookies.spotify_token
+        },
+        json: true
+    };
+    var options2 = {
+        url: 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists/' + id + '/tracks',
+        headers: {
+            'Authorization': 'Bearer ' + req.cookies.spotify_token
+        },
+        json: true
+    };
+    var name = "";
+    // use the access token to access the Spotify Web API
+    request.get(options1, function(error, response, body) {
+        name = body.name;
+        request.get(options2, function(error, response, body) {
+            res.io.on('connection', function(client) {
+                client.on('searchtrack', function(data) {
+                    var track = data.title;
+                    var url = 'https://api.spotify.com/v1/search?q=' + track + '&type=track&limit=6';
 
-          var track = data.title;
-          var url = 'https://api.spotify.com/v1/search?q=' + track + '&type=track&limit=5';
+                    var options = {
+                        url: url,
+                        headers: {
+                            'Authorization': 'Bearer ' + req.cookies.spotify_token
+                        },
+                        json: true
+                    };
+                    request.get(options, function(error, response, body) {
+                        console.log("Track Found Get Before Emit");
+                        client.emit('trackfound', body);
+                    });
+                })
+                client.on('deletetrack', function(data) {
+                    var trackId = data.id;
+                    var position = data.position;
 
-          var options = {
-            url: url,
-            headers: {
-              'Authorization': 'Bearer ' + req.cookies.spotify_token
-            },
-            json: true
-          };
-          request.get(options, function(error, response, body) {
-              client.emit('trackfound', body);
-          });
-        })
-      })
-      res.render('showPlaylist', {
-        title: 'Pimp my road',
-        playlists: body.items,
-        name: name
-      });
+                    var data = {
+                        tracks: [{
+                            uri: "spotify:track:"+trackId,
+                            positions: [position]
+                        }],
+                    };
+
+                    var url = 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists/' + id + '/tracks';
+
+                    var options = {
+                        url: url,
+                        headers: {
+                            'Authorization': 'Bearer ' + req.cookies.spotify_token
+                        },
+                        body: data,
+                        json: true
+                    };
+                    request.delete(options, function(error, response, body) {
+                        client.emit('deleted', position);
+                    });
+                })
+                client.on('addtrack', function(data) {
+                    var trackId = data.trackId;
+                    var url = 'https://api.spotify.com/v1/users/' + req.cookies.id_spotify + '/playlists/' + id + '/tracks?uris=spotify%3Atrack%3A' + trackId;
+
+                    var options = {
+                        url: url,
+                        headers: {
+                            'Authorization': 'Bearer ' + req.cookies.spotify_token
+                        },
+                        json: true
+                    };
+                    request.post(options, function(error, response, body) {
+                        if(response.statusCode == 200 || response.statusCode == 201) {
+                            var url2 = 'https://api.spotify.com/v1/tracks/' + trackId;
+
+                            var options2 = {
+                                url: url2,
+                                headers: {
+                                    'Authorization': 'Bearer ' + req.cookies.spotify_token
+                                },
+                                json: true
+                            };
+                            request.get(options2, function(error, response, body) {
+                                client.emit('added', body);
+                            });
+                        }
+                        if(error !== null) {
+                            console.log(error);
+                            client.emit('error', error);
+                        }
+                    });
+                })
+            })
+            res.render('showPlaylist', {
+                title: 'Pimp my road',
+                playlists: body.items,
+                name: name
+            });
+        });
     });
-  });
-
-
 })
 
 

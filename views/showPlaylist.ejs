@@ -14,17 +14,29 @@
                                     <%= name %>
                                 </div>
                                 <div class="panel-body">
-                                    <% if (playlists.length > 0) { %>
-                                        <ul>
-                                            <% playlists.forEach(function(info) { %>
-                                            <% }); %>
-                                        </ul>
-                                    <% } else { %>
-                                        <div class="alert aler-info">
-                                            <strong>Information</strong><br>
-                                            Il n'y a aucun morceau dans cette playlist
-                                        </div>
-                                    <% }; %>
+                                    <ul id="listTracks" class="list-unstyled">
+                                        <% if (playlists.length > 0) { %>
+                                            <% for(var i=0; i<playlists.length; i++) {%>
+                                                <li id="track<%= i %>">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-danger delete" data-id="<%= playlists[i].track.id %>" data-position="<%= i %>">Supprimer</button>
+                                                    </div>
+                                                    <h2><%= playlists[i].track.name %></h2>
+                                                    <p>
+                                                        <% playlists[i].track.artists.forEach(function(artist) { %>
+                                                            <%= artist.name %>
+                                                        <% }); %>
+                                                        . <%= playlists[i].track.album.name %>
+                                                    </p>
+                                                </li>
+                                            <% } %>
+                                        <% } else { %>
+                                            <div class="alert alert-info">
+                                                <strong>Information</strong><br>
+                                                Il n'y a aucun morceau dans cette playlist
+                                            </div>
+                                        <% }; %>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -47,36 +59,65 @@
         </div>
     </div>
 </div>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
 <script>
-$(document).ready(function  () {
-    var socket = io.connect('http://localhost:8080/');
-    $("#search").on("click",function  (e) {
+var socket = io.connect('http://localhost:8080/');
+$(document).ready(function() {
+    $("#search").on("click",function() {
         var title = "";
         if($("#track").val() !== '') {
             title = $("#track").val();
             socket.emit('searchtrack', {title: title});
-            socket.on('trackfound', function(datas) {
-                $('#response').html("");
-                console.log(datas.tracks.items);
-                var tracks = datas.tracks.items;
-                tracks.forEach(function(track) {
-                    $('#response').append(
-                        '<div class="col-md-6">' +
-                            '<figure class="snip1174 navy col-md-4">' +
-                                '<img src="' + track.album.images[0].url + '"/>' +
-                                '<figcaption>' +
-                                    '<h2>' + track.name + '</h2>' +
-                                    '<p>' +
-                                        track.artists[0].name + " . " + track.album.name +
-                                    '</p>' +
-                                    '<a href="#">Ajouter</a>' +
-                                '</figcaption>' +
-                            '</figure>' +
-                        '</div>'
-                    )
-                })
-            })
+        }
+    })
+    $(".delete").on("click",function() {
+        var id = $(this).data('id');
+        var position = $(this).data('position');
+        socket.emit('deletetrack', {id: id, position: position});
+    })
+    socket.on('trackfound', function(datas) {
+        $('#response').html("");
+        console.log(datas.tracks.items);
+        var tracks = datas.tracks.items;
+        tracks.forEach(function(track) {
+            var name = track.name;
+            if(name.length > 20) name = name.substring(0,20);
+            var artist = track.artists[0].name;
+            if(artist.length > 30) artist = artist.substring(0,30);
+            var album = track.album.name;
+            if(album.length > 30) album = album.substring(0,30);
+
+            $('#response').append(
+                '<div class="col-md-6">' +
+                    '<figure class="snip1174 navy col-md-4">' +
+                        '<img src="' + track.album.images[0].url + '"/>' +
+                        '<figcaption>' +
+                            '<h2>' + name + '</h2>' +
+                            '<p>' +
+                                artist + " . " + album +
+                            '</p>' +
+                            '<button class="addTrack" data-id="'+ track.id +'">Ajouter</button>' +
+                        '</figcaption>' +
+                    '</figure>' +
+                '</div>'
+            )
+        })
+        $(".addTrack").on('click', function() {
+            var trackId = $(this).data('id');
+            socket.emit('addtrack', {trackId: trackId});
+        })
+    })
+    socket.on('added', function(datas) {
+        if(!datas.error) {
+            if($(".alert") !== null) {
+                $(".alert").hide();
+            }
+            $("#listTracks").append('<li><div class="pull-right"><button class="btn btn-danger" data-id="'+ datas.id +'">Supprimer</button></div><h2>'+ datas.name +'</h2><p>'+ datas.artists[0].name +' . '+ datas.album.name +' </p></li>')
+        }
+    })
+    socket.on('deleted', function(datas) {
+        if(datas !== null) {
+            $("#track"+datas).remove();
         }
     })
 })

@@ -30,9 +30,9 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
 	// use the access token to access Web API
 	request.get(options, function(error, response, body) {
 		console.log(body.list_user);
-		// console.log(error);
+		// console.log(body);
 		// console.log(response);
-      res.render('trajets', { title: 'Pimp my road', trajets: body.list_user });
+      res.render('trajets', { title: 'Pimp my road', trajets: [] });
     });
 
 

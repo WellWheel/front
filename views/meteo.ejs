@@ -10,28 +10,90 @@
             </div>
 
 
-        <div id="page-wrapper">
+        <div id="container">
             <!-- /.row -->
+            
+
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Votre météo
+             
+<!-- soleil  -->
+                <div class="col-lg-12 jour">
+                    <div class='blockJour'>
+                        <div class="info-jour col-xs-12">
+                            <div class="temps">32°</div>
+                            <div class="ville">
+                                <p>LYON</p>
+                            </div>
                         </div>
-                        <div id='meteo'></div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            
-        </div>
+                        <div class="description">Partiellement ensoleillé</div>
+                        <div class="temperaturemin">25°</div>
+                        <div class="temperaturemax">32°</div>
+                    </div>
+
+                </div>
+            </div>
+            
+
+            <div class="row">
+
+                <div class="col-lg-12 semaine">
+                    <div class='blockTemps'>
+                        <div class="ico-temps"></div>
+                        <div class="description">nuageux</div>
+                        <div class="temperaturemin">22°</div>
+                        <div class="temperaturemax">26°</div>
+                    </div>
+               
+
+                    <div class='blockTemps'>
+                        <div class="ico-temps"></div>
+                        <div class="description">partiellement nuageux</div>
+                        <div class="temperaturemin">24°</div>
+                        <div class="temperaturemax">30°</div>
+                    </div>
+                
+
+               
+                    <div class='blockTemps'>
+                        <div class="ico-temps"></div>
+                        <div class="description">très nuageux</div>
+                        <div class="temperaturemin">22°</div>
+                        <div class="temperaturemax">26°</div>
+                    </div>
+                
+
+               
+                    <div class='blockTemps'>
+                        <div class="ico-temps"></div>
+                        <div class="description">nuageux</div>
+                        <div class="temperaturemin">22°</div>
+                        <div class="temperaturemax">26°</div>
+                    </div>
+                
+
+                
+                    <div class='blockTemps'>
+                        <div class="ico-temps"></div>
+                        <div class="description">pluie</div>
+                        <div class="temperaturemin">23°</div>
+                        <div class="temperaturemax">25°</div>
+                    </div>
+                
+
+               
+                    <div class='blockTemps'>
+                        <div class="ico-temps"></div>
+                        <div class="description">ensoleillé</div>
+                        <div class="temperaturemin">27°</div>
+                        <div class="temperaturemax">35°</div>
+                    </div>
+                </div>
 
             </div>
-
-</div>
-</div>
-
-            <div id="contenumeteo"></div>
             
-</div>
+
+            
+        </div>
 </div>
 
 
@@ -52,9 +114,10 @@
             console.log(data);
 
     var maChaine = "<p>" + 'Bienvenue sur votre page météo' + "</p>" 
-                 + "<p>" + 'Aujourd hui le temps est : ' + JSON.stringify(data.list[0].weather[0].description) + '' 
-                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[0].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[0].main.temp_max) + 'degrés' + "</p>" 
-                 + "<p>" + 'Demain le temps est : ' + JSON.stringify(data.list[1].weather[0].description) + "</p>";
+                 + "<p>" + 'Aujourd hui le temps est : ' + JSON.stringify(data.list[0].weather[0].description) + '. ' 
+                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[0].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[0].main.temp_max) + ' degrés' + "</p>" 
+                 + "<p>" + 'Demain le temps est : ' + JSON.stringify(data.list[1].weather[0].description) + '. ' 
+                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[1].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[1].main.temp_max) + ' degrés' + "</p>";
 
     return maChaine ;
 
@@ -88,6 +151,10 @@
 		} else {
 		  alert("Le service de géolocalisation n'est pas disponible sur votre ordinateur.");
 		}
+
+        if $('temps').val == 'peu nuageux' {
+
+        }
     </script>
 
 

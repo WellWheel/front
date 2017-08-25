@@ -30,8 +30,8 @@ router.post('/login', function(req, res, next) {
 		  		{
 				  	response.on('data', function(data) {
 							var datas = JSON.parse(data);
-							console.log("Success login");
-
+							console.log("Success login : ");
+							console.log(datas);
 				  			res.statusCode = 302;
 							res.setHeader("Location", '/Accueil');
     						res.cookie('my_token', datas.token, { maxAge: 900000, httpOnly: true });

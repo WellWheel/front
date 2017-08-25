@@ -86,7 +86,8 @@ body.open #menu {
        -moz-transition: all .3s ease-in;
          -o-transition: all .3s ease-in;
             transition: all .3s ease-in;
-    background-color:#ffffff;
+    background-image: linear-gradient(142deg, #FEE140 0%, #ff4f52 100%);
+
 }
 body.open .page-wrap {
     margin-left: 300px;
@@ -146,9 +147,4 @@ body.open button#menu-toggle:after {
         -ms-transform: rotate(45deg);
             transform: rotate(45deg);
 }
-/* CONTENT CONTAINER */
-.container {
-    max-width: 600px;
-    min-width: 200px;
-    margin: 0 auto;
-}
+

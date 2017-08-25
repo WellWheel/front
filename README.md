@@ -21,6 +21,10 @@ Go to:
 
 http://localhost:3000/
 
+#### Develpement source
+
+*All devlopment will be done on "app/src" and all public folder is not fallow at all.*
+
 #### Install
 
 0. `cd project folder`

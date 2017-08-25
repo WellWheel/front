@@ -6,14 +6,37 @@
 body {
   background-color: #f8f8f8;
   font-size:16px;
+  font-family: 'Open Sans', sans-serif;
 }
 #wrapper {
   width: 100%;
 }
 #page-wrapper {
   padding: 0 15px;
-  min-height: 568px;
-  background-color: white;
+}
+.fa {
+  display: block!important;
+}
+.fa:before {
+  display: block;
+  width: 80px;
+  margin: auto;
+}
+.info-badge {
+  padding-top: 40px;
+  color:#484848;
+}
+.panel-heading {
+  padding: 70px 15px;
+}
+.fa-arrow-circle-right {
+  width: 14px;
+}
+.info-ico .fa:before {
+  color:white;
+}
+.panel {
+  background:rgba(255, 255, 255, 0.28);
 }
 
 @media (min-width: 768px) {
@@ -153,6 +176,9 @@ table.dataTable thead .sorting:after {
 }
 .huge {
   font-size: 40px;
+  font-family: 'Open Sans'!important;
+  font-weight: 800!important;
+  color:#484848;
 }
 .panel-green {
   border-color: #5cb85c;

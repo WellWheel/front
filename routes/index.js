@@ -18,7 +18,7 @@ router.get('/CreationCompte', function(req, res, next) {
 router.get('/Accueil', auth.isAuthenticated, function(req, res, next) {
     console.log('A token is decoded ?');
     console.log(req.user);
-    res.render('dashboardAccueil', { title: 'Pimp my road' });
+    res.render('dashboardAccueil', { title: 'Pimp my road', token: req.cookies.my_token });
 });
 
 

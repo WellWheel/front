@@ -137,7 +137,7 @@ router.get('/refresh_token', auth.isAuthenticated, function(req, res) {
     if (!error && response.statusCode === 200) {
       var access_token = body.access_token;
       res.cookie('spotify_token', access_token, {
-        maxAge: 900000,
+        maxAge: 9000000,
         httpOnly: true
       });
 

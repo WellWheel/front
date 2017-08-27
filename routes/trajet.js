@@ -12,14 +12,14 @@ var qs = require("querystring");
 router.get('/', auth.isAuthenticated, function (req, res, next) {
 
     var options = {
-      url: "http://" + res.conf.parameters().api().full() + "/api/list/$iduser", 
+      url: res.conf.parameters().api().full() + "/api/list/$iduser",
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
       json: true
     };
-    
+
     //request.get(options, function(error, response, body) {
     //	var trajets= [
-    //					{nom : 'mylene', parcours : 'trajet 1'}, 
+    //					{nom : 'mylene', parcours : 'trajet 1'},
     //					{nom : 'florian', parcours : 'trajet 2'}
 	//	];
 

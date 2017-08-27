@@ -9,7 +9,7 @@ var auth = require('../auth.js');
 router.post('/login', function(req, res, next) {
 	console.log("res.conf.parameters().api().full()" + res.conf.parameters().api().full())
 	request({
-	  url: "http://" + res.conf.parameters().api().full() + "/api/login_check",
+	  url: res.conf.parameters().api().full() + "/api/login_check",
       body: qs.stringify(req.body),
       method: "POST",
 	  headers: {
@@ -34,7 +34,7 @@ router.post('/login', function(req, res, next) {
 							console.log(datas);
 				  			res.statusCode = 302;
 							res.setHeader("Location", '/Accueil');
-    						res.cookie('my_token', datas.token, { maxAge: 900000, httpOnly: true });
+    						res.cookie('my_token', datas.token, { maxAge: 9000000, httpOnly: true });
 							res.end();
 					  })
 		  		} else {
@@ -50,7 +50,7 @@ router.post('/login', function(req, res, next) {
 router.post('/create', function (req, res, next) {
 
 	request({
-	  url: "http://" + res.conf.parameters().api().full() + "/api/register",
+	  url: res.conf.parameters().api().full() + "/api/register",
       body: qs.stringify(req.body),
       method: "POST",
 	  headers: {

@@ -85,5 +85,5 @@ gulp.task('server:nodemon',function(){
 
 gulp.task('dist', ['styles:scss','styles:css', 'scripts']);
 gulp.task('serve:prod', ['dist', 'server:pm2']);
-gulp.task('serve:dev', ['dist', 'server:nodemon','watch']);
+gulp.task('serve:dev', ['dist', 'server:nodemon', 'watch']);
 

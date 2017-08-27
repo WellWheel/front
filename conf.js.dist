@@ -17,10 +17,11 @@ module.exports = {
             },
             api: function () {
                 return {
+                    mode: "http",
                     ip : "API_HOSTNAME_OR_IP",
                     port: 80,
                     full: function () {
-                        return this.ip + ":" + this.port;
+                        return this.mode + "://" + this.ip + ":" + this.port;
                     }
                 };
             },

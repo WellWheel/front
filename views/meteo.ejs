@@ -12,10 +12,10 @@
 
         <div id="container">
             <!-- /.row -->
-            
+
 
             <div class="row">
-             
+
 <!-- soleil  -->
                 <div class="col-lg-12 jour">
                     <div class='blockJour'>
@@ -32,7 +32,7 @@
 
                 </div>
             </div>
-            
+
 
             <div class="row">
 
@@ -43,7 +43,7 @@
                         <div class="temperaturemin">22°</div>
                         <div class="temperaturemax">26°</div>
                     </div>
-               
+
 
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
@@ -51,36 +51,36 @@
                         <div class="temperaturemin">24°</div>
                         <div class="temperaturemax">30°</div>
                     </div>
-                
 
-               
+
+
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
                         <div class="description">très nuageux</div>
                         <div class="temperaturemin">22°</div>
                         <div class="temperaturemax">26°</div>
                     </div>
-                
 
-               
+
+
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
                         <div class="description">nuageux</div>
                         <div class="temperaturemin">22°</div>
                         <div class="temperaturemax">26°</div>
                     </div>
-                
 
-                
+
+
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
                         <div class="description">pluie</div>
                         <div class="temperaturemin">23°</div>
                         <div class="temperaturemax">25°</div>
                     </div>
-                
 
-               
+
+
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
                         <div class="description">ensoleillé</div>
@@ -90,9 +90,9 @@
                 </div>
 
             </div>
-            
 
-            
+
+
         </div>
 </div>
 
@@ -111,12 +111,10 @@
 
         function extractdata(data) {
 
-            console.log(data);
-
-    var maChaine = "<p>" + 'Bienvenue sur votre page météo' + "</p>" 
-                 + "<p>" + 'Aujourd hui le temps est : ' + JSON.stringify(data.list[0].weather[0].description) + '. ' 
-                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[0].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[0].main.temp_max) + ' degrés' + "</p>" 
-                 + "<p>" + 'Demain le temps est : ' + JSON.stringify(data.list[1].weather[0].description) + '. ' 
+    var maChaine = "<p>" + 'Bienvenue sur votre page météo' + "</p>"
+                 + "<p>" + 'Aujourd hui le temps est : ' + JSON.stringify(data.list[0].weather[0].description) + '. '
+                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[0].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[0].main.temp_max) + ' degrés' + "</p>"
+                 + "<p>" + 'Demain le temps est : ' + JSON.stringify(data.list[1].weather[0].description) + '. '
                  + 'Les températures sont comprise entre ' + JSON.stringify(data.list[1].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[1].main.temp_max) + ' degrés' + "</p>";
 
     return maChaine ;
@@ -124,13 +122,14 @@
 }
         function success(pos) {
           var crd = pos.coords;
+          var token = "<%= token %>)"
 
           console.log('Your current position is:');
           console.log(`Latitude : ${crd.latitude}`);
           console.log(`Longitude: ${crd.longitude}`);
           console.log(`More or less ${crd.accuracy} meters.`);
 
-          socket.emit('localization', {lat: crd.latitude, lon: crd.longitude});
+          socket.emit('localization', {token : token, lat: crd.latitude, lon: crd.longitude});
           socket.on('dataMeteo', function (data) {
         	//alert('hello')
             console.log(data);
@@ -152,7 +151,7 @@
 		  alert("Le service de géolocalisation n'est pas disponible sur votre ordinateur.");
 		}
 
-        if $('temps').val == 'peu nuageux' {
+        if ($('temps').val == 'peu nuageux') {
 
         }
     </script>

@@ -14,11 +14,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var trajet = require('./routes/trajet');
 var spotify = require('./routes/spotify');
+var socketService = require('./service/socketService');
 
 
 
 var meteo = require('./routes/meteo');
-var request = require('request');
 
 var app = express();
 
@@ -29,9 +29,9 @@ app.use(cors());
 var io = require('socket.io')(server, { origins: '*:*'});
 server.listen(conf.parameters().serv().port, conf.parameters().serv().ip);
 
-io.on('connection', function(client) {
-	console.log('client connect');
-});
+// Start all socket service
+socketService.up(io);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

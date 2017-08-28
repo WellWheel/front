@@ -16,7 +16,7 @@ module.exports = {
                     mode: "http",
                     hostname : this.SOCKET_IP.hostname,
                     ip : this.SOCKET_IP.ip,
-                    port: this.SOCKET_IP.port
+                    port: this.SOCKET_IP.port,
                     full: function () {
                         return this.mode + "://" + this.hostname + ":" + this.port;
                     }

@@ -12,7 +12,7 @@ var qs = require("querystring");
 router.get('/', auth.isAuthenticated, function (req, res, next) {
 
     var options = {
-      url: res.conf.parameters().api().full() + "/api/list/$iduser",
+      url: res.conf.parameters().api().full() + "/api/journey/1",
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
       json: true
     };
@@ -32,7 +32,7 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
 		console.log(body.list_user);
 		// console.log(body);
 		// console.log(response);
-      res.render('trajets', { title: 'Pimp my road', trajets: [] });
+      res.render('trajets', { title: 'Pimp my road', trajets: body.list_user });
     });
 
 
@@ -78,8 +78,21 @@ router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, funct
 
 /* POST creation trajet page. */
 router.post('/creation', auth.isAuthenticated, function(req, res, next) {
-
+    console.log("test");
     console.log("BODY : " + JSON.stringify(req.body) );
+
+    var data = {
+        origin: req.body.start,
+        destination: req.body.end,
+        iduser: '1',
+    };
+
+    var options = {
+      url: res.conf.parameters().api().full() + '/api/journey/create',
+      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+      body: data,
+      json: true
+    };
 
     res.redirect('/trajet/creation');
 });

@@ -73,14 +73,14 @@
     </div>
 </div>
 <script type='text/javascript'>
-    var socket = io.connect('http://localhost:8080/');
+    var socket = io.connect('<%= socketHost %>');
     $(document).ready(function() {
         // $('#dataTables-example').DataTable({
         //     responsive: true
         // });
         $(".deletePlaylist").on('click', function(){
             var id = $(this).data("id");
-            socket.emit('deletePlaylist', {id: id});
+            socket.emit('deletePlaylist', {id: id, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: id});
             socket.on('playlistDeleted', function(data) {
                 $("#playlist"+data).remove();
             })

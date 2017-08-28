@@ -2,17 +2,24 @@ module.exports = {
     parameters : function () {
         var params = {
             nodemonServer: {
+                    hostname: 'localhost',
                     ip : '127.0.0.1',
                     port: 8080
             },
             dockerServer : {
+                    hostname: 'localhost',
                     ip : 'node',
                     port: 8080
             },
             serv : function () {
                 return {
+                    mode: "http",
+                    hostname : this.SOCKET_IP.hostname,
                     ip : this.SOCKET_IP.ip,
                     port: this.SOCKET_IP.port
+                    full: function () {
+                        return this.mode + "://" + this.hostname + ":" + this.port;
+                    }
                 };
             },
             api: function () {

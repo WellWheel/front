@@ -48,7 +48,7 @@ router.post('/', auth.isAuthenticated, function (req, res) {
     };
 
     var options = {
-      url: 'http://' + res.conf.parameters().api().ip + '/api/journey/update/2',
+      url: res.conf.parameters().api().full() + '/api/journey/update/2',
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
       body: data,
       json: true

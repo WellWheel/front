@@ -71,9 +71,54 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 <script type='text/javascript'>
     var socket = io.connect('<%= socketHost %>');
+=======
+    <!-- /#wrapper -->
+
+<script src="/components/annyang/dist/annyang.min.js"></script>
+
+
+ <script type="text/javascript"> %>
+    if (annyang) {
+        console.log("annyang");
+
+      // Let's define our first command. First the text we expect, and then the function it should call
+      var commands = {
+        'do something': function() {
+            alert("Nice")
+        },
+
+        'open': function() {
+            document.querySelector('body').className += "open";
+        },
+
+        'close': function() {
+            document.querySelector('body').classList.remove("open");
+            document.querySelector('body').removeAttribute("class");
+        },
+
+        'do another thing with *word': function(word) {
+        alert(word);
+            console.log(word);
+        }
+
+      };
+
+      // Add our commands to annyang
+      annyang.addCommands(commands);
+
+      // Start listening. You can call this here, or attach this call to an event, button, etc.
+      annyang.start();
+    }
+</script>
+
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+>>>>>>> Begin speech
     $(document).ready(function() {
         // $('#dataTables-example').DataTable({
         //     responsive: true

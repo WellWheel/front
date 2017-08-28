@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-
 var auth = require('../auth.js');
-
+var request = require('request');
+var qs = require("querystring");
 /* GET login page. */
 router.get('/',  function(req, res, next) {
+
   res.render('login', { title: 'Pimp my road' });
 });
 
@@ -15,9 +16,29 @@ router.get('/CreationCompte', function(req, res, next) {
 
 /* GET dashboard Accueil page. */
 router.get('/Accueil', auth.isAuthenticated, function(req, res, next) {
+
     console.log('A token is decoded ?');
     console.log(req.user);
-    res.render('dashboardAccueil', { title: 'Pimp my road', token: req.cookies.my_token });
+
+    var options = {
+      url: res.conf.parameters().api().full() + "/api/journey/1",
+      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+      json: true
+    };
+
+    request.get(options, function(error, response, body) {
+      console.log(body.list_user);
+
+
+    res.render('dashboardAccueil', {
+        title: 'Pimp my road' ,
+        token: req.cookies.my_token,
+        trajets: body.list_user,
+        socketHost: res.conf.parameters().serv().full()
+      });
+
+  });
+
 });
 
 

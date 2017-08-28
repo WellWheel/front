@@ -12,7 +12,7 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-12 text-center info-badge">
-                                    <div class="huge">26</div>
+                                    <div class="huge"><%= trajets.length %></div>
                                     <div>Trajets</div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-12 text-center info-badge">
-                                    <div class="huge">Soleil</div>
+                                    <div id="meteo" class="huge"></div>
                                     <div>Météo</div>
                                 </div>
                             </div>
@@ -118,4 +118,55 @@
             </div>
             <!-- /.row -->
     </div>
+    <script type="text/javascript">
+          var socket = io.connect('<%= socketHost %>');
+          socket.on('error', function (error) {
+            console.log(error);
+          });
+
+          var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+          };
+
+          function extractdata(data) {
+
+
+              var degres = data.list[0].main.temp;
+              console.log(degres);
+              var maChaine = Math.round(degres).toString() + " °C";
+
+              return maChaine ;
+
+            }
+          function success(pos) {
+            console.log("success");
+            var crd = pos.coords;
+
+
+
+            socket.emit('localization', {token: "<%= token %>", lat: crd.latitude, lon: crd.longitude});
+
+          };
+
+  //+ JSON.stringify(data.message)
+          function error(err) {
+            socket.emit('localization', {err: `ERROR(${err.code}): ${err.message}` });
+
+          };
+
+  		if ("geolocation" in navigator) {
+  		  /* géolocalisation possible */
+      		navigator.geolocation.getCurrentPosition(success, error, options);
+  		} else {
+  		  alert("Le service de géolocalisation n'est pas disponible sur votre ordinateur.");
+  		}
+      socket.on('dataMeteo', function (data) {
+      //alert('hello')
+
+
+        $('#meteo').html(extractdata(data));
+      })
+      </script>
     <!-- /#wrapper -->

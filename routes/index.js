@@ -10,7 +10,6 @@ router.get('/',  function(req, res, next) {
 
 /* GET creation compte page. */
 router.get('/CreationCompte', function(req, res, next) {
-  res.io.emit('messages', 'test msg');
   res.render('creationLogin', { title: 'Pimp my road' });
 });
 

@@ -61,19 +61,19 @@
 </div>
 
 <script>
-var socket = io.connect('http://localhost:8080/');
+var socket = io.connect('<%= socketHost  %>');
 $(document).ready(function() {
     $("#search").on("click",function() {
         var title = "";
         if($("#track").val() !== '') {
             title = $("#track").val();
-            socket.emit('searchtrack', {title: title});
+            socket.emit('searchtrack', {title: title, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: "<%= idPlaylist %>" });
         }
     })
     $(".delete").on("click",function() {
         var id = $(this).data('id');
         var position = $(this).data('position');
-        socket.emit('deletetrack', {id: id, position: position});
+        socket.emit('deletetrack', {id: id, position: position, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: "<%= idPlaylist %>" });
     })
     socket.on('trackfound', function(datas) {
         $('#response').html("");
@@ -104,7 +104,7 @@ $(document).ready(function() {
         })
         $(".addTrack").on('click', function() {
             var trackId = $(this).data('id');
-            socket.emit('addtrack', {trackId: trackId});
+            socket.emit('addtrack', {trackId: trackId, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: "<%= idPlaylist %>" });
         })
     })
     socket.on('added', function(datas) {

@@ -98,7 +98,7 @@
 
 
     <script type="text/javascript">
-        var socket = io.connect('http://127.0.0.1:8080/');
+        var socket = io.connect('<%= socketHost %>');
         socket.on('error', function (error) {
             console.log("Server return error :" + error);
         });

@@ -64,6 +64,10 @@ module.exports = {
             res.setHeader("Location", '/');
             res.end();
           });
+      } else {
+        res.statusCode = 302;
+        res.setHeader("Location", '/');
+        res.end();
       }
     },
     isSpotifyAuthenticated: function (req, res , next) {

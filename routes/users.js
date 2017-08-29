@@ -7,6 +7,8 @@ var auth = require('../auth.js');
 
 /* GET users listing. */
 router.post('/login', function(req, res, next) {
+
+
 	console.log("res.conf.parameters().api().full()" + res.conf.parameters().api().full())
 	request({
 	  url: res.conf.parameters().api().full() + "/api/login_check",
@@ -31,10 +33,11 @@ router.post('/login', function(req, res, next) {
 				  	response.on('data', function(data) {
 							var datas = JSON.parse(data);
 							console.log("Success login : ");
+    						res.locals.login = true;
 							console.log(datas);
 				  			res.statusCode = 302;
 							res.setHeader("Location", '/Accueil');
-    						res.cookie('my_token', datas.token, { maxAge: 9000000, httpOnly: true });
+    						res.cookie('my_token', datas.token, { maxAge: 3600000, httpOnly: true });
 							res.end();
 					  })
 		  		} else {
@@ -77,6 +80,7 @@ router.post('/create', function (req, res, next) {
 
 /* GET login page. */
 router.get('/deco', auth.isAuthenticated, function(req, res, next) {
+    res.locals.login = false;
 	res.clearCookie("my_token");
 	res.statusCode = 302;
 	res.setHeader("Location", '/');

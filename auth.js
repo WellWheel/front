@@ -25,13 +25,16 @@ module.exports = {
 
       console.log("req.auth : " + req.auth)
       if(req.auth) {
+          res.locals.login = true;
 
-                return next();
-        }
-        
+            return next();
+      } else {
+        console.log("REDIRIGEEEEEE")
         res.statusCode = 302;
         res.setHeader("Location", '/');
         res.end();
+      }
+        
       
     },
     isSpotifyAuthenticated: function (req, res , next) {

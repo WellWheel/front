@@ -52,7 +52,7 @@ app.use( function(req, res, next) {
 });
 
 // Get the token
-// app.use(auth.init());
+app.use(auth.init());
 
 app.use('/', index);
 app.use('/users', users);

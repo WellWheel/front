@@ -7,9 +7,8 @@ var qs = require("querystring");
 router.get('/',  function(req, res, next) {
   res.locals.login = false;
 
-  if (typeof req.cookies.my_token !== 'undefined' && req.auth) {
+  if (typeof req.cookies.my_token !== 'undefined') {
     res.locals.login = true;
-    res.redirect('/Accueil');
   }
     
   res.render('login', { title: 'Pimp my road' });

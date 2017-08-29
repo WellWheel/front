@@ -75,7 +75,21 @@ router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, funct
 
     res.render('creationTrajet', { title: 'Pimp my road', playlists: playlists });
 });
+router.post('/delete', auth.isAuthenticated, function (req, res, next) {
+console.log("coucou");
+console.log("req: " + req.body.idvoyage);
+    var options = {
+      url: res.conf.parameters().api().full() + "/api/journey/delete/" + req.body.idvoyage,
+      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+      json: true
+    };
+    console.log(options);
+  request.delete(options, function(error, response, body) {
+    res.redirect('/trajet');
+  });
 
+
+})
 /* POST creation trajet page. */
 router.post('/creation', auth.isAuthenticated, function(req, res, next) {
     console.log("test");
@@ -86,7 +100,7 @@ router.post('/creation', auth.isAuthenticated, function(req, res, next) {
         destination: req.body.end,
         iduser: '1',
     };
-
+    console.log(data);
     var options = {
       url: res.conf.parameters().api().full() + '/api/journey/create',
       headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
@@ -94,7 +108,9 @@ router.post('/creation', auth.isAuthenticated, function(req, res, next) {
       json: true
     };
 
-    res.redirect('/trajet/creation');
+    request.post(options, function(error, response, body) {
+      res.redirect('/trajet');
+    });
 });
 
 

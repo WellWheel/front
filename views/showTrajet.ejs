@@ -3,33 +3,82 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">VOS TRAJETS</h1>
-                <a href="/trajet/creation/">Création</a>
-
+                <h1 class="page-header">
+                    <%= info.start %><br />
+                    <%= info.end %>
+                </h1>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
 
 
         <div id="page-wrapper">
-            <!-- /.row -->
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Listes de vos trajets
+                            Mon plan
                         </div>
-                        <!-- /.panel-heading -->
                         <div class="panel-body">
+                            <div id="gmap">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Ma playlist
+                        </div>
+                        <div class="panel-body">
+                            <% if (spotify.playlist !== "No Playlist") {%>
+                                <iframe src="https://open.spotify.com/embed?uri=spotify%3Auser%3A<%= spotify.id %>%3Aplaylist%3A<%= spotify.playlist %>&theme=white" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>
+                            <% } else { %>
+                                <a href="/spotify/">
+                                    Connectez vous avec spotify et choisissez vos playlists.
+                                </a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Ma feuille de route
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                <strong>Distance :</strong>
+                                <%= steps.distance.text %>
+                            </p>
+                            <p>
+                                <strong>Temps du trajet :</strong>
+                                <%= steps.duration.text %>
+                            </p>
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Point de départ</th>
-                                        <th>Point d'arrivé</th>
-                                        <th>Paramètres</th>
+                                        <th>Temps</th>
+                                        <th>Distance</th>
+                                        <th>Instruction</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% steps.steps.forEach(function(step) { %>
+                                        <tr>
+                                            <td>
+                                                <%= step.duration.text %>
+                                            </td>
+                                            <td>
+                                                <%= step.distance.text %>
+                                            </td>
+                                            <td>
+                                                <%- step.html_instructions %>
+                                            </td>
+                                        </tr>
+                                    <% }); %>
                                 </tbody>
                             </table>
                         </div>
@@ -40,7 +89,35 @@
     </div>
 </div>
 <script>
-$(document).ready(function() {
-    console.log();
-})
+
+function initMap() {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('gmap'), {
+      zoom: 5,
+      center: {lat: 46.52863469527167, lng: 2.43896484375 },
+    });
+    directionsDisplay.setMap(map);
+
+
+    directionsService.route({
+        origin: "<%= info.start %>",
+        destination: "<%= info.end %>",
+        travelMode: 'DRIVING'
+    }, function(response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}
+
+function calculateOriginForSearchAndDisplay(directionsService, directionsDisplay) {
+
+
+
+}
+
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrvc135P6W5lV0mNykc7S4-1IOWzCCjac&callback=initMap&libraries=places" async defer></script>

@@ -37,7 +37,7 @@ router.post('/login', function(req, res, next) {
 							console.log(datas);
 				  			res.statusCode = 302;
 							res.setHeader("Location", '/Accueil');
-    						res.cookie('my_token', datas.token, { maxAge: 9000000, httpOnly: true });
+    						res.cookie('my_token', datas.token, { maxAge: 900000, httpOnly: true });
 							res.end();
 					  })
 		  		} else {

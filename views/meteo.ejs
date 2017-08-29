@@ -20,14 +20,13 @@
                 <div class="col-lg-12 jour">
                     <div class='blockJour'>
                         <div class="info-jour col-xs-12">
-                            <div class="temps">32°</div>
-                            <div class="ville">
-                                <p>LYON</p>
+                            <div id="meteo" class="temps" ></div>
+                            <div id="city" class="ville">
                             </div>
                         </div>
-                        <div class="description">Partiellement ensoleillé</div>
-                        <div class="temperaturemin">25°</div>
-                        <div class="temperaturemax">32°</div>
+                        <div id='description' class="description"></div>
+                        <div id="tempMin" class="temperaturemin"></div>
+                        <div id="tempMax" class="temperaturemax"></div>
                     </div>
 
                 </div>
@@ -37,55 +36,42 @@
             <div class="row">
 
                 <div class="col-lg-12 semaine">
+
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
-                        <div class="description">nuageux</div>
-                        <div class="temperaturemin">22°</div>
-                        <div class="temperaturemax">26°</div>
+                        <div id='date2' class="date"></div>
+                        <div id='description2' class="description"></div>
+                        <div id="tempMin2" class="temperaturemin"></div>
+                        <div id="tempMax2" class="temperaturemax"></div>
                     </div>
 
 
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
-                        <div class="description">partiellement nuageux</div>
-                        <div class="temperaturemin">24°</div>
-                        <div class="temperaturemax">30°</div>
-                    </div>
-
-
-
-                    <div class='blockTemps'>
-                        <div class="ico-temps"></div>
-                        <div class="description">très nuageux</div>
-                        <div class="temperaturemin">22°</div>
-                        <div class="temperaturemax">26°</div>
+                        <div id='date3' class="date"></div>
+                        <div id='description3' class="description"></div>
+                        <div id="tempMin3" class="temperaturemin"></div>
+                        <div id="tempMax3" class="temperaturemax"></div>
                     </div>
 
 
 
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
-                        <div class="description">nuageux</div>
-                        <div class="temperaturemin">22°</div>
-                        <div class="temperaturemax">26°</div>
+                        <div id='date4' class="date"></div>
+                        <div id='description4' class="description"></div>
+                        <div id="tempMin4" class="temperaturemin"></div>
+                        <div id="tempMax4" class="temperaturemax"></div>
                     </div>
 
 
 
                     <div class='blockTemps'>
                         <div class="ico-temps"></div>
-                        <div class="description">pluie</div>
-                        <div class="temperaturemin">23°</div>
-                        <div class="temperaturemax">25°</div>
-                    </div>
-
-
-
-                    <div class='blockTemps'>
-                        <div class="ico-temps"></div>
-                        <div class="description">ensoleillé</div>
-                        <div class="temperaturemin">27°</div>
-                        <div class="temperaturemax">35°</div>
+                        <div id='date5' class="date"></div>
+                        <div id='description5' class="description"></div>
+                        <div id="tempMin5" class="temperaturemin"></div>
+                        <div id="tempMax5" class="temperaturemax"></div>
                     </div>
                 </div>
 
@@ -109,17 +95,143 @@
           maximumAge: 0
         };
 
-        function extractdata(data) {
 
-    var maChaine = "<p>" + 'Bienvenue sur votre page météo' + "</p>"
-                 + "<p>" + 'Aujourd hui le temps est : ' + JSON.stringify(data.list[0].weather[0].description) + '. '
-                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[0].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[0].main.temp_max) + ' degrés' + "</p>"
-                 + "<p>" + 'Demain le temps est : ' + JSON.stringify(data.list[1].weather[0].description) + '. '
-                 + 'Les températures sont comprise entre ' + JSON.stringify(data.list[1].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[1].main.temp_max) + ' degrés' + "</p>";
 
+    function extractdatadate2(data) {
+        var date2 = new Date(data.list[9].dt_txt);
+        var tab_jour2=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+        /*tab_jour=[date.getDay()];*/
+        return tab_jour2[date2.getDay()];
+    }
+    function extractdatadate3(data) {
+        var date3 = new Date(data.list[13].dt_txt);
+        var tab_jour3=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+        /*tab_jour=[date.getDay()];*/
+        return tab_jour3[date3.getDay()];
+    }
+    function extractdatadate4(data) {
+        var date4 = new Date(data.list[13].dt_txt);
+        var tab_jour4=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+        /*tab_jour=[date.getDay()];*/
+        return tab_jour4[date4.getDay()];
+    }
+    function extractdatadate5(data) {
+        var date5 = new Date(data.list[13].dt_txt);
+        var tab_jour5=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+        /*tab_jour=[date.getDay()];*/
+        return tab_jour5[date5.getDay()];
+    }
+
+    function extractdata(data) {
+
+        var maChaine = JSON.stringify(data.list[0].main.temp) 
+        maChaine = maChaine.substring(0, maChaine.length-3) + '°'
     return maChaine ;
+}
+
+    function extractdatadesc(data) {
+        var description = JSON.stringify(data.list[0].weather[0].description )
+        
+    return description ;
 
 }
+    function extractdatamin(data) {
+        var temperatureMin = JSON.stringify(data.list[1].main.temp_min) 
+        temperatureMin = temperatureMin.substring(0, temperatureMin.length-3) + '°'
+    return temperatureMin ;
+
+}
+    function extractdatamax(data) {
+        var temperatureMax = JSON.stringify(data.list[1].main.temp_max) 
+        temperatureMax = temperatureMax.substring(0, temperatureMax.length-3) + '°'
+    return temperatureMax ;
+
+}
+function extractdatacity(data) {
+        var city = JSON.stringify(data.city.name )
+    return city ;
+
+}
+
+     
+
+    function extractdatadesc2(data) {
+        var description2 = JSON.stringify(data.list[1].weather[0].description)
+    return description2 ;
+
+}
+    function extractdatamin2(data) {
+        var temperatureMin2 = JSON.stringify(data.list[3].main.temp_min) 
+    
+        temperatureMin2 = temperatureMin2.substring(0, temperatureMin2.length-3) + '°'
+    return temperatureMin2 ;
+}
+    function extractdatamax2(data) {
+        var temperatureMax2 = JSON.stringify(data.list[3].main.temp_max)
+        temperatureMax2 = temperatureMax2.substring(0, temperatureMax2.length-3) + '°'
+    return temperatureMax2 ;
+
+}
+
+    function extractdatadesc3(data) {
+        var description3 = JSON.stringify(data.list[2].weather[0].description)
+    return description3 ;
+
+}
+    function extractdatamin3(data) {
+        var temperatureMin3 = JSON.stringify(data.list[5].main.temp_min) 
+        temperatureMin3 = temperatureMin3.substring(0, temperatureMin3.length-3) + '°'
+    return temperatureMin3 ;
+
+}
+    function extractdatamax3(data) {
+        var temperatureMax3 = JSON.stringify(data.list[5].main.temp_max) 
+        temperatureMax3 = temperatureMax3.substring(0, temperatureMax3.length-3) + '°'
+    return temperatureMax3 ;
+
+}
+
+
+
+    function extractdatadesc4(data) {
+        var description4 = JSON.stringify(data.list[3].weather[0].description)
+    return description4 ;
+
+}
+    function extractdatamin4(data) {
+        var temperatureMin4 = JSON.stringify(data.list[7].main.temp_min) 
+        temperatureMin4 = temperatureMin4.substring(0, temperatureMin4.length-3) + '°'
+    return temperatureMin4 ;
+
+}
+    function extractdatamax4(data) {
+        var temperatureMax4 = JSON.stringify(data.list[7].main.temp_max) 
+        temperatureMax4 = temperatureMax4.substring(0, temperatureMax4.length-3) + '°'
+    return temperatureMax4 ;
+
+}
+
+
+
+    function extractdatadesc5(data) {
+        var description5 = JSON.stringify(data.list[4].weather[0].description)
+    return description5 ;
+
+}
+    function extractdatamin5(data) {
+        var temperatureMin5 = JSON.stringify(data.list[9].main.temp_min) 
+        temperatureMin5 = temperatureMin5.substring(0, temperatureMin5.length-3) + '°'
+    return temperatureMin5 ;
+
+}
+    function extractdatamax5(data) {
+        var temperatureMax5 = JSON.stringify(data.list[9].main.temp_max) 
+        temperatureMax5 = temperatureMax5.substring(0, temperatureMax5.length-3) + '°'
+    return temperatureMax5 ;
+
+}
+
+
         function success(pos) {
           var crd = pos.coords;
           var token = "<%= token %>)"
@@ -133,10 +245,40 @@
           socket.on('dataMeteo', function (data) {
         	//alert('hello')
             console.log(data);
+            
 
             $('#meteo').html(extractdata(data));
+            $('#description').html(extractdatadesc(data));
+            $('#tempMin').html(extractdatamin(data));
+            $('#tempMax').html(extractdatamax(data));
+            $('#city').html(extractdatacity(data));
+            
+            $('#date2').html(extractdatadate2(data));
+            $('#description2').html(extractdatadesc2(data));
+            $('#tempMin2').html(extractdatamin2(data));
+            $('#tempMax2').html(extractdatamax2(data));
+
+            $('#date3').html(extractdatadate3(data));
+            $('#description3').html(extractdatadesc3(data));
+            $('#tempMin3').html(extractdatamin3(data));
+            $('#tempMax3').html(extractdatamax3(data));
+
+            $('#date4').html(extractdatadate4(data));
+            $('#description4').html(extractdatadesc4(data));
+            $('#tempMin4').html(extractdatamin4(data));
+            $('#tempMax4').html(extractdatamax4(data));
+
+            $('#date5').html(extractdatadate5(data));
+            $('#description5').html(extractdatadesc5(data));
+            $('#tempMin5').html(extractdatamin5(data));
+            $('#tempMax5').html(extractdatamax5(data));
+            
           })
         };
+    
+
+
+
 
 //+ JSON.stringify(data.message)
         function error(err) {

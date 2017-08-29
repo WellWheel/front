@@ -6,14 +6,15 @@
 
 .semaine{
 	background-color: rgba(255, 255, 255, 0.28);
-	
+	text-align: center;
 }
 
 .blockTemps{
 	
-	margin-right:10px;
+	margin-right:36px;
 	display: inline-block;
 	border-left: 1px solid white;
+	padding-left : 53px;
 }
 .info-jour {
 	display: block;

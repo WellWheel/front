@@ -34,3 +34,218 @@ p {
 		}
 	}	
 }
+
+
+
+
+.panel-footer {
+flex: 1 1 auto;
+margin: 10px;
+padding: 20px;
+border: 2px solid #f7f7f7;
+text-align: center;
+text-transform: uppercase;
+position: relative;
+overflow:hidden;
+transition: .3s;
+  &:after {
+    position: absolute;
+    transition: .3s;
+    content: '';
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background: #f7f7f7;
+  }
+  &:hover {
+    cursor: pointer;
+    &:after {
+      width: 100%;
+      left: 0;
+    }
+  }
+  
+}
+
+
+/* Demo Container */
+body {
+  margin: 0;
+  padding: 0;
+  background: #56CCF2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #56CCF2 , #2F80ED); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #56CCF2 , #2F80ED); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.container-demo { 
+  width: 960px;
+  margin: 0 auto;
+  margin-top: 5%;
+  
+  .demo-title {
+    font-size: 56px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    color: #ecf0f1;
+    border-bottom: 1px solid;
+    width: 400px;
+  }
+  .demo-list {
+    position: inline-block;
+    
+    .demo-item {
+      width: 25%;
+      margin: 20px 0;
+      float: left;
+      text-align: center;
+    }
+  }
+}
+
+/* Burger Bubble */
+.burger-bubble {
+  width: 60px;
+  padding: 10px;
+  position: relative;
+  margin: 0 auto;
+  cursor: pointer;
+  
+  .burger-line {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #ecf0f1;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    transition: all 0.2s ease-in-out;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &.pulse {
+    &.open-nav > .burger-line {
+      &:nth-child(1) {
+        transform: translatey(-5px);
+      }
+      &:nth-child(3) {
+        transform: translatey(5px);
+      }
+    }
+  }
+  &.cross {
+    .burger-line:nth-child(3) {
+      margin-top: -20px;
+    }
+    &.open-nav > .burger-line {
+      &:nth-child(1),
+      &:nth-child(4) {
+        opacity: 0;
+      }
+      &:nth-child(2) {
+        transform: rotate(45deg);
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  &.plus {
+    .burger-line:nth-child(3) {
+      margin-top: -20px;
+    }
+    &.open-nav > .burger-line {
+      &:nth-child(1),
+      &:nth-child(4) {
+        opacity: 0;
+      }
+      &:nth-child(2) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  &.arrow-left {
+    &.open-nav > .burger-line {
+      &:nth-child(3) {
+        width: 75%;
+        transform: translatex(-11px) translatey(-5px) rotate(45deg);
+      }
+      &:nth-child(1) {
+        width: 75%;
+        transform: translatex(-11px) translatey(5px) rotate(-45deg);
+      }
+    }
+  }
+  &.arrow-right {
+    &.open-nav > .burger-line {
+      &:nth-child(3) {
+        width: 75%;
+        transform: translatex(11px) translatey(-5px) rotate(-45deg);
+      }
+      &:nth-child(1) {
+        width: 75%;
+        transform: translatex(11px) translatey(5px) rotate(45deg);
+      }
+    }
+  }
+  &.arrow-line-up {
+    &.open-nav > .burger-line {
+      &:nth-child(1) {
+        width: 25%;
+      }
+      &:nth-child(2) {
+        width: 50%;
+      }
+      &:nth-child(3) {
+        width: 80%;
+      }
+    }
+  }
+  &.arrow-line-down {
+    &.open-nav > .burger-line {
+      &:nth-child(3) {
+        width: 25%;
+      }
+      &:nth-child(2) {
+        width: 50%;
+      }
+      &:nth-child(1) {
+        width: 80%;
+      }
+    }
+  }
+  &.arrow-line-left {
+    &.open-nav > .burger-line {
+      &:nth-child(3) {
+        width: 25%;
+        transform: translatex(-20px) translatey(-20px) rotate(90deg);
+      }
+      &:nth-child(2) {
+        width: 60%;
+        transform: translatey(0px) rotate(90deg);
+      }
+      &:nth-child(1) {
+        width: 100%;
+        transform: translatex(20px) translatey(20px) rotate(90deg);
+      }
+    }
+  }
+  &.arrow-line-right {
+    &.open-nav > .burger-line {
+      &:nth-child(3) {
+        width: 100%;
+        transform: translatex(-20px) translatey(-20px) rotate(90deg);
+      }
+      &:nth-child(2) {
+        width: 60%;
+        transform: translatey(0px) rotate(90deg);
+      }
+      &:nth-child(1) {
+        width: 25%;
+        transform: translatex(20px) translatey(20px) rotate(90deg);
+      }
+    }
+  }
+}
+

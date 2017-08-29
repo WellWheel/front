@@ -1,17 +1,17 @@
 
 .avatar{
-		background:rgba(0,0,0,0.1);
-		padding:2em 0.5em;
-		text-align:center;
-	}
-		
+        background:rgba(0,0,0,0.1);
+        padding:2em 0.5em;
+        text-align:center;
+    }
+        
 #imgProfil {
-			width:100px;
-			border-radius:50%;
-			overflow:hidden;
-			border:4px solid @color-1st;
-			box-shadow:0 0 0 4px rgba(255,255,255,0.2);
-		}
+            width:100px;
+            border-radius:50%;
+            overflow:hidden;
+            border:4px solid @color-1st;
+            box-shadow:0 0 0 4px rgba(255,255,255,0.2);
+        }
 
 
 /* PUSH MENU */
@@ -98,48 +98,6 @@ body.open .page-wrap {
 button:focus {
     outline: none;
 }
-#menu-toggle {
-    position: relative;
-
-    width: 51px;
-    height: 51px;
-
-    cursor: pointer;
-
-    border: none;
-    -webkit-border-radius: 50px;
-       -moz-border-radius: 50px;
-            border-radius: 50px;
-    background: #fff;
-}
-#menu-toggle:before,
-#menu-toggle:after {
-    position: absolute;
-
-    content: "";
-    content: "";
-    -webkit-transition: all .5s ease;
-       -moz-transition: all .5s ease;
-         -o-transition: all .5s ease;
-            transition: all .5s ease;
-
-    background-color: #232629;
-}
-
-#menu-toggle:before {
-    top: 12px;
-    left: 25px;
-
-    width: 1px;
-    height: 27px;
-}
-#menu-toggle:after {
-    top: 25px;
-    left: 12px;
-
-    width: 27px;
-    height: 1px;
-}
 
 body.open button#menu-toggle:before,
 body.open button#menu-toggle:after {
@@ -147,4 +105,58 @@ body.open button#menu-toggle:after {
         -ms-transform: rotate(45deg);
             transform: rotate(45deg);
 }
+
+.panel-footer {
+    background-color: rgba(255, 255, 255);
+}
+
+
+
+
+
+
+#nav-de-malade {
+    display:none;
+    position: fixed;
+    height: 100vh;
+    min-width: 100%;
+    width: 100%;
+    text-align: center;
+    z-index: 999999;
+    font-weight: bold;
+    -webkit-animation: anim linear forwards 1s;
+    animation: anim linear forwards 1s;
+}
+
+.list-group-item {
+    -webkit-animation: opa linear forwards 1s;
+    animation: opa linear forwards 1s;
+}
+
+@-webkit-keyframes anim {
+    0%  {background: rgba(255,100,0,0);}
+    100% {background: rgba(255,100,0,1);}
+}
+@keyframes anim {
+    0%  {background: rgba(255,100,0,0);}
+    100% {background: rgba(255,100,0,1);}
+}
+
+@-webkit-keyframes opa {
+    0%  {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes opa {
+    0%  {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.menu-toggle-tend {
+    display: block;
+    width: auto; 
+    background: red;
+    position: fixed;
+    z-index: 9999999;
+}
+
 

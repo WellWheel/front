@@ -63,18 +63,8 @@
 <script>
 var socket = io.connect('<%= socketHost  %>');
 $(document).ready(function() {
-    $("#search").on("click",function() {
-        var title = "";
-        if($("#track").val() !== '') {
-            title = $("#track").val();
-            socket.emit('searchtrack', {title: title, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: "<%= idPlaylist %>" });
-        }
-    })
-    $(".delete").on("click",function() {
-        var id = $(this).data('id');
-        var position = $(this).data('position');
-        socket.emit('deletetrack', {id: id, position: position, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: "<%= idPlaylist %>" });
-    })
+    initEvents();
+
     socket.on('trackfound', function(datas) {
         $('#response').html("");
         console.log(datas.tracks.items);
@@ -112,7 +102,9 @@ $(document).ready(function() {
             if($(".alert") !== null) {
                 $(".alert").hide();
             }
-            $("#listTracks").append('<li><div class="pull-right"><button class="btn btn-danger" data-id="'+ datas.id +'">Supprimer</button></div><h2>'+ datas.name +'</h2><p>'+ datas.artists[0].name +' . '+ datas.album.name +' </p></li>')
+            var position = $('#listTracks li').length;
+            initEvents();
+            $("#listTracks").append('<li><div class="pull-right"><button class="btn btn-danger delete" data-id="'+ datas.id +'" data-position="'+ position +'">Supprimer</button></div><h2>'+ datas.name +'</h2><p>'+ datas.artists[0].name +' . '+ datas.album.name +' </p></li>')
         }
     })
     socket.on('deleted', function(datas) {
@@ -121,4 +113,18 @@ $(document).ready(function() {
         }
     })
 })
+function initEvents() {
+    $("#search").on("click",function() {
+        var title = "";
+        if($("#track").val() !== '') {
+            title = $("#track").val();
+            socket.emit('searchtrack', {title: title, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: "<%= idPlaylist %>" });
+        }
+    })
+    $(".delete").on("click",function() {
+        var id = $(this).data('id');
+        var position = $(this).data('position');
+        socket.emit('deletetrack', {id: id, position: position, id_spotify: "<%= id_spotify %>", spotify_token : "<%= spotify_token %>", idPlaylist: "<%= idPlaylist %>" });
+    })
+}
 </script>

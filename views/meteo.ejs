@@ -110,7 +110,10 @@
         };
 
         function extractdata(data) {
+          var date = new Date(data.list[0].dt_txt);
+          var tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
 
+          console.log("Nous sommes un "+tab_jour[date.getDay()]);
     var maChaine = "<p>" + 'Bienvenue sur votre page météo' + "</p>"
                  + "<p>" + 'Aujourd hui le temps est : ' + JSON.stringify(data.list[0].weather[0].description) + '. '
                  + 'Les températures sont comprise entre ' + JSON.stringify(data.list[0].main.temp_min) + ' degrés et ' + JSON.stringify(data.list[0].main.temp_max) + ' degrés' + "</p>"
@@ -155,5 +158,3 @@
 
         }
     </script>
-
-

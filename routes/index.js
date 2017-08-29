@@ -6,7 +6,7 @@ var qs = require("querystring");
 /* GET login page. */
 router.get('/',  function(req, res, next) {
   res.locals.login = false;
-  console.log(req.auth)
+
   if (typeof req.cookies.my_token !== 'undefined' && req.auth) {
     res.locals.login = true;
     res.redirect('/Accueil');
@@ -17,7 +17,7 @@ router.get('/',  function(req, res, next) {
 
 /* GET creation compte page. */
 router.get('/CreationCompte', function(req, res, next) {
-  res.render('creationLogin', { title: 'Pimp my road' });
+    res.render('creationLogin', { title: 'Pimp my road' });
 });
 
 /* GET dashboard Accueil page. */
@@ -27,24 +27,20 @@ router.get('/Accueil', auth.isAuthenticated, function(req, res, next) {
     console.log(req.user);
 
     var options = {
-      url: res.conf.parameters().api().full() + "/api/journey/1",
-      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
-      json: true
+        url: res.conf.parameters().api().full() + "/api/journey/list",
+        headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+        json: true
     };
 
     request.get(options, function(error, response, body) {
-      console.log(body.list_user);
-
-
-    res.render('dashboardAccueil', {
-        title: 'Pimp my road' ,
-        token: req.cookies.my_token,
-        trajets: body.list_user,
-        socketHost: res.conf.parameters().serv().full()
-      });
-
-  });
-
+        console.log(body.list_journey);
+        res.render('dashboardAccueil', {
+            title: 'Pimp my road' ,
+            token: req.cookies.my_token,
+            trajets: body.list_journey,
+            socketHost: res.conf.parameters().serv().full()
+          });
+    });
 });
 
 

@@ -12,9 +12,9 @@ var qs = require("querystring");
 router.get('/', auth.isAuthenticated, function (req, res, next) {
 
     var options = {
-      url: res.conf.parameters().api().full() + "/api/journey/1",
-      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
-      json: true
+        url: res.conf.parameters().api().full() + "/api/list",
+        headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+        json: true
     };
 
     //request.get(options, function(error, response, body) {
@@ -32,7 +32,7 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
 		console.log(body.list_user);
 		// console.log(body);
 		// console.log(response);
-      res.render('trajets', { title: 'Pimp my road', trajets: body.list_user });
+        res.render('trajets', { title: 'Pimp my road', trajets: body.list_user });
     });
 
 
@@ -43,20 +43,20 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
 
 router.post('/', auth.isAuthenticated, function (req, res) {
     var data = {
-      name : req.body.name,
-      public : false
+        name : req.body.name,
+        public : false
     };
 
     var options = {
-      url: res.conf.parameters().api().full() + '/api/journey/update/2',
-      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
-      body: data,
-      json: true
+        url: res.conf.parameters().api().full() + '/api/journey/update/2',
+        headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+        body: data,
+        json: true
     };
 
     // use the access token to access the Spotify Web API
     request.post(options, function(error, response, body) {
-      res.redirect('/trajets');
+        res.redirect('/trajets');
     });
 
 })
@@ -70,25 +70,20 @@ router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, funct
 
     if (typeof res.playlists !== 'undefined')
         playlists = res.playlists;
-
-
-
     res.render('creationTrajet', { title: 'Pimp my road', playlists: playlists });
 });
 router.post('/delete', auth.isAuthenticated, function (req, res, next) {
-console.log("coucou");
-console.log("req: " + req.body.idvoyage);
+    console.log("coucou");
+    console.log("req: " + req.body.idvoyage);
     var options = {
-      url: res.conf.parameters().api().full() + "/api/journey/delete/" + req.body.idvoyage,
-      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
-      json: true
+        url: res.conf.parameters().api().full() + "/api/journey/delete/" + req.body.idvoyage,
+        headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+        json: true
     };
     console.log(options);
-  request.delete(options, function(error, response, body) {
-    res.redirect('/trajet');
-  });
-
-
+    request.delete(options, function(error, response, body) {
+        res.redirect('/trajet');
+    });
 })
 /* POST creation trajet page. */
 router.post('/creation', auth.isAuthenticated, function(req, res, next) {

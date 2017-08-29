@@ -185,10 +185,26 @@ router.post('/playlists', auth.isAuthenticated, auth.isSpotifyAuthenticated, fun
         json: true
     };
 
-
     // use the access token to access the Spotify Web API
     request.post(options, function(error, response, body) {
-        res.redirect('/spotify/playlists');
+        var options2 = {
+            url: res.conf.parameters().api().full() + "/api/playlist/create",
+            headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+            json: true,
+            body: {
+                title: req.body.name,
+                idplaylist: body.id
+            }
+        };
+        request.post(options2, function(error, response, body) {
+            console.log(body.success);
+            if (body.success) {
+                res.redirect('/spotify/playlists');
+            }else {
+                console.log("Erreur lors de l'inscription en bdd");
+                res.redirect("/");
+            }
+        })
     });
 })
 

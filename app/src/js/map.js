@@ -54,6 +54,8 @@ function initMap() {
 }
 
 function calculateOriginForSearchAndDisplay(directionsService, directionsDisplay) {
+    console.log(infos.start);
+    console.log(infos.end);
     directionsService.route({
       origin: infos.start,
       destination: infos.end,

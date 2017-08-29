@@ -23,7 +23,7 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
 
 
 })
-router.get('/show/:id', auth.isAuthenticated, function (req, res, next) {
+router.get('/show/:id', auth.isAuthenticated, auth.isSpotifyAuthenticated, function (req, res, next) {
 
     var id = req.params.id;
 
@@ -32,10 +32,14 @@ router.get('/show/:id', auth.isAuthenticated, function (req, res, next) {
         headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
         json: true
     };
+
 	request.get(options, function(error, response, body) {
-		console.log("Reponse");
-		console.log(body.datas.routes);
-        res.render('showTrajet', { title: 'Pimp my road', info: body.datas });
+        console.log("Id Playlist: " + body.playlist);
+        var spotify = {
+            playlist: body.playlist,
+            id: req.cookies.id_spotify
+        }
+        res.render('showTrajet', { title: 'Pimp my road', steps: body.datas.routes[0].legs[0], info: body.info, spotify: spotify});
     });
 })
 
@@ -67,45 +71,57 @@ router.post('/', auth.isAuthenticated, function (req, res) {
 router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, function(req, res, next) {
     var playlists = undefined;
 
-    console.log("res.playlists : " + res.playlists);
-
     if (typeof res.playlists !== 'undefined')
         playlists = res.playlists;
     res.render('creationTrajet', { title: 'Pimp my road', playlists: playlists });
 });
 router.post('/delete', auth.isAuthenticated, function (req, res, next) {
-    console.log("coucou");
-    console.log("req: " + req.body.idvoyage);
     var options = {
         url: res.conf.parameters().api().full() + "/api/journey/delete/" + req.body.idvoyage,
         headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
         json: true
     };
-    console.log(options);
     request.delete(options, function(error, response, body) {
         res.redirect('/trajet');
     });
 })
 /* POST creation trajet page. */
 router.post('/creation', auth.isAuthenticated, function(req, res, next) {
-    console.log("test");
     console.log("BODY : " + JSON.stringify(req.body) );
-
+    var idPlaylist = req.body.playlist;
+    var origin = req.body.start;
+    var destination = req.body.end;
     var data = {
-        origin: req.body.start,
-        destination: req.body.end,
+        origin: origin,
+        destination: destination,
         iduser: '1',
     };
-    console.log(data);
     var options = {
-      url: res.conf.parameters().api().full() + '/api/journey/create',
-      headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
-      body: data,
-      json: true
+        url: res.conf.parameters().api().full() + '/api/journey/create',
+        headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+        body: data,
+        json: true
     };
-
     request.post(options, function(error, response, body) {
-      res.redirect('/trajet');
+        if((response.statusCode === 201 || response.statusCode === 200) && idPlaylist) {
+            var data = {
+                idplaylist: idPlaylist,
+                title: "Playlist : " + origin + " " + destination,
+                idjourney: body.idJourney,
+            };
+            var options2 = {
+                url: res.conf.parameters().api().full() + '/api/playlist/new-playlist-to-journey',
+                headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+                body: data,
+                json: true
+            };
+            request.post(options2, function(error, response, body) {
+                res.redirect('/trajet');
+            });
+
+        }else {
+            res.redirect("/creation");
+        }
     });
 });
 

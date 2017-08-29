@@ -13,6 +13,7 @@ router.get('/',  function(req, res, next) {
     }
 
     res.render('login', { title: 'Pimp my road' });
+
 });
 
 /* GET creation compte page. */

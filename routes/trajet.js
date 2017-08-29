@@ -12,30 +12,31 @@ var qs = require("querystring");
 router.get('/', auth.isAuthenticated, function (req, res, next) {
 
     var options = {
-        url: res.conf.parameters().api().full() + "/api/list",
+        url: res.conf.parameters().api().full() + "/api/journey/list",
         headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
         json: true
     };
-
-    //request.get(options, function(error, response, body) {
-    //	var trajets= [
-    //					{nom : 'mylene', parcours : 'trajet 1'},
-    //					{nom : 'florian', parcours : 'trajet 2'}
-	//	];
-
-    //  res.render('trajets', { title: 'Pimp my road', trajets: trajets });
-    //});
-
-
-	// use the access token to access Web API
 	request.get(options, function(error, response, body) {
-		console.log(body.list_user);
-		// console.log(body);
-		// console.log(response);
-        res.render('trajets', { title: 'Pimp my road', trajets: body.list_user });
+		console.log(body.list_journey);
+        res.render('trajets', { title: 'Pimp my road', trajets: body.list_journey });
     });
 
 
+})
+router.get('/show/:id', auth.isAuthenticated, function (req, res, next) {
+
+    var id = req.params.id;
+
+    var options = {
+        url: res.conf.parameters().api().full() + "/api/journey/show/" + id,
+        headers: { 'Authorization': 'Bearer ' + req.cookies.my_token },
+        json: true
+    };
+	request.get(options, function(error, response, body) {
+		console.log("Reponse");
+		console.log(body.datas.routes);
+        res.render('showTrajet', { title: 'Pimp my road', info: body.datas });
+    });
 })
 
 

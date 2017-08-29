@@ -11,7 +11,6 @@
         </div>
 
 
-        <!--<%= JSON.stringify(trajets) %>-->
         <div id="page-wrapper">
             <!-- /.row -->
             <div class="row">
@@ -31,33 +30,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% trajets.forEach(function(info) { %>
-                                        <tr class="odd gradeX">
-                                            <td>
-                                                <%= info.start %>
-                                            </td>
-                                            <td>
-                                                <%= info.end %>
-                                            </td>
-                                            <td class="center">
-                                                <a href="/trajet/show/<%= info.id %>" class="btn btn-primary">Voir</a>
-                                                <form action="/trajet/delete" method="POST">
-                                                    <input type="hidden" name="idvoyage" id="idvoyage" value="<%= info.id %>">
-                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <% }); %>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    console.log();
+})
+</script>

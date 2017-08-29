@@ -36,7 +36,10 @@
                                         <td><%= info.start %></td>
                                         <td><%= info.end %></td>
                                         <td class="center">
-                                            <button type="button" class="btn btn-primary">Supprimer</button>
+                                          <form action="/trajet/delete" method="POST">
+                                            <input type="hidden" name="idvoyage" id="idvoyage" value="<%= info.id %>" >
+                                            <button type="submit" class="btn btn-primary">Supprimer</button>
+                                            </form>
                                         </td>
                                     </tr>
                                     <% }); %>
@@ -48,7 +51,7 @@
 
 </div>
 </div>
-  
+
 
         </div>
 </div>

@@ -20,17 +20,9 @@ module.exports = {
             }
         });
     },
-    /*isAuthenticated: function (req, res, next) {
-      console.log("req.auth : " + req.auth)
-      if(req.auth) {
-        return next();
-      }
-
-      res.statusCode = 302;
-      res.setHeader("Location", '/');
-      res.end();
-    },*/
     isAuthenticated: function (req, res, next) {
+      res.locals.login = false;
+
       console.log("req.auth : " + req.auth)
       if(req.auth) {
           var publicKey = fs.readFileSync('public.pem');
@@ -45,6 +37,7 @@ module.exports = {
 
                     console.log('Error jwt expired');
                     res.clearCookie('my_token');
+                    res.locals.login = false;
                     
                     res.statusCode = 302;
                     res.setHeader("Location", '/');
@@ -52,18 +45,20 @@ module.exports = {
                 }
                 else {
                   console.log('No token error with jwt expired')
+                  res.locals.login = true;
                   return next();
                 }
             } else {
-                  console.log('No token error')
+                res.locals.login = true;
+                console.log('No token error');
+
                 return next();
             }
-
-
-            res.statusCode = 302;
-            res.setHeader("Location", '/');
-            res.end();
           });
+      } else {
+        res.statusCode = 302;
+        res.setHeader("Location", '/');
+        res.end();
       }
     },
     isSpotifyAuthenticated: function (req, res , next) {

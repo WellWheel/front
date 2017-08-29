@@ -71,22 +71,42 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-</div>
-<script type='text/javascript'>
-    var socket = io.connect('<%= socketHost %>');
-=======
-    <!-- /#wrapper -->
+</div>     <!-- /#wrapper -->
+
+ <video width="320" height="240" controls>
+  <source src="/video.mp4" type="video/mp4">
+  <source src="/video.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+<button id="start-button">Start Listening</button>
+<div id="demo-echo"></div>
 
 <script src="/components/annyang/dist/annyang.min.js"></script>
 
 
+
  <script type="text/javascript"> %>
     if (annyang) {
+        annyang.setLanguage('fr-FR');
         console.log("annyang");
 
       // Let's define our first command. First the text we expect, and then the function it should call
-      var commands = {
+      var commandsEn = {
+        'play video': function() {
+            document.querySelector('video').play();
+        },
+        'pause video': function() {
+            document.querySelector('video').pause();
+        },
+        '*word video': function(word) {
+            if(word === 'play') {
+                document.querySelector('video').play();
+            }
+            else if(word === 'pause' || word === 'stop') {
+                document.querySelector('video').pause();
+            }
+        },
         'do something': function() {
             alert("Nice")
         },
@@ -101,24 +121,41 @@
         },
 
         'do another thing with *word': function(word) {
-        alert(word);
-            console.log(word);
+            alert(word);
+                console.log(word);
         }
 
       };
 
+      var commandsFr = {
+        'ouvrir': function() {
+            document.querySelector('body').className += "open";
+        },
+
+        'fermer': function() {
+            document.querySelector('body').classList.remove("open");
+            document.querySelector('body').removeAttribute("class");
+        },
+
+        'titre playlist': function () {
+            document.querySelector('input[name="name"]').focus();
+        }
+      };
+
       // Add our commands to annyang
-      annyang.addCommands(commands);
+      annyang.addCommands(commandsFr);
 
       // Start listening. You can call this here, or attach this call to an event, button, etc.
       annyang.start();
     }
 </script>
 
+<script type='text/javascript'>
+    var socket = io.connect('<%= socketHost %>');
+
+
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
->>>>>>> Begin speech
     $(document).ready(function() {
         // $('#dataTables-example').DataTable({
         //     responsive: true

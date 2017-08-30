@@ -26,6 +26,22 @@ if (annyang) {
         document.querySelector('form').submit();
     },
 
+    'lire *word' : function (word) {
+      console.log( "WOORRRDD : " + word)
+      var elts = document.querySelectorAll('[data-content*="' + word + '"]');
+
+      console.log('[data-content*="' + word + '"]')
+      console.log(elts)
+
+      if (elts.length > 0) {
+        for (var i = 0; i < elts.length; i++) {
+          console.log(elts[i].outerText)
+        }
+      } else {
+          console.log("Rien est trouvé")
+      }
+    },  
+
     'click *button' : function (word) {
       console.log( "WOORRRDD : " + word)
       var link = document.querySelector('a[data-content*="' + word + '"]');
@@ -33,7 +49,8 @@ if (annyang) {
       console.log('a[data-content*="' + word + '"]')
       console.log(link)
       window.location.href = link.getAttribute("href");
-    } ,
+    },
+
     'go *word' : function (word) {
         if (word === 'trajet') {
           window.location.href = '/trajet/';

@@ -17,9 +17,17 @@ With scotch box:
 
 `make API_HOSTNAME_OR_IP="192.168.33.10"  SOCKET_IP="nodemonServer" REDIRECT_SPOTIFY_IP_FQDN="localhost" REDIRECT_SPOTIFY_PORT="3000"`
 
-Go to: 
+Go to:
 
 http://localhost:3000/
+
+#### Disable security for iframe
+
+Mac
+`open -a Google\ Chrome --args --disable-web-security --user-data-dir'
+
+Linux
+`google-chrome --disable-web-security`
 
 #### Develpement source
 
@@ -33,9 +41,9 @@ http://localhost:3000/
 
 #### Configure
 
-All parameters for configure the api and the application itself are on `conf.js`. The `conf.js.dist` is use with 4 variable: 
+All parameters for configure the api and the application itself are on `conf.js`. The `conf.js.dist` is use with 4 variable:
 
-For information this is the variable. 
+For information this is the variable.
 
 ```
 API_HOSTNAME_OR_IP : our api;
@@ -44,7 +52,7 @@ REDIRECT_SPOTIFY_IP_FQDN : redirirect callback for spotify api (after login);
 REDIRECT_SPOTIFY_PORT : port of our front app.
 ```
 
-Whole site: 
+Whole site:
 
 1. api
 
@@ -59,7 +67,7 @@ Whole site:
     Switch to docker and use your host name directly.
 
 4. Spotify
-    
+
     Redirect uri MUST be confirgured.
 
 #### Install
@@ -85,7 +93,7 @@ Use make to start everything:
 
 
 
-#### Run 
+#### Run
 
     `make start`
 
@@ -144,7 +152,7 @@ Whole express routes protected:
 
 #### VirtualHost proxy passing
 
-To redirect to port 80, simply redirect the 3000 default port with Apache: 
+To redirect to port 80, simply redirect the 3000 default port with Apache:
 
 
 1. `sudo nano /etc/apache2/sites-available/000-default.conf`

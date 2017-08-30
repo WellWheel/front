@@ -13,6 +13,9 @@ var WellWhell = (function(document){
         var val = document.getElementById("playMeteo").value;
         console.log(val);
         responsiveVoice.speak("Il fait " + val );
+      },
+      lireTitrePlaylist: function(titrePlaylist) {
+        responsiveVoice.speak(titrePlaylist);
       }
     }
     return WellWhellVal;

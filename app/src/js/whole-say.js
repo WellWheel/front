@@ -4,6 +4,10 @@ if (annyang) {
     console.log("annyang");
 
   var commandsFr = {
+    'retour' : function() {
+      console.log(document.referrer);
+      window.location.href = document.referrer;
+    },
     'ouvrir': function() {
         document.querySelector('body').className += "open";
     },
@@ -39,13 +43,14 @@ if (annyang) {
       if (elts.length > 0) {
         for (var i = 0; i < elts.length; i++) {
           console.log(elts[i].outerText)
+          WellWhell.lireTitrePlaylist(elts[i].outerText);
         }
       } else {
           console.log("Rien est trouvé")
       }
     },
 
-    'click *button' : function (word) {
+    'clique *button' : function (word) {
       console.log( "WOORRRDD : " + word)
       var link = document.querySelector('a[data-content*="' + word + '"]');
 
@@ -74,6 +79,14 @@ if (annyang) {
         else if (word === 'visite') {
           window.location.href = '/vos-visites/';
         }
+    },
+    'lecture': function () {
+      console.log('lecture');
+      var frame = document.getElementById('lecteur');
+      console.log(frame);
+      console.log(frame.contentWindow.document);
+      // frame.contentWindow.postMessage('lecture','*');
+      frame.contentWindow.document.getElementById("play-button").click();
     }
   };
 

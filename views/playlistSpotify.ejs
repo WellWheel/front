@@ -36,7 +36,7 @@
                                                         <%= info.external_urls.spotify %>
                                                     </td>
                                                     <td class="center">
-                                                        <a href="/spotify/playlists/show/<%= info.id %>" class="btn btn-primary">Accéder</a>
+                                                        <a href="/spotify/playlists/show/<%= info.id %>" data-content="<%= info.name %>" class="btn btn-primary">Accéder</a>
                                                         <button type="button" class="btn btn-danger deletePlaylist" data-id="<%= info.id %>">Supprimer</button>
                                                     </td>
                                                 </tr>

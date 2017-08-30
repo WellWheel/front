@@ -25,6 +25,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
+                                        <th>Numéro trajet</th>
                                         <th>Point de départ</th>
                                         <th>Point d'arrivé</th>
                                         <th>Paramètres</th>
@@ -34,13 +35,16 @@
                                     <% trajets.forEach(function(info) { %>
                                         <tr class="odd gradeX">
                                             <td>
+                                                <%= info.id %>
+                                            </td>
+                                            <td>
                                                 <%= info.start %>
                                             </td>
                                             <td>
                                                 <%= info.end %>
                                             </td>
                                             <td class="center">
-                                                <a href="/trajet/show/<%= info.id %>" class="btn btn-primary">Voir</a>
+                                                <a href="/trajet/show/<%= info.id %>" class="btn btn-primary" data-content="trajet <%= info.id %>">Voir</a>
                                                 <form action="/trajet/delete" method="POST">
                                                     <input type="hidden" name="idvoyage" id="idvoyage" value="<%= info.id %>">
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>

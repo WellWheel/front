@@ -19,14 +19,20 @@
 <!-- soleil  -->
                 <div class="col-lg-12 jour">
                     <div class='blockJour'>
+                        <div class="aujourdhui" >Aujourd'hui</div>
                         <div class="info-jour col-xs-12">
+                            <div id="ico" class="ico1" ></div>
                             <div id="meteo" class="temps" ></div>
                             <div id="city" class="ville">
                             </div>
                         </div>
                         <div id='description' class="description"></div>
-                        <div id="tempMin" class="temperaturemin"></div>
-                        <div id="tempMax" class="temperaturemax"></div>
+                        <div class="tempMinimumBlock col-xs-12">
+                            <div id="tempMin" class="temperaturemin"></div>
+                        </div> 
+                        <div class="tempMaximumBlock col-xs-12">
+                            <div id="tempMax" class="temperaturemax"></div>
+                        </div> 
                     </div>
 
                 </div>
@@ -38,7 +44,7 @@
                 <div class="col-lg-12 semaine">
 
                     <div class='blockTemps'>
-                        <div class="ico-temps"></div>
+                        <div id='ico2' class="ico"></div>
                         <div id='date2' class="date"></div>
                         <div id='description2' class="description"></div>
                         <div id="tempMin2" class="temperaturemin"></div>
@@ -47,7 +53,7 @@
 
 
                     <div class='blockTemps'>
-                        <div class="ico-temps"></div>
+                        <div id='ico3' class="ico"></div>
                         <div id='date3' class="date"></div>
                         <div id='description3' class="description"></div>
                         <div id="tempMin3" class="temperaturemin"></div>
@@ -57,7 +63,7 @@
 
 
                     <div class='blockTemps'>
-                        <div class="ico-temps"></div>
+                        <div id='ico4'class="ico"></div>
                         <div id='date4' class="date"></div>
                         <div id='description4' class="description"></div>
                         <div id="tempMin4" class="temperaturemin"></div>
@@ -67,7 +73,7 @@
 
 
                     <div class='blockTemps'>
-                        <div class="ico-temps"></div>
+                        <div id='ico5' class="ico"></div>
                         <div id='date5' class="date"></div>
                         <div id='description5' class="description"></div>
                         <div id="tempMin5" class="temperaturemin"></div>
@@ -109,126 +115,179 @@
         return tab_jour3[date3.getDay()];
     }
     function extractdatadate4(data) {
-        var date4 = new Date(data.list[13].dt_txt);
+        var date4 = new Date(data.list[22].dt_txt);
         var tab_jour4=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
         /*tab_jour=[date.getDay()];*/
         return tab_jour4[date4.getDay()];
     }
     function extractdatadate5(data) {
-        var date5 = new Date(data.list[13].dt_txt);
+        var date5 = new Date(data.list[32].dt_txt);
         var tab_jour5=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
         /*tab_jour=[date.getDay()];*/
         return tab_jour5[date5.getDay()];
     }
+
+
 
     function extractdata(data) {
 
         var maChaine = JSON.stringify(data.list[0].main.temp) 
         maChaine = maChaine.substring(0, maChaine.length-3) + '°'
     return maChaine ;
-}
+    }
+
+    function extractdataico(data) {
+        /*peu nuageux*/
+        if(data.list[0].weather[0].icon == "10d"){
+            var ico = "<svg class='rain-cloud' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><path class='raindrop-one' d='M96,384c0,17.7,14.3,32,32,32s32-14.3,32-32s-32-64-32-64S96,366.3,96,384z' /><path class='raindrop-two' d='M225,480c0,17.7,14.3,32,32,32s32-14.3,32-32s-32-64-32-64S225,462.3,225,480z' /><path class='raindrop-three' d='M352,448c0,17.7,14.3,32,32,32s32-14.3,32-32s-32-64-32-64S352,430.3,352,448z' /><path d='M400,64c-5.3,0-10.6,0.4-15.8,1.1C354.3,24.4,307.2,0,256,0s-98.3,24.4-128.2,65.1c-5.2-0.8-10.5-1.1-15.8-1.1 C50.2,64,0,114.2,0,176s50.2,112,112,112c13.7,0,27.1-2.5,39.7-7.3c29,25.2,65.8,39.3,104.3,39.3c38.5,0,75.3-14.1,104.3-39.3 c12.6,4.8,26,7.3,39.7,7.3c61.8,0,112-50.2,112-112S461.8,64,400,64z M400,256c-17.1,0-32.9-5.5-45.9-14.7 C330.6,269.6,295.6,288,256,288c-39.6,0-74.6-18.4-98.1-46.7c-13,9.2-28.8,14.7-45.9,14.7c-44.2,0-80-35.8-80-80s35.8-80,80-80 c10.8,0,21.1,2.2,30.4,6.1C163.7,60.7,206.3,32,256,32s92.3,28.7,113.5,70.1c9.4-3.9,19.7-6.1,30.5-6.1c44.2,0,80,35.8,80,80 S444.2,256,400,256z' /> </svg>"
+        }
+        /*ensoleillé*/
+        else if(data.list[0].weather[0].icon == "01d"){
+            var ico = "<svg class='sunshine' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><path class='sun-full' d='M256,144c-61.8,0-112,50.2-112,112s50.2,112,112,112s112-50.2,112-112S317.8,144,256,144z M256,336 c-44.2,0-80-35.8-80-80s35.8-80,80-80s80,35.8,80,80S300.2,336,256,336z' /><path class='sun-ray-eight' d='M131.6,357.8l-22.6,22.6c-6.2,6.2-6.2,16.4,0,22.6s16.4,6.2,22.6,0l22.6-22.6c6.2-6.3,6.2-16.4,0-22.6 C147.9,351.6,137.8,351.6,131.6,357.8z' /><path class='sun-ray-seven' d='M256,400c-8.8,0-16,7.2-16,16v32c0,8.8,7.2,16,16,16s16-7.2,16-16v-32C272,407.2,264.8,400,256,400z' /><path class='sun-ray-six' d='M380.5,357.8c-6.3-6.2-16.4-6.2-22.6,0c-6.3,6.2-6.3,16.4,0,22.6l22.6,22.6c6.2,6.2,16.4,6.2,22.6,0 s6.2-16.4,0-22.6L380.5,357.8z' /><path class='sun-ray-five' d='M448,240h-32c-8.8,0-16,7.2-16,16s7.2,16,16,16h32c8.8,0,16-7.2,16-16S456.8,240,448,240z' /><path class='sun-ray-four' d='M380.4,154.2l22.6-22.6c6.2-6.2,6.2-16.4,0-22.6s-16.4-6.2-22.6,0l-22.6,22.6c-6.2,6.2-6.2,16.4,0,22.6 C364.1,160.4,374.2,160.4,380.4,154.2z' /><path class='sun-ray-three' d='M256,112c8.8,0,16-7.2,16-16V64c0-8.8-7.2-16-16-16s-16,7.2-16,16v32C240,104.8,247.2,112,256,112z' /><path class='sun-ray-two' d='M131.5,154.2c6.3,6.2,16.4,6.2,22.6,0c6.3-6.2,6.3-16.4,0-22.6l-22.6-22.6c-6.2-6.2-16.4-6.2-22.6,0 c-6.2,6.2-6.2,16.4,0,22.6L131.5,154.2z' /><path class='sun-ray-one' d='M112,256c0-8.8-7.2-16-16-16H64c-8.8,0-16,7.2-16,16s7.2,16,16,16h32C104.8,272,112,264.8,112,256z'/></svg>"
+        }
+        /* partiellement ensoleillé*/
+        else if(data.list[0].weather[0].icon == "02d"){
+            var ico="<svg class='sun-cloud' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><path class='sun-half' d='M127.8,259.1c3.1-4.3,6.5-8.4,10-12.3c-6-11.2-9.4-24-9.4-37.7c0-44.1,35.7-79.8,79.8-79.8 c40,0,73.1,29.4,78.9,67.7c11.4,2.3,22.4,5.7,32.9,10.4c-0.4-29.2-12-56.6-32.7-77.3C266.1,109,238,97.4,208.2,97.4 c-29.9,0-57.9,11.6-79.1,32.8c-21.1,21.1-32.8,49.2-32.8,79.1c0,17.2,3.9,33.9,11.2,48.9c1.5-0.1,3-0.1,4.4-0.1 C117.3,258,122.6,258.4,127.8,259.1z' /><path class='cloud' d='M400,256c-5.3,0-10.6,0.4-15.8,1.1c-16.8-22.8-39-40.5-64.2-51.7c-10.5-4.6-21.5-8.1-32.9-10.4 c-10.1-2-20.5-3.1-31.1-3.1c-45.8,0-88.4,19.6-118.2,52.9c-3.5,3.9-6.9,8-10,12.3c-5.2-0.8-10.5-1.1-15.8-1.1c-1.5,0-3,0-4.4,0.1 C47.9,258.4,0,307.7,0,368c0,61.8,50.2,112,112,112c13.7,0,27.1-2.5,39.7-7.3c29,25.2,65.8,39.3,104.3,39.3 c38.5,0,75.3-14.1,104.3-39.3c12.6,4.8,26,7.3,39.7,7.3c61.8,0,112-50.2,112-112S461.8,256,400,256z M400,448 c-17.1,0-32.9-5.5-45.9-14.7C330.6,461.6,295.6,480,256,480c-39.6,0-74.6-18.4-98.1-46.7c-13,9.2-28.8,14.7-45.9,14.7 c-44.2,0-80-35.8-80-80s35.8-80,80-80c7.8,0,15.4,1.2,22.5,3.3c2.7,0.8,5.4,1.7,8,2.8c4.5-8.7,9.9-16.9,16.2-24.4 C182,241.9,216.8,224,256,224c10.1,0,20,1.2,29.4,3.5c10.6,2.5,20.7,6.4,30.1,11.4c23.2,12.4,42.1,31.8,54.1,55.2 c9.4-3.9,19.7-6.1,30.5-6.1c44.2,0,80,35.8,80,80S444.2,448,400,448z' /><path class='ray ray-one' d='M16,224h32c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,224,16,224z' /><path class='ray ray-two' d='M83.5,106.2c6.3,6.2,16.4,6.2,22.6,0c6.3-6.2,6.3-16.4,0-22.6L83.5,60.9c-6.2-6.2-16.4-6.2-22.6,0 c-6.2,6.2-6.2,16.4,0,22.6L83.5,106.2z' /><path class='ray ray-three' d='M208,64c8.8,0,16-7.2,16-16V16c0-8.8-7.2-16-16-16s-16,7.2-16,16v32C192,56.8,199.2,64,208,64z' /><path class='ray ray-four' d='M332.4,106.2l22.6-22.6c6.2-6.2,6.2-16.4,0-22.6c-6.2-6.2-16.4-6.2-22.6,0l-22.6,22.6 c-6.2,6.2-6.2,16.4,0,22.6S326.2,112.4,332.4,106.2z' /><path class='ray ray-five' d='M352,208c0,8.8,7.2,16,16,16h32c8.8,0,16-7.2,16-16s-7.2-16-16-16h-32C359.2,192,352,199.2,352,208z' /></svg>"
+        }
+        else if(data.list[0].weather[0].icon == "03d"){
+            var ico="<svg class='sun-cloud' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><path class='cloud' d='M400,256c-5.3,0-10.6,0.4-15.8,1.1c-16.8-22.8-39-40.5-64.2-51.7c-10.5-4.6-21.5-8.1-32.9-10.4 c-10.1-2-20.5-3.1-31.1-3.1c-45.8,0-88.4,19.6-118.2,52.9c-3.5,3.9-6.9,8-10,12.3c-5.2-0.8-10.5-1.1-15.8-1.1c-1.5,0-3,0-4.4,0.1 C47.9,258.4,0,307.7,0,368c0,61.8,50.2,112,112,112c13.7,0,27.1-2.5,39.7-7.3c29,25.2,65.8,39.3,104.3,39.3 c38.5,0,75.3-14.1,104.3-39.3c12.6,4.8,26,7.3,39.7,7.3c61.8,0,112-50.2,112-112S461.8,256,400,256z M400,448 c-17.1,0-32.9-5.5-45.9-14.7C330.6,461.6,295.6,480,256,480c-39.6,0-74.6-18.4-98.1-46.7c-13,9.2-28.8,14.7-45.9,14.7 c-44.2,0-80-35.8-80-80s35.8-80,80-80c7.8,0,15.4,1.2,22.5,3.3c2.7,0.8,5.4,1.7,8,2.8c4.5-8.7,9.9-16.9,16.2-24.4 C182,241.9,216.8,224,256,224c10.1,0,20,1.2,29.4,3.5c10.6,2.5,20.7,6.4,30.1,11.4c23.2,12.4,42.1,31.8,54.1,55.2 c9.4-3.9,19.7-6.1,30.5-6.1c44.2,0,80,35.8,80,80S444.2,448,400,448z' /></svg>"
+        }
+        
+    return ico ;
+
+    }
 
     function extractdatadesc(data) {
-        var description = JSON.stringify(data.list[0].weather[0].description )
+        var description = data.list[0].weather[0].description
         
     return description ;
 
-}
+    }
     function extractdatamin(data) {
         var temperatureMin = JSON.stringify(data.list[1].main.temp_min) 
         temperatureMin = temperatureMin.substring(0, temperatureMin.length-3) + '°'
     return temperatureMin ;
 
-}
+    }
     function extractdatamax(data) {
         var temperatureMax = JSON.stringify(data.list[1].main.temp_max) 
         temperatureMax = temperatureMax.substring(0, temperatureMax.length-3) + '°'
     return temperatureMax ;
 
-}
-function extractdatacity(data) {
-        var city = JSON.stringify(data.city.name )
+    }
+    function extractdatacity(data) {
+        var city = data.city.name
     return city ;
 
-}
+    }   
 
      
 
+
+    function extractdataico2(data) {
+        var ico2 = "<img src='http://openweathermap.org/img/w/" + data.list[1].weather[0].icon + ".png '/>"
+        
+    return ico2 ;
+
+    }
     function extractdatadesc2(data) {
-        var description2 = JSON.stringify(data.list[1].weather[0].description)
+        var description2 = data.list[1].weather[0].description
     return description2 ;
 
-}
+    }
     function extractdatamin2(data) {
         var temperatureMin2 = JSON.stringify(data.list[3].main.temp_min) 
     
         temperatureMin2 = temperatureMin2.substring(0, temperatureMin2.length-3) + '°'
     return temperatureMin2 ;
-}
+    }
     function extractdatamax2(data) {
         var temperatureMax2 = JSON.stringify(data.list[3].main.temp_max)
         temperatureMax2 = temperatureMax2.substring(0, temperatureMax2.length-3) + '°'
     return temperatureMax2 ;
 
-}
+    }
 
+
+    function extractdataico3(data) {
+        var ico3 = "<img src='http://openweathermap.org/img/w/" + data.list[2].weather[0].icon + ".png '/>"
+        
+    return ico3 ;
+
+    }
     function extractdatadesc3(data) {
-        var description3 = JSON.stringify(data.list[2].weather[0].description)
+        var description3 = data.list[2].weather[0].description
     return description3 ;
 
-}
+    }
     function extractdatamin3(data) {
         var temperatureMin3 = JSON.stringify(data.list[5].main.temp_min) 
         temperatureMin3 = temperatureMin3.substring(0, temperatureMin3.length-3) + '°'
     return temperatureMin3 ;
 
-}
+    }
     function extractdatamax3(data) {
         var temperatureMax3 = JSON.stringify(data.list[5].main.temp_max) 
         temperatureMax3 = temperatureMax3.substring(0, temperatureMax3.length-3) + '°'
     return temperatureMax3 ;
 
-}
+    }
 
 
+
+    function extractdataico4(data) {
+        var ico4 = "<img src='http://openweathermap.org/img/w/" + data.list[3].weather[0].icon + ".png '/>"
+        
+    return ico4 ;
+
+    }
 
     function extractdatadesc4(data) {
-        var description4 = JSON.stringify(data.list[3].weather[0].description)
+        var description4 = data.list[3].weather[0].description
     return description4 ;
 
-}
+    }
     function extractdatamin4(data) {
         var temperatureMin4 = JSON.stringify(data.list[7].main.temp_min) 
         temperatureMin4 = temperatureMin4.substring(0, temperatureMin4.length-3) + '°'
     return temperatureMin4 ;
 
-}
+    }
     function extractdatamax4(data) {
         var temperatureMax4 = JSON.stringify(data.list[7].main.temp_max) 
         temperatureMax4 = temperatureMax4.substring(0, temperatureMax4.length-3) + '°'
     return temperatureMax4 ;
 
-}
+    }
 
 
+
+
+    function extractdataico5(data) {
+
+        var ico5 = "<img src='http://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png '/>"
+        
+    return ico5 ;
+
+    }
 
     function extractdatadesc5(data) {
-        var description5 = JSON.stringify(data.list[4].weather[0].description)
+        var description5 = data.list[4].weather[0].description
     return description5 ;
 
-}
+    }
     function extractdatamin5(data) {
         var temperatureMin5 = JSON.stringify(data.list[9].main.temp_min) 
         temperatureMin5 = temperatureMin5.substring(0, temperatureMin5.length-3) + '°'
     return temperatureMin5 ;
 
-}
+    }
     function extractdatamax5(data) {
         var temperatureMax5 = JSON.stringify(data.list[9].main.temp_max) 
         temperatureMax5 = temperatureMax5.substring(0, temperatureMax5.length-3) + '°'
     return temperatureMax5 ;
 
-}
+    }
 
 
         function success(pos) {
@@ -247,27 +306,32 @@ function extractdatacity(data) {
             
 
             $('#meteo').html(extractdata(data));
+            $('#ico').html(extractdataico(data));
             $('#description').html(extractdatadesc(data));
             $('#tempMin').html(extractdatamin(data));
             $('#tempMax').html(extractdatamax(data));
             $('#city').html(extractdatacity(data));
             
             $('#date2').html(extractdatadate2(data));
+            $('#ico2').html(extractdataico2(data));
             $('#description2').html(extractdatadesc2(data));
             $('#tempMin2').html(extractdatamin2(data));
             $('#tempMax2').html(extractdatamax2(data));
 
             $('#date3').html(extractdatadate3(data));
+            $('#ico3').html(extractdataico3(data));
             $('#description3').html(extractdatadesc3(data));
             $('#tempMin3').html(extractdatamin3(data));
             $('#tempMax3').html(extractdatamax3(data));
 
             $('#date4').html(extractdatadate4(data));
+            $('#ico4').html(extractdataico4(data));
             $('#description4').html(extractdatadesc4(data));
             $('#tempMin4').html(extractdatamin4(data));
             $('#tempMax4').html(extractdatamax4(data));
 
             $('#date5').html(extractdatadate5(data));
+            $('#ico5').html(extractdataico5(data));
             $('#description5').html(extractdatadesc5(data));
             $('#tempMin5').html(extractdatamin5(data));
             $('#tempMax5').html(extractdatamax5(data));
@@ -275,10 +339,6 @@ function extractdatacity(data) {
           })
         };
     
-
-
-
-
 //+ JSON.stringify(data.message)
         function error(err) {
           socket.emit('localization', {err: `ERROR(${err.code}): ${err.message}` });

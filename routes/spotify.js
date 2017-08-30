@@ -201,6 +201,7 @@ router.post('/playlists', auth.isAuthenticated, auth.isSpotifyAuthenticated, fun
             if (body.success) {
                 res.redirect('/spotify/playlists');
             }else {
+                console.log(error)
                 console.log("Erreur lors de l'inscription en bdd");
                 res.redirect("/");
             }

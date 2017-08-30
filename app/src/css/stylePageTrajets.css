@@ -43,3 +43,49 @@ div#contenufonctionnalitemaps {
         white-space: nowrap;
         width: 500px;
       }
+
+h1 {
+  margin-bottom: 0.5em;
+  color: #fff;
+}
+
+.support {
+  margin-bottom: 2em;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.support a {
+  color: #fff;
+}
+
+.phrases p {
+  display: flex;
+  align-items: center;
+  width: 640px;
+  max-width: 100%;
+  padding-top: 0.2rem;
+  padding-right: 1rem;
+  padding-bottom: 0.2rem;
+  padding-left: 1rem;
+  border: 1px solid rgba(#fff, 0.4);
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  background-color: rgba(#fff, 0.4);
+}
+
+.phrases p span {
+  display: inline-block;
+  margin-right: 1rem;
+  vertical-align: middle;
+  font-size: 2rem;
+}
+
+div.feedback {
+  padding: 20px;
+  margin: 100px;
+  border: 2px solid black;
+  width: 300px;
+  text-align: center;
+}

@@ -29,7 +29,7 @@
                                         <tbody>
                                             <% playlists.forEach(function(info) { %>
                                                 <tr id="playlist<%= info.id %>" class="odd gradeX">
-                                                    <td>
+                                                    <td data-content="titre playlist">
                                                         <%= info.name %>
                                                     </td>
                                                     <td>
@@ -71,9 +71,15 @@
             </div>
         </div>
     </div>
-</div>
+</div>     <!-- /#wrapper -->
+
+
 <script type='text/javascript'>
     var socket = io.connect('<%= socketHost %>');
+
+
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     $(document).ready(function() {
         // $('#dataTables-example').DataTable({
         //     responsive: true

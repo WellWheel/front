@@ -74,7 +74,7 @@ transition: .3s;
 body { 
   margin: 0;
   padding: 0;
-  background-image: url("../images/Weather-Wallpaper-15.jpg");
+  background-image: url(../image/dashboard/wall-1.jpg);
   background-size: cover;
 }
 
@@ -288,7 +288,7 @@ filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(101, 101, 101, 0.22),
             transition: all .3s ease-in;
       display: block;
       padding: 0 40px;
-      height: 60px;
+      height: 71px;
       line-height: 60px;
   }
 
@@ -368,6 +368,15 @@ filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(101, 101, 101, 0.22),
 
 .panel {
     border:none!important;
+}
+
+.panel {
+  background:rgba(255, 255, 255, 0.28);
+  -moz-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.52);
+  -webkit-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.52);
+  -o-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.52);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.52);
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(0, 0, 0, 0.52), Direction=180, Strength=10);
 }
 
 

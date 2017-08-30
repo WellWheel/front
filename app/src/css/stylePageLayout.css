@@ -1,7 +1,10 @@
 
 body {
-    background-image: url("../images/Weather-Wallpaper-15.jpg");
+    background-image: url("../images/Weather-Wallpaper-15.jpg") no-reapeat;
     background-size: cover;
+    background-position: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 

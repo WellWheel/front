@@ -12,34 +12,29 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Listes de vos playlists musicales
-                                </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                        <thead>
-                                            <tr>
-                                                <th>Nom de la playlist</th>
-                                                <th>Lien vers la playlist</th>
-                                                <th>Paramètres</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                            <div class="row">
+                                                <div class="col-xs-4">Nom de la playlist</div>
+                                                <div class="col-xs-4">Lien vers la playlist</div>
+                                                <div class="col-xs-4">Paramètres</div>
+                                            </div>
+                                            <div class="row">
                                             <% playlists.forEach(function(info) { %>
-                                                <tr id="playlist<%= info.id %>" class="odd gradeX">
-                                                    <td data-content="titre playlist">
+                                                <div id="playlist<%= info.id %>" class="odd gradeX row-playlist">
+                                                    <div class="col-xs-4" data-content="titre playlist">
                                                         <%= info.name %>
-                                                    </td>
-                                                    <td>
+                                                    </div>
+                                                    <div class="col-xs-4">
                                                         <%= info.external_urls.spotify %>
-                                                    </td>
-                                                    <td class="center">
-                                                        <a href="/spotify/playlists/show/<%= info.id %>" class="btn btn-primary">Accéder</a>
-                                                        <button type="button" class="btn btn-danger deletePlaylist" data-id="<%= info.id %>">Supprimer</button>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <a href="/spotify/playlists/show/<%= info.id %>" class="btn btn-primary"> Go </a>
+                                                        <button type="button" class="btn btn-danger deletePlaylist" data-id="<%= info.id %>"> X </button>
+                                                    </div>
+                                                </div>
                                             <% }); %>
+                                            </div>
                                                     <!-- <tr class=" gradeC">
                                         <td>Trident</td>
                                         <td>Internet Explorer 5.0</td>
@@ -50,8 +45,6 @@
                                         <td>Internet Explorer 5.5</td>
                                         <td class="center"><button type="button" class="btn btn-primary">Supprimer</button></td>
                                     </tr> -->
-                                        </tbody>
-                                    </table>
                                 </div>
                                 <!-- /#page-wrapper -->
                                 <form action="/spotify/playlists" method="POST" role="form">

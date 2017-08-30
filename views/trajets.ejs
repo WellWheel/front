@@ -16,6 +16,7 @@
                     <div class="panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+
                            <!--  <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">-->
                                     <div class="row">
                                         <div class="col-xs-4">Départ</div>
@@ -25,14 +26,17 @@
                                     <% trajets.forEach(function(info) { %>
                                         <div class="row">
                                             <div class="col-xs-4">
+
                                                 <%= info.start %>
                                             </div>
                                             <div class="col-xs-4">
                                                 <%= info.end %>
+
                                             </div>
                                             <div class="col-xs-4">
                                                 <a href="/trajet/show/<%= info.id %>" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 <form action="/trajet/delete" method="POST" style="display:inline-block;" ;>
+
                                                     <input type="hidden" name="idvoyage" id="idvoyage" value="<%= info.id %>">
                                                     <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
 

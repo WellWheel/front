@@ -29,6 +29,7 @@
     <link rel='stylesheet' href='/stylesheets/stylePageMeteo.css'>
 
     <link rel='stylesheet' href='/stylesheets/stylePagePlaylist.css'>
+    
 
 
     <!-- Custom Fonts -->
@@ -40,6 +41,7 @@
 
 
     <link rel='stylesheet' href='/stylesheets/stylePageCreationLogin.css' />
+    
 
     <link rel='stylesheet' href='/stylesheets/stylePageLogin.css' />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -47,31 +49,82 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
     <![endif]-->
+    <link rel='stylesheet' href='/stylesheets/test.css'>
 <%-include('scripts');%>
 </head>
 
-<body>
+<body onload="init()">
+    
+    <% if (typeof login !== 'undefined' && login) { %>
+        
+                <nav>
+                    <div class="container">
+                    <button class="menu-toggle-tend" onclick="cacher(document.getElementById('nav-de-malade'))">
+                        <div class="burger-bubble cross">
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                        </div>
+                    </button>
+                    </div>
 
-    <nav id="menu" role="navigation">
-                <header class="avatar">
+<!--                    <header class="avatar">
                         <img id="imgProfil" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
                         <h2>John D.</h2>
-                </header>
-        <ul>
-            <li><a href="/Accueil/">Accueil</a></li>
-            <li><a href="/trajet/">Vos trajets</a></li>
-            <li><a href="/meteo/">Votre météo</a></li>
-            <li><a href="/spotify/playlists/">Vos playlist Spotify</a></li>
-            <li><a href="/vos-articles/">Vos articles</a></li>
-            <li><a href="/vos-visites/">Vos visites</a></li>
-            <li><a href="/users/deco/">Se deconnecter</a></li>
-        </ul>
-    </nav>
+                        -->
+
+                    <div id="nav-de-malade">
+                        <ul class="list-group">
+                            <li><a href="/Accueil/">Accueil</a></li>
+                            <li><a href="/trajet/">Vos trajets</a></li>
+                            <li><a href="/meteo/">Votre météo</a></li>
+                            <li><a href="/spotify/playlists/">Vos playlist Spotify</a></li>
+                            <li><a href="/vos-articles/">Vos articles</a></li>
+                            <li><a href="/vos-visites/">Vos visites</a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+    <% } %>
+    <div class="container">
  <%-body%>
 
+        <script type="text/javascript">
+        function init(){
+            document.getElementById('nav-de-malade').style.display = 'none'
+        }
+         
+        function cacher(objet){
+            if(objet.style.display == 'none'){
+                $('#nav-de-malade').fadeIn('fast');
+                $('.cross').addClass('open-nav');
+            }
+            else{
+                $('#nav-de-malade').fadeOut('fast');
+                $('.cross').removeClass('open-nav');                 
+            }
+        }  
+        </script>
+         <script type="text/javascript">
+            i = setInterval ->
+              $("div").toggleClass "cross"
+            , 1500
 
+            $("div").click ->
+              clearInterval i
+              $("div").toggleClass "cross"
 
+            resize = ->
+              $("body").css
+                "margin-top": ~~((window.innerHeight - 150) / 2) + "px"
+                
+            $(window).resize resize
+            resize()
+        </script>
+    </div>
 </body>
 
 </html>

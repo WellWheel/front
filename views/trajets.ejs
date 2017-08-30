@@ -40,10 +40,12 @@
                                                 <%= info.end %>
                                             </td>
                                             <td class="center">
-                                                <a href="/trajet/show/<%= info.id %>" class="btn btn-primary">Voir</a>
+                                                <a href="/trajet/show/<%= info.id %>" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i>
+</a>
                                                 <form action="/trajet/delete" method="POST">
                                                     <input type="hidden" name="idvoyage" id="idvoyage" value="<%= info.id %>">
-                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+</button>
                                                 </form>
                                             </td>
                                         </tr>

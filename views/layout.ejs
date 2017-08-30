@@ -64,9 +64,11 @@
 </head>
 
 <body onload="init()">
-    <% if (login) { %>
+    
+    <% if (typeof login !== 'undefined' && login) { %>
         
                 <nav>
+                    <div class="container">
                     <button class="menu-toggle-tend" onclick="cacher(document.getElementById('nav-de-malade'))">
                         <div class="burger-bubble cross">
                             <div class="burger-line"></div>
@@ -75,6 +77,7 @@
                             <div class="burger-line"></div>
                         </div>
                     </button>
+                    </div>
 
 <!--                    <header class="avatar">
                         <img id="imgProfil" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
@@ -94,6 +97,7 @@
                 </nav>
 
     <% } %>
+    <div class="container">
  <%-body%>
 
         <script type="text/javascript">
@@ -128,7 +132,7 @@
             $(window).resize resize
             resize()
         </script>
-
+    </div>
 </body>
 
 </html>

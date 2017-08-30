@@ -35,6 +35,7 @@
                                 </div>
                                 <div class="col-xs-12 text-center info-badge">
                                     <div id="meteo" class="huge"></div>
+                                    <div id="maMeteo"><button id="playMeteo" type="button" >🔊 Play</button></div>
                                     <div>Météo</div>
                                 </div>
                             </div>
@@ -118,6 +119,7 @@
             </div>
             <!-- /.row -->
     </div>
+
     <script type="text/javascript">
           var socket = io.connect('<%= socketHost %>');
           socket.on('error', function (error) {
@@ -135,11 +137,11 @@
 
               var degres = data.list[0].main.temp;
               console.log(degres);
-              var maChaine = Math.round(degres).toString() + " °C";
-
+              var maChaine = Math.round(degres).toString() + " °C ";
               return maChaine ;
 
             }
+
           function success(pos) {
             console.log("success");
             var crd = pos.coords;
@@ -167,6 +169,11 @@
 
 
         $('#meteo').html(extractdata(data));
+        $('#playMeteo').val(extractdata(data));
       })
+      </script>
+      <script>
+      console.log(WellWhell);
+      WellWhell.lireMeteo();
       </script>
     <!-- /#wrapper -->

@@ -21,6 +21,9 @@ if (annyang) {
         document.activeElement.value = "";
         document.activeElement.value = word;
     },
+    'météo' : function () {
+      WellWhell.test();
+    },
 
     'valider' : function () {
         document.querySelector('form').submit();
@@ -40,7 +43,7 @@ if (annyang) {
       } else {
           console.log("Rien est trouvé")
       }
-    },  
+    },
 
     'click *button' : function (word) {
       console.log( "WOORRRDD : " + word)
@@ -48,7 +51,8 @@ if (annyang) {
 
       console.log('a[data-content*="' + word + '"]')
       console.log(link)
-      window.location.href = link.getAttribute("href");
+      if(typeof link !== 'undefined' && link !== null)
+        window.location.href = link.getAttribute("href");
     },
 
     'go *word' : function (word) {
@@ -77,5 +81,5 @@ if (annyang) {
   annyang.addCommands(commandsFr);
 
   // Start listening. You can call this here, or attach this call to an event, button, etc.
-  annyang.start();
+  annyang.start({ continuous: false });
 }

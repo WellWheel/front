@@ -106,7 +106,7 @@ router.post('/creation', auth.isAuthenticated, function(req, res, next) {
 
         if (error)
           console.log("error : " + error)
-        
+
         if((response.statusCode === 201 || response.statusCode === 200)) {
             var data = {
                 idplaylist: idPlaylist,
@@ -128,7 +128,6 @@ router.post('/creation', auth.isAuthenticated, function(req, res, next) {
             });
 
         }else {
-
             res.redirect("/trajet/creation");
         }
     });

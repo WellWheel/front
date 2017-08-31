@@ -1,5 +1,14 @@
 
 <div class="page-wrap">
+        <button id="menu-toggle"></button>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">METEO</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
 
         <div id="container">
             <!-- /.row -->
@@ -20,10 +29,10 @@
                         <div id='description' class="description"></div>
                         <div class="tempMaximumBlock col-xs-12">
                             <div id="tempMax" class="temperaturemax"></div>
-                        </div> 
+                        </div>
                         <div class="tempMinimumBlock col-xs-12">
                             <div id="tempMin" class="temperaturemin"></div>
-                        </div> 
+                        </div>
                     </div>
 
                 </div>
@@ -122,7 +131,7 @@
 
     function extractdata(data) {
 
-        var maChaine = JSON.stringify(data.list[0].main.temp) 
+        var maChaine = JSON.stringify(data.list[0].main.temp)
         maChaine = maChaine.substring(0, maChaine.length-3) + '°'
     return maChaine ;
     }
@@ -174,18 +183,18 @@
 
     function extractdatadesc(data) {
         var description = data.list[0].weather[0].description
-        
+
     return description ;
 
     }
     function extractdatamin(data) {
-        var temperatureMin = JSON.stringify(data.list[1].main.temp_min) 
+        var temperatureMin = JSON.stringify(data.list[1].main.temp_min)
         temperatureMin = temperatureMin.substring(0, temperatureMin.length-3) + '°'
     return temperatureMin ;
 
     }
     function extractdatamax(data) {
-        var temperatureMax = JSON.stringify(data.list[1].main.temp_max) 
+        var temperatureMax = JSON.stringify(data.list[1].main.temp_max)
         temperatureMax = temperatureMax.substring(0, temperatureMax.length-3) + '°'
     return temperatureMax ;
 
@@ -194,9 +203,9 @@
         var city = data.city.name
     return city ;
 
-    }   
+    }
 
-     
+
 
 
     function extractdataico2(data) {
@@ -238,7 +247,7 @@
             var ico2 ="<svg class='windy-cloud' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><g class='cloud-wrap'><path class='cloud' d='M417,166.1c-24-24.5-57.1-38.8-91.7-38.8c-34.6,0-67.7,14.2-91.7,38.8c-52.8,2.5-95,46.2-95,99.6 c0,55,44.7,99.7,99.7,99.7c5.8,0,11.6-0.5,17.3-1.5c20.7,13.5,44.9,20.9,69.7,20.9c24.9,0,49.1-7.3,69.8-20.9 c5.7,1,11.5,1.5,17.3,1.5c54.9,0,99.6-44.7,99.6-99.7C512,212.3,469.8,168.5,417,166.1z M412.4,333.3c-8.3,0-16.4-1.5-24-4.4 c-17.5,15.2-39.8,23.8-63.1,23.8c-23.2,0-45.5-8.5-63-23.8c-7.6,2.9-15.8,4.4-24,4.4c-37.3,0-67.7-30.4-67.7-67.7 c0-37.3,30.4-67.7,67.7-67.7c3.2,0,6.4,0.2,9.5,0.7c18.1-24.6,46.5-39.4,77.5-39.4c30.9,0,59.4,14.8,77.5,39.4 c3.1-0.5,6.3-0.7,9.6-0.7c37.3,0,67.6,30.4,67.6,67.7C480,303,449.7,333.3,412.4,333.3z' /></g><path class='wind-three' d='M144,352H16c-8.8,0-16,7.2-16,16s7.2,16,16,16h128c8.8,0,16-7.2,16-16S152.8,352,144,352z' /><path class='wind-two' d='M16,320h94c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,320,16,320z' /><path class='wind-one' d='M16,256h64c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,256,16,256z' /></svg>"
         }
 
-        
+
     return ico2 ;
 
     }
@@ -248,8 +257,8 @@
 
     }
     function extractdatamin2(data) {
-        var temperatureMin2 = JSON.stringify(data.list[3].main.temp_min) 
-    
+        var temperatureMin2 = JSON.stringify(data.list[3].main.temp_min)
+
         temperatureMin2 = temperatureMin2.substring(0, temperatureMin2.length-2) + '°'
     return temperatureMin2 ;
     }
@@ -300,7 +309,7 @@
             var ico3 ="<svg class='windy-cloud' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><g class='cloud-wrap'><path class='cloud' d='M417,166.1c-24-24.5-57.1-38.8-91.7-38.8c-34.6,0-67.7,14.2-91.7,38.8c-52.8,2.5-95,46.2-95,99.6 c0,55,44.7,99.7,99.7,99.7c5.8,0,11.6-0.5,17.3-1.5c20.7,13.5,44.9,20.9,69.7,20.9c24.9,0,49.1-7.3,69.8-20.9 c5.7,1,11.5,1.5,17.3,1.5c54.9,0,99.6-44.7,99.6-99.7C512,212.3,469.8,168.5,417,166.1z M412.4,333.3c-8.3,0-16.4-1.5-24-4.4 c-17.5,15.2-39.8,23.8-63.1,23.8c-23.2,0-45.5-8.5-63-23.8c-7.6,2.9-15.8,4.4-24,4.4c-37.3,0-67.7-30.4-67.7-67.7 c0-37.3,30.4-67.7,67.7-67.7c3.2,0,6.4,0.2,9.5,0.7c18.1-24.6,46.5-39.4,77.5-39.4c30.9,0,59.4,14.8,77.5,39.4 c3.1-0.5,6.3-0.7,9.6-0.7c37.3,0,67.6,30.4,67.6,67.7C480,303,449.7,333.3,412.4,333.3z' /></g><path class='wind-three' d='M144,352H16c-8.8,0-16,7.2-16,16s7.2,16,16,16h128c8.8,0,16-7.2,16-16S152.8,352,144,352z' /><path class='wind-two' d='M16,320h94c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,320,16,320z' /><path class='wind-one' d='M16,256h64c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,256,16,256z' /></svg>"
         }
 
-        
+
     return ico3 ;
     }
 
@@ -310,13 +319,13 @@
 
     }
     function extractdatamin3(data) {
-        var temperatureMin3 = JSON.stringify(data.list[5].main.temp_min) 
+        var temperatureMin3 = JSON.stringify(data.list[5].main.temp_min)
         temperatureMin3 = temperatureMin3.substring(0, temperatureMin3.length-3) + '°'
     return temperatureMin3 ;
 
     }
     function extractdatamax3(data) {
-        var temperatureMax3 = JSON.stringify(data.list[5].main.temp_max) 
+        var temperatureMax3 = JSON.stringify(data.list[5].main.temp_max)
         temperatureMax3 = temperatureMax3.substring(0, temperatureMax3.length-3) + '°'
     return temperatureMax3 ;
 
@@ -363,7 +372,7 @@
             var ico4 ="<svg class='windy-cloud' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><g class='cloud-wrap'><path class='cloud' d='M417,166.1c-24-24.5-57.1-38.8-91.7-38.8c-34.6,0-67.7,14.2-91.7,38.8c-52.8,2.5-95,46.2-95,99.6 c0,55,44.7,99.7,99.7,99.7c5.8,0,11.6-0.5,17.3-1.5c20.7,13.5,44.9,20.9,69.7,20.9c24.9,0,49.1-7.3,69.8-20.9 c5.7,1,11.5,1.5,17.3,1.5c54.9,0,99.6-44.7,99.6-99.7C512,212.3,469.8,168.5,417,166.1z M412.4,333.3c-8.3,0-16.4-1.5-24-4.4 c-17.5,15.2-39.8,23.8-63.1,23.8c-23.2,0-45.5-8.5-63-23.8c-7.6,2.9-15.8,4.4-24,4.4c-37.3,0-67.7-30.4-67.7-67.7 c0-37.3,30.4-67.7,67.7-67.7c3.2,0,6.4,0.2,9.5,0.7c18.1-24.6,46.5-39.4,77.5-39.4c30.9,0,59.4,14.8,77.5,39.4 c3.1-0.5,6.3-0.7,9.6-0.7c37.3,0,67.6,30.4,67.6,67.7C480,303,449.7,333.3,412.4,333.3z' /></g><path class='wind-three' d='M144,352H16c-8.8,0-16,7.2-16,16s7.2,16,16,16h128c8.8,0,16-7.2,16-16S152.8,352,144,352z' /><path class='wind-two' d='M16,320h94c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,320,16,320z' /><path class='wind-one' d='M16,256h64c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,256,16,256z' /></svg>"
         }
 
-        
+
     return ico4 ;
     }
 
@@ -373,13 +382,13 @@
 
     }
     function extractdatamin4(data) {
-        var temperatureMin4 = JSON.stringify(data.list[7].main.temp_min) 
+        var temperatureMin4 = JSON.stringify(data.list[7].main.temp_min)
         temperatureMin4 = temperatureMin4.substring(0, temperatureMin4.length-3) + '°'
     return temperatureMin4 ;
 
     }
     function extractdatamax4(data) {
-        var temperatureMax4 = JSON.stringify(data.list[7].main.temp_max) 
+        var temperatureMax4 = JSON.stringify(data.list[7].main.temp_max)
         temperatureMax4 = temperatureMax4.substring(0, temperatureMax4.length-3) + '°'
     return temperatureMax4 ;
 
@@ -427,7 +436,7 @@
             var ico5 ="<svg class='windy-cloud' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 512 512'><g class='cloud-wrap'><path class='cloud' d='M417,166.1c-24-24.5-57.1-38.8-91.7-38.8c-34.6,0-67.7,14.2-91.7,38.8c-52.8,2.5-95,46.2-95,99.6 c0,55,44.7,99.7,99.7,99.7c5.8,0,11.6-0.5,17.3-1.5c20.7,13.5,44.9,20.9,69.7,20.9c24.9,0,49.1-7.3,69.8-20.9 c5.7,1,11.5,1.5,17.3,1.5c54.9,0,99.6-44.7,99.6-99.7C512,212.3,469.8,168.5,417,166.1z M412.4,333.3c-8.3,0-16.4-1.5-24-4.4 c-17.5,15.2-39.8,23.8-63.1,23.8c-23.2,0-45.5-8.5-63-23.8c-7.6,2.9-15.8,4.4-24,4.4c-37.3,0-67.7-30.4-67.7-67.7 c0-37.3,30.4-67.7,67.7-67.7c3.2,0,6.4,0.2,9.5,0.7c18.1-24.6,46.5-39.4,77.5-39.4c30.9,0,59.4,14.8,77.5,39.4 c3.1-0.5,6.3-0.7,9.6-0.7c37.3,0,67.6,30.4,67.6,67.7C480,303,449.7,333.3,412.4,333.3z' /></g><path class='wind-three' d='M144,352H16c-8.8,0-16,7.2-16,16s7.2,16,16,16h128c8.8,0,16-7.2,16-16S152.8,352,144,352z' /><path class='wind-two' d='M16,320h94c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,320,16,320z' /><path class='wind-one' d='M16,256h64c8.8,0,16-7.2,16-16s-7.2-16-16-16H16c-8.8,0-16,7.2-16,16S7.2,256,16,256z' /></svg>"
         }
 
-        
+
     return ico5 ;
     }
 
@@ -437,13 +446,13 @@
 
     }
     function extractdatamin5(data) {
-        var temperatureMin5 = JSON.stringify(data.list[9].main.temp_min) 
+        var temperatureMin5 = JSON.stringify(data.list[9].main.temp_min)
         temperatureMin5 = temperatureMin5.substring(0, temperatureMin5.length-3) + '°'
     return temperatureMin5 ;
 
     }
     function extractdatamax5(data) {
-        var temperatureMax5 = JSON.stringify(data.list[9].main.temp_max) 
+        var temperatureMax5 = JSON.stringify(data.list[9].main.temp_max)
         temperatureMax5 = temperatureMax5.substring(0, temperatureMax5.length-3) + '°'
     return temperatureMax5 ;
 
@@ -463,7 +472,7 @@
           socket.on('dataMeteo', function (data) {
         	//alert('hello')
             console.log(data);
-            
+
 
             $('#meteo').html(extractdata(data));
             $('#ico').html(extractdataico(data));
@@ -471,8 +480,9 @@
             $('#tempMin').html(extractdatamin(data));
             $('#tempMax').html(extractdatamax(data));
             $('#city').html(extractdatacity(data));
-            
+
             $('#date2').html(extractdatadate2(data));
+            $('#date2').attr("data-content","météo " + extractdatadate2(data));
             $('#ico2').html(extractdataico2(data));
             $('#description2').html(extractdatadesc2(data));
             $('#tempMin2').html(extractdatamin2(data));
@@ -495,10 +505,10 @@
             $('#description5').html(extractdatadesc5(data));
             $('#tempMin5').html(extractdatamin5(data));
             $('#tempMax5').html(extractdatamax5(data));
-            
+
           })
         };
-    
+
 //+ JSON.stringify(data.message)
         function error(err) {
           socket.emit('localization', {err: `ERROR(${err.code}): ${err.message}` });

@@ -42,7 +42,6 @@ module.exports = {
 
         res.redirect('/parameters/');
     },
-
     checkSpotifyAuthenticated: function (req, res, next) {
       if (typeof req.cookies.spotify_token !== 'undefined') {
         if (req.cookies.spotify_token) {

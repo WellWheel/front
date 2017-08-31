@@ -130,11 +130,7 @@ if (annyang) {
 
   // Add our commands to annyang
   annyang.addCommands(commandsFr);
-
-  setTimeout(function () {
-    var annyangBtn = document.getElementById("annyangBtn");
-  annyangBtn.addEventListener("click", function () { annyang.start({ continuous: false }) }, false);
-}, 2000)
+  annyang.start({ continuous: false });
   
   // Start listening. You can call this here, or attach this call to an event, button, etc.
   // annyang.start({ continuous: false });

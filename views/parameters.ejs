@@ -11,13 +11,18 @@
                     <div class="row">
                       <div class="col-md-12">
                       <% if (loginSpotify) { %>
-                        <a href="/spotify/deco">Déconnexion spotify</a> 
+                        <a href="/spotify/deco" data-content="connexion Spotify" class="btn btn-primary">Déconnexion Spotify</a>
                       <% } else { %>
                         <a href="/spotify/login" data-content="connexion Spotify" class="btn btn-primary">Connexion Spotify</a>
                       <% } %>
                       </div>
                       <div class="col-md-12">
-                        <a data-content="connexion Spotify" class="btn btn-primary" href="/voice">Active voice</a>
+
+                      <% if (voice) { %>
+                        <a data-content="connexion Spotify" class="btn btn-primary" href='/voice/destroy'>Desactiver voice</a>
+                      <% } else { %>
+                        <a data-content="connexion Spotify" class="btn btn-primary" href="/voice/init">Active voice</a>
+                      <% } %>
                       </div>
                     </div>
                     <!-- /.row -->

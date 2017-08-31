@@ -68,7 +68,27 @@ router.get('/vos-visites', function(req, res, next) {
 
 /* GET visites page. */
 router.get('/parameters', auth.checkSpotifyAuthenticated, function(req, res, next) {
+
   res.render('parameters', { title: 'Pimp my road' });
 });
+
+router.get('/voice/init', function (req, res, next) {
+
+  res.statusCode = 302;
+  res.setHeader("Location", '/parameters');
+  res.cookie('voice', true, { maxAge: 3300000, httpOnly: true });
+  res.end();
+});
+
+router.get('/voice/destroy', function (req, res, next) {
+
+  res.locals.login = false;
+  res.clearCookie("voice");
+  res.statusCode = 302;
+  res.setHeader("Location", '/parameters');
+
+  res.end();
+});
+
 module.exports = router;
 

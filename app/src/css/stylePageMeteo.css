@@ -111,7 +111,7 @@ transform: rotate(35deg);
 	background-size: 35%;
 	width: 20px;
 	height: 26px;
-	left: 0px;
+	left: -5px;
 	top: 8px;
 }
 
@@ -140,9 +140,9 @@ transform: rotate(-150deg);
 	padding-bottom: 14px;
 }
 
-
-
-
+.blockTemps .temperaturemin:before {
+    left: 0px;
+}
 
 
 

@@ -59,3 +59,86 @@
  text-align:center;
 }
 
+.login .panel {
+  padding: 61px;
+  padding-bottom: 105px;
+  min-width: 100%;
+}
+
+.login:before {
+    content: "Connexion";
+    color: rgba(6, 6, 6, 0.38);
+    display: block;
+    position: relative;
+    top: 16px;
+    font-size: 3em;
+    text-transform: uppercase;
+    font-weight: bold;
+    left: 4%;
+    text-align: center;
+    max-width: 50px;
+}
+
+.login {
+  margin-top: 4%;
+}
+
+.login input.form-control {
+  margin-bottom: 15px;
+  border-radius: 0!important;
+  background-color: #50EF94;
+  border: none;
+  border: 4px solid transparent;
+  color: white;
+}
+
+.login input:focus {
+  border: 4px solid white;
+}
+
+.login label {
+  color:white;
+}
+
+input[type=checkbox] {
+  margin-right: 8px;
+    top: -2px;
+    position: relative;  
+}
+
+.login .button {
+    display: inline-block;
+    width: 50%;
+    float: left;
+    margin-top: 0;
+    border-radius: 0;
+    border: 0;
+    color: #50EF94;
+    background-color: rgba(255, 255, 255, 0.45);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.login .button:after {
+    display: none;
+}
+
+.login .buttonVert {
+    border: 0;
+    color: white;
+    background-color: #50EF94;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.login .button:hover {
+    letter-spacing: 4px;
+}
+
+.logo {
+  margin-top: 10%;
+}
+
+.login a {
+  text-decoration: none !important;
+}

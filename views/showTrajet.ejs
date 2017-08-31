@@ -1,5 +1,6 @@
 <div class="page-wrap">
     <button id="menu-toggle"></button>
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header" data-content="titre trajet">
@@ -8,9 +9,15 @@
                 </h1>
             </div>
         </div>
+
+
+        <div id="page-wrapper">
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Mon plan
+                        </div>
                         <div class="panel-body">
                             <div id="gmap">
 
@@ -29,7 +36,7 @@
                                 </iframe>
                             <% } else { %>
                                 <a href="/spotify/">
-                                    Connectez vous avec spotify et consultez vos playlists.
+                                    Connectez vous avec spotify et choisissez vos playlists.
                                 </a>
                             <% } %>
                         </div>
@@ -79,6 +86,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 </div>
 <script>
 
@@ -102,6 +111,11 @@ function initMap() {
         }
     });
 }
+function calculateOriginForSearchAndDisplay(directionsService, directionsDisplay) {
+
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrvc135P6W5lV0mNykc7S4-1IOWzCCjac&callback=initMap&libraries=places" async defer></script>
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrvc135P6W5lV0mNykc7S4-1IOWzCCjac&callback=initMap&libraries=places" async defer></script>

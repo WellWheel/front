@@ -16,6 +16,9 @@ var WellWhell = (function(document){
       },
       lireTitrePlaylist: function(titrePlaylist) {
         responsiveVoice.speak(titrePlaylist);
+      },
+      lireMenu: function(titreMenu) {
+        responsiveVoice.speak(titreMenu);
       }
     }
     return WellWhellVal;

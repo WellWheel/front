@@ -29,7 +29,7 @@
     <link rel='stylesheet' href='/stylesheets/stylePageMeteo.css'>
 
     <link rel='stylesheet' href='/stylesheets/stylePagePlaylist.css'>
-    
+
 
 
     <!-- Custom Fonts -->
@@ -53,9 +53,9 @@
 </head>
 
 <body onload="init()">
-    
+
     <% if (typeof login !== 'undefined' && login) { %>
-        
+
                 <nav>
                     <div class="container">
                     <button class="menu-toggle-tend" onclick="cacher(document.getElementById('nav-de-malade'))">
@@ -93,7 +93,7 @@
         function init(){
             document.getElementById('nav-de-malade').style.display = 'none'
         }
-         
+
         function cacher(objet){
             if(objet.style.display == 'none'){
                 $('#nav-de-malade').fadeIn('fast');
@@ -101,9 +101,9 @@
             }
             else{
                 $('#nav-de-malade').fadeOut('fast');
-                $('.cross').removeClass('open-nav');                 
+                $('.cross').removeClass('open-nav');
             }
-        }  
+        }
         </script>
          <script type="text/javascript">
             i = setInterval ->
@@ -117,7 +117,7 @@
             resize = ->
               $("body").css
                 "margin-top": ~~((window.innerHeight - 150) / 2) + "px"
-                
+
             $(window).resize resize
             resize()
         </script>

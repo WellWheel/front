@@ -64,6 +64,7 @@ router.get('/voice/destroy', auth.isAuthenticated, function (req, res, next) {
   res.clearCookie("voice");
   res.statusCode = 302;
   res.setHeader("Location", '/parameters');
+});
 
 
 /* GET visites page. */

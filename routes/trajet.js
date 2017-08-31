@@ -23,7 +23,7 @@ router.get('/', auth.isAuthenticated, function (req, res, next) {
 
 
 })
-router.get('/show/:id', auth.isAuthenticated, auth.isSpotifyAuthenticated, function (req, res, next) {
+router.get('/show/:id', auth.isAuthenticated, function (req, res, next) {
 
     var id = req.params.id;
 

@@ -31,11 +31,15 @@
                             Ma playlist
                         </div>
                         <div class="panel-body">
-                            <% if (spotify.playlist !== "No Playlist") {%>
-                                <iframe src="https://open.spotify.com/embed?uri=spotify%3Auser%3A<%= spotify.id %>%3Aplaylist%3A<%= spotify.playlist %>&theme=white" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>
+                            <% if (spotify.id) {%>
+                                <% if (spotify.playlist !== "No Playlist") {%>
+                                    <iframe src="https://open.spotify.com/embed?uri=spotify%3Auser%3A<%= spotify.id %>%3Aplaylist%3A<%= spotify.playlist %>&theme=white" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>
+                                <% } else { %>
+                                    Aucune playlist associée à ce trajet
+                                <% } %>
                             <% } else { %>
                                 <a href="/spotify/">
-                                    Connectez vous avec spotify et choisissez vos playlists.
+                                    Connectez vous avec spotify et consultez vos playlists.
                                 </a>
                             <% } %>
                         </div>
@@ -111,12 +115,6 @@ function initMap() {
             window.alert('Directions request failed due to ' + status);
         }
     });
-}
-
-function calculateOriginForSearchAndDisplay(directionsService, directionsDisplay) {
-
-
-
 }
 
 </script>

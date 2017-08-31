@@ -51,6 +51,15 @@ app.use( function(req, res, next) {
   next()
 });
 
+
+// all login begin here
+app.use(function(req, res, next) {
+  res.locals.login = false;
+  res.locals.loginSpotify = false;
+  res.locals.voice = false;
+  next();
+});
+
 // Get the token
 app.use(auth.init());
 
@@ -59,6 +68,7 @@ app.use('/users', users);
 app.use('/trajet', trajet);
 app.use('/meteo', meteo);
 app.use('/spotify', spotify);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

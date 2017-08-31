@@ -3,6 +3,8 @@ var router = express.Router();
 var auth = require('../auth.js');
 var request = require('request');
 var qs = require("querystring");
+var auth = require('../auth.js');
+
 /* GET login page. */
 router.get('/',  function(req, res, next) {
   res.locals.login = false;
@@ -65,8 +67,8 @@ router.get('/vos-visites', function(req, res, next) {
 
 
 /* GET visites page. */
-router.get('/voice-helper', function(req, res, next) {
-  res.render('voiceHelper', { title: 'Pimp my road' });
+router.get('/parameters', auth.checkSpotifyAuthenticated, function(req, res, next) {
+  res.render('parameters', { title: 'Pimp my road' });
 });
 module.exports = router;
 

@@ -21,8 +21,6 @@ module.exports = {
         });
     },
     isAuthenticated: function (req, res, next) {
-      res.locals.login = false;
-
       console.log("req.auth : " + req.auth)
       if(req.auth) {
           res.locals.login = true;
@@ -38,13 +36,25 @@ module.exports = {
       
     },
     isSpotifyAuthenticated: function (req, res , next) {
+        if (this.checkSpotifyAuthenticated(req, res)) {
+          return next();
+        }
+
+        res.redirect('/parameters/');
+    },
+
+    checkSpotifyAuthenticated: function (req, res, next) {
       if (typeof req.cookies.spotify_token !== 'undefined') {
         if (req.cookies.spotify_token) {
-          return next();
+          res.locals.loginSpotify = true;
         }
       }
 
-      res.redirect('/spotify/');
+      if (typeof next !== 'undefined') {
+        return next();
+      }
+
+      return res.locals.loginSpotify;
     }
 };
 

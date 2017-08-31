@@ -27,7 +27,7 @@ body {
 }
 .info-badge {
   padding-top: 40px;
-  color:#484848;
+  color: #ffffff;
 }
 .panel-heading {
   padding: 70px 15px;
@@ -179,7 +179,7 @@ table.dataTable thead .sorting:after {
   font-size: 40px;
   font-family: 'Open Sans'!important;
   font-weight: 800!important;
-  color:#484848;
+  color: #50ef94;
 }
 .panel-green {
   border-color: #5cb85c;

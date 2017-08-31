@@ -44,26 +44,26 @@ router.get('/Accueil', auth.isAuthenticated, function(req, res, next) {
     });
 });
 
-
-/* GET meteo page. */
-router.get('/votre-meteo', function(req, res, next) {
-  res.render('meteo', { title: 'Pimp my road' });
-});
-
-/* GET playlist Spotify page. */
-router.get('/votre-playlist-Spotify', function(req, res, next) {
-  res.render('playlistSpotify', { title: 'Pimp my road' });
-});
-
-/* GET articles page. */
-router.get('/vos-articles', function(req, res, next) {
-  res.render('articles', { title: 'Pimp my road' });
-});
-
 /* GET visites page. */
-router.get('/vos-visites', function(req, res, next) {
-  res.render('visites', { title: 'Pimp my road' });
+router.get('/parameters', auth.isAuthenticated, auth.checkSpotifyAuthenticated, function(req, res, next) {
+
+  res.render('parameters', { title: 'Pimp my road' });
 });
+
+router.get('/voice/init', auth.isAuthenticated, function (req, res, next) {
+
+  res.statusCode = 302;
+  res.setHeader("Location", '/parameters');
+  res.cookie('voice', true, { maxAge: 3300000, httpOnly: true });
+  res.end();
+});
+
+router.get('/voice/destroy', auth.isAuthenticated, function (req, res, next) {
+
+  res.locals.login = false;
+  res.clearCookie("voice");
+  res.statusCode = 302;
+  res.setHeader("Location", '/parameters');
 
 
 /* GET visites page. */

@@ -2,8 +2,8 @@ var jwt = require('express-jwt');
 var jsonWebToken = require('jsonwebtoken');
 var fs = require('fs');
 
-module.exports = {
-      
+var auth = {
+
       init : function () {
 
           var publicKey = fs.readFileSync('public.pem');
@@ -32,11 +32,11 @@ module.exports = {
         res.setHeader("Location", '/');
         res.end();
       }
-        
-      
+
+
     },
     isSpotifyAuthenticated: function (req, res , next) {
-        if (this.checkSpotifyAuthenticated(req, res)) {
+        if (auth.checkSpotifyAuthenticated(req, res)) {
           return next();
         }
 
@@ -57,3 +57,4 @@ module.exports = {
     }
 };
 
+module.exports = auth;

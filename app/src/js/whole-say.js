@@ -130,7 +130,8 @@ if (annyang) {
 
   // Add our commands to annyang
   annyang.addCommands(commandsFr);
-
-  // Start listening. You can call this here, or attach this call to an event, button, etc.
   annyang.start({ continuous: false });
+  
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  // annyang.start({ continuous: false });
 }

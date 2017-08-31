@@ -22,7 +22,7 @@ var generateRandomString = function(length) {
 var stateKey = 'spotify_auth_state';
 
 router.get('/', auth.isAuthenticated, function(req, res) {
-  res.render('spotify', {
+  res.render('parameters', {
     title: 'Pimp my road'
   });
 });
@@ -48,7 +48,10 @@ router.get('/callback', auth.isAuthenticated, function(req, res) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter
-
+  console.log("req.query")
+  console.log(req.query)
+  console.log("req.query.code")
+  console.log(req.query.code)
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -99,18 +102,11 @@ router.get('/callback', auth.isAuthenticated, function(req, res) {
           });
 
           // we can also pass the token to the browser to make requests from there direcly with javascript
-          res.redirect('/spotify/#' +
-            querystring.stringify({
-              access_token: access_token,
-              refresh_token: refresh_token
-            }));
+          res.redirect('/parameters/');
         });
 
       } else {
-        res.redirect('/spotify/#' +
-          querystring.stringify({
-            error: 'invalid_token'
-          }));
+        res.redirect('/parameters/');
       }
     });
   }
@@ -245,6 +241,12 @@ router.get('/playlists/show/:id', auth.isAuthenticated, auth.isSpotifyAuthentica
         });
     });
 })
-
+/* GET login page. */
+router.get('/deco', auth.isAuthenticated, function(req, res, next) {
+  res.clearCookie("spotify_token");
+  res.statusCode = 302;
+  res.setHeader("Location", '/parameters');
+  res.end();
+});
 
 module.exports = router;

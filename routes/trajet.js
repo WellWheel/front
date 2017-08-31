@@ -75,6 +75,7 @@ router.get('/creation', auth.isAuthenticated, spotifyService.getPlaylists, funct
         playlists = res.playlists;
     res.render('creationTrajet', { title: 'Pimp my road', playlists: playlists });
 });
+
 router.post('/delete', auth.isAuthenticated, function (req, res, next) {
     var options = {
         url: res.conf.parameters().api().full() + "/api/journey/delete/" + req.body.idvoyage,

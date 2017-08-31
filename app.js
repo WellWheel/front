@@ -9,6 +9,7 @@ var http = require('http');
 var cors = require('cors');
 
 var auth = require('./auth.js');
+var voice = require('./service/voiceService')
 var conf = require('./conf.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -51,14 +52,26 @@ app.use( function(req, res, next) {
   next()
 });
 
+
+// all login begin here
+app.use(function(req, res, next) {
+  res.locals.login = false;
+  res.locals.loginSpotify = false;
+  res.locals.voice = false;
+
+  next();
+});
+
 // Get the token
 app.use(auth.init());
+app.use(voice.checkVoice);
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/trajet', trajet);
 app.use('/meteo', meteo);
 app.use('/spotify', spotify);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

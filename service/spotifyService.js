@@ -3,7 +3,7 @@ var auth = require('../auth');
 
 module.exports = {
     getPlaylists: function (req, res, next) {
-        if (auth.isSpotifyAuthenticated) {
+        if (auth.checkSpotifyAuthenticated(req, res)) {
             var options = {
                 url: 'https://api.spotify.com/v1/me/playlists',
                 headers: { 'Authorization': 'Bearer ' + req.cookies.spotify_token },

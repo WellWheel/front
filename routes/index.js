@@ -3,6 +3,8 @@ var router = express.Router();
 var auth = require('../auth.js');
 var request = require('request');
 var qs = require("querystring");
+var auth = require('../auth.js');
+
 /* GET login page. */
 router.get('/',  function(req, res, next) {
   res.locals.login = false;
@@ -65,8 +67,28 @@ router.get('/vos-visites', function(req, res, next) {
 
 
 /* GET visites page. */
-router.get('/voice-helper', function(req, res, next) {
-  res.render('voiceHelper', { title: 'Pimp my road' });
+router.get('/parameters', auth.checkSpotifyAuthenticated, function(req, res, next) {
+
+  res.render('parameters', { title: 'Pimp my road' });
 });
+
+router.get('/voice/init', function (req, res, next) {
+
+  res.statusCode = 302;
+  res.setHeader("Location", '/parameters');
+  res.cookie('voice', true, { maxAge: 3300000, httpOnly: true });
+  res.end();
+});
+
+router.get('/voice/destroy', function (req, res, next) {
+
+  res.locals.login = false;
+  res.clearCookie("voice");
+  res.statusCode = 302;
+  res.setHeader("Location", '/parameters');
+
+  res.end();
+});
+
 module.exports = router;
 

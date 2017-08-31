@@ -103,7 +103,11 @@ router.post('/creation', auth.isAuthenticated, function(req, res, next) {
         json: true
     };
     request.post(options, function(error, response, body) {
-        if((response.statusCode === 201 || response.statusCode === 200) && idPlaylist) {
+
+        if (error)
+          console.log("error : " + error)
+
+        if((response.statusCode === 201 || response.statusCode === 200)) {
             var data = {
                 idplaylist: idPlaylist,
                 title: "Playlist : " + origin + " " + destination,
@@ -115,12 +119,16 @@ router.post('/creation', auth.isAuthenticated, function(req, res, next) {
                 body: data,
                 json: true
             };
-            request.post(options2, function(error, response, body) {
-                res.redirect('/trajet');
+            request.post(options2, function(errorNext, responseNext, bodyNext) {
+
+                if (errorNext)
+                  console.log("errorNext : " + errorNext)
+
+                res.redirect('/trajet/');
             });
 
         }else {
-            res.redirect("/creation");
+            res.redirect("/trajet/creation");
         }
     });
 });

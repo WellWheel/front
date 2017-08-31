@@ -5,14 +5,13 @@ var request = require('request');
 var qs = require("querystring");
 /* GET login page. */
 router.get('/',  function(req, res, next) {
-    res.locals.login = false;
+  res.locals.login = false;
 
-    if (typeof req.cookies.my_token !== 'undefined') {
-        res.locals.login = true;
-        res.redirect('/Accueil')
-    }
+  if (typeof req.cookies.my_token !== 'undefined') {
+    res.locals.login = true;
+  }
 
-    res.render('login', { title: 'Pimp my road' });
+  res.render('login', { title: 'Pimp my road' });
 });
 
 /* GET creation compte page. */
@@ -63,4 +62,11 @@ router.get('/vos-articles', function(req, res, next) {
 router.get('/vos-visites', function(req, res, next) {
   res.render('visites', { title: 'Pimp my road' });
 });
+
+
+/* GET visites page. */
+router.get('/voice-helper', function(req, res, next) {
+  res.render('voiceHelper', { title: 'Pimp my road' });
+});
 module.exports = router;
+

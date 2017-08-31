@@ -17,9 +17,22 @@ var WellWhell = (function(document){
       lireTitrePlaylist: function(titrePlaylist) {
         responsiveVoice.speak(titrePlaylist);
       },
-      lireMenu: function(titreMenu) {
-        responsiveVoice.speak(titreMenu);
-      }
+      meteoAjourdhui: function() {
+        var temp = document.getElementById("meteo").innerHTML;
+        var description = document.getElementById("description").innerHTML;
+        var tempMin = document.getElementById("tempMin").innerHTML;
+        var tempMax = document.getElementById("tempMax").innerHTML;
+        var city = document.getElementById("city").innerHTML;
+
+        responsiveVoice.speak("aujourd'hui à " + city + description + " la température sera de " + temp + " la température minimal sera de " + tempMin + " la température maximal " + tempMax);
+      },
+      meteoSemaine: function(elt) {
+        var description = elt.querySelector("#description").innerHTML;
+        var tempMin = elt.querySelector("#tempMin").innerHTML;
+        var tempMax = elt.querySelector("#tempMax").innerHTML;
+
+        responsiveVoice.speak(description + " la température minimal sera de " + tempMin + " la température maximal " + tempMax);
+      },
     }
     return WellWhellVal;
 })(document);

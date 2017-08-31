@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-xs-12 text-center info-badge">
                                     <div id="meteo" class="huge"></div>
-                                    <div id="maMeteo"><button id="playMeteo" type="button" >🔊 Play</button></div>
+                                    <div id="description"></div>
                                     <div>Météo</div>
                                 </div>
                             </div>
@@ -134,7 +134,16 @@
 
               var degres = data.list[0].main.temp;
               console.log(degres);
-              var maChaine = Math.round(degres).toString() + " °C ";
+              var maChaine = Math.round(degres).toString() + " °C " ;
+              return maChaine ;
+
+            }
+          function extractdata2(data) {
+
+
+
+              var description = data.list[0].weather[0].description;
+              var maChaine = description;
               return maChaine ;
 
             }
@@ -166,11 +175,7 @@
 
 
         $('#meteo').html(extractdata(data));
-        $('#playMeteo').val(extractdata(data));
+        $('#description').html(extractdata2(data));
       })
-      </script>
-      <script>
-      console.log(WellWhell);
-      WellWhell.lireMeteo();
       </script>
     <!-- /#wrapper -->

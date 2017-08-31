@@ -4,17 +4,38 @@ if (annyang) {
     console.log("annyang");
 
   var commandsFr = {
+    'connard': function() {
+      console.log('coucou');
+      document.body.style.backgroundImage = "url('http://www.memegen.fr/wp-content/uploads/2016/10/1950s-Middle-Finger.jpg')";
+      document.getElementById('page-wrapper').style.display = "none";
+    },
+    'rince moi les yeux': function() {
+      console.log('coucou');
+      document.body.style.backgroundImage = "url('https://i0.wp.com/public.avionsdechasse.org/images/sources/2016/10/20161028183607_4.jpg')";
+      document.getElementById('page-wrapper').style.display = "none";
+    },
+    'pardon': function() {
+      console.log('coucou');
+      document.body.style.backgroundImage = "url('../../image/dashboard/wall3.jpg')";
+      document.getElementById('page-wrapper').style.display = "block";
+    },
+    'merci madame': function() {
+      console.log('coucou');
+      document.body.style.backgroundImage = "url('../../image/dashboard/wall3.jpg')";
+      document.getElementById('page-wrapper').style.display = "block";
+    },
     'retour' : function() {
       console.log(document.referrer);
       window.location.href = document.referrer;
     },
     'ouvrir': function() {
-        document.querySelector('body').className += "open";
+        document.querySelector('.burger-bubble').className += " open-nav";
+        document.querySelector('.menu-toggle-tend').click();
     },
 
     'fermer': function() {
-        document.querySelector('body').classList.remove("open");
-        document.querySelector('body').removeAttribute("class");
+        document.querySelector('.burger-bubble').classList.remove("open-nav");
+        document.querySelector('.menu-toggle-tend').click();
     },
 
     'titre playlist': function () {
@@ -27,6 +48,23 @@ if (annyang) {
     },
     'météo' : function () {
       WellWhell.test();
+    },
+    'météo aujourd\'hui' : function () {
+      WellWhell.meteoAjourdhui();
+    },
+    'météo *word' : function (word) {
+      var elts = document.querySelector('[data-content*="' + word + '"]');
+      console.log(elts);
+      if(typeof elts !== "undefined")
+      {
+        elementsInfo = elts.parentNode;
+          console.log(childrenInfo);
+      }
+      else {
+        console.log("rien n'est trouvé");
+      }
+      console.log(elementsInfo);
+      WellWhell.meteoSemaine(elementsInfo);
     },
 
     'valider' : function () {

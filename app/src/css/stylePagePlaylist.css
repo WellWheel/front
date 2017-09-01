@@ -99,3 +99,22 @@ figure.snip1174.hover button {
   transform: translateY(0);
   opacity: 1;
 }
+
+.list-unstyled {
+  color:white;
+}
+
+.list-unstyled h2{
+  font-weight: 700;
+}
+
+
+.pown {
+      width: auto;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 4px;
+    color: white;
+    margin: -1px;
+    margin-top: 15px;
+}

@@ -14,22 +14,18 @@
                             <div class="panel panel-default">
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-xs-4">Nom de la playlist</div>
-                                                <div class="col-xs-4">Lien vers la playlist</div>
-                                                <div class="col-xs-4">Paramètres</div>
+                                            <div class="row title">
+                                                <div class="col-xs-6 head">Nom de la playlist</div>
+                                                <div class="col-xs-6 head">Paramètres</div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row table2">
                                             <% playlists.forEach(function(info) { %>
                                                 <div id="playlist<%= info.id %>" class="odd gradeX row-playlist">
-                                                    <div class="col-xs-4" data-content="titre playlist">
+                                                    <div class="col-xs-6" data-content="titre playlist">
                                                         <%= info.name %>
                                                     </div>
-                                                    <div class="col-xs-4">
-                                                        <%= info.external_urls.spotify %>
 
-                                                    </div>
-                                                    <div class="col-xs-4">
+                                                    <div class="col-xs-6">
                                                         <a href="/spotify/playlists/show/<%= info.id %>" class="btn btn-primary"> Go </a>
                                                         <button type="button" class="btn btn-danger deletePlaylist" data-id="<%= info.id %>"> X </button>
                                                     </div>
@@ -51,7 +47,7 @@
                                 <form action="/spotify/playlists" method="POST" role="form">
                                     <legend>Form title</legend>
                                     <div class="form-group">
-                                        <label for="">Nom playlist : </label>
+                                        <label style="color:white;" for="">Nom playlist : </label>
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Nom playlist">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

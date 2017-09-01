@@ -1,15 +1,17 @@
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 logo">
+          <img src="image/logo/logo1.png">
+        </div>
+      </div>
 
-
-    <h1 class='titreLogo'> Pimp My road <h1>
-        <div class="wrapper">
-          <form class="connexion-form-signin" action="/users/create" method="POST" onSubmit="return validPassword(this)">
-            <h2 class="connexion-form-signin-heading">Inscription</h2>
-
+       <div class="row creation">
+        <div class="login col-md-6 col-md-offset-3">
+          <form class="connexion-form-signin panel" action="/users/create" method="POST" onSubmit="return validPassword(this)">
               <input  type="text" class="form-control" name="username" placeholder="Identifiant" required="" autofocus="" />
               <input  type="text" class="form-control" name="email" placeholder="Adresse mail" required="" autofocus="" />
               <input id ="password" type="password" class="form-control" name="password" placeholder="Mots de passe" required=""/>
               <input type="password" id='confirmationMdp' class="form-control" name="confirmedPassword" placeholder="Confirmation du mots de passe" required="" autofocus="" />
-              <input id='creationCompte' value='envoyer' class="btn btn-lg btn-primary btn-block" type="submit"/>
+              <input id='creationCompte' value='envoyer' class="button btn-tarace" type="submit"/>
           </form>
         </div>
 

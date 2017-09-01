@@ -89,3 +89,48 @@ div.feedback {
   width: 300px;
   text-align: center;
 }
+
+.trajet {
+  margin-top: 12%;
+}
+
+.trajet .panel-body {
+    padding: 25px;
+}
+
+.trajet .btn-success {
+  margin: 10px;
+  background-color: #50EF94;
+    border-color: #50EF94;
+}
+
+.trajet .btn-success:hover {
+  background-color: white;
+    border-color: white;
+    color:#50EF94;
+}
+
+.title .head {
+    padding: 10px;
+    border: 1px solid white;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.table2 {
+  background: rgba(255, 255, 255, 0.28);
+    height: 35px;
+    color: white;
+    text-align: center;
+    line-height: 2;
+}
+
+@media all and (max-width: 1024px)
+{
+    .trajet
+    {
+        margin-top: 50px;
+    }
+}
